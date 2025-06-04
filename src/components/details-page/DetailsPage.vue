@@ -99,19 +99,6 @@ const truncatedEllipsedDescription = computed(() => {
 </script>
 
 <template>
-  <!-- <div
-      v-if="error"
-      class="grid size-full place-content-center bg-bg-base"
-    >
-      <KCard class="size-96">
-        <template #title>
-          Fehler
-        </template>
-<template #content>
-          {{ errorView }}
-        </template>
-</KCard>
-</div> -->
   <div class="container mx-auto p-8">
     <div class="mx-auto mb-12 w-full max-w-content-max space-y-12 pt-1">
       <section name="dsd-header" class="flex flex-col gap-12">

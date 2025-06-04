@@ -98,12 +98,8 @@ const {
   <div>
     <div v-if="error" class="grid size-full place-content-center bg-bg-base">
       <KCard class="size-96">
-        <template #title>
           <span class="p-card-title text-2xl font-medium mb-2">Fehler</span>
-        </template>
-        <template #content>
-          {{ errorView }}
-        </template>
+          <div> {{ errorView }}</div>
       </KCard>
     </div>
     <DetailsPage
