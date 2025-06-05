@@ -1,15 +1,10 @@
 <script setup>
 import KButton from '@/components/base/button/KButton.vue'
-import Sidebar from 'primevue/sidebar'
 import { ref } from 'vue'
 import NavigationBar from './NavigationBar.vue'
 import DarkModeToggle from '../toggler-dark-mode/DarkModeToggle.vue'
 
 const visible = ref(false)
-
-const handleCloseNav = () => {
-  visible.value = false
-}
 </script>
 
 <template>
@@ -50,7 +45,7 @@ const handleCloseNav = () => {
           <div class="md:hidden">
             <KButton
               variant="null"
-              @click="visible = true"
+              @click="visible = !visible"
             > 
               <i class="icon-[ph--list]"></i>
             </KButton>
@@ -80,7 +75,7 @@ const handleCloseNav = () => {
     </div>
 
     <!-- Mobile Sidebar -->
-    <Sidebar v-model:visible="visible" position="full" class="bg-surface! text-surface-text!">
+    <!-- <Sidebar v-model:visible="visible" position="full" class="bg-surface! text-surface-text!">
       <template #header>
         <div class="flex h-12 items-center justify-center px-2 py-10">
          
@@ -97,11 +92,13 @@ const handleCloseNav = () => {
           </svg>
 
         </div>
-      </template>
-      <div class="mx-auto px-6 py-8 ">
+      </template> -->
+      <div 
+        class="mx-auto px-6 py-8 md:hidden"
+        :class="{'hidden' : !visible}"
+      >
         <NavigationBar 
-          direction="vertical"
-          @close-nav="handleCloseNav" 
+          direction="vertical" 
         />
         <div class="mt-8 flex flex-col gap-4 border-t border-neutral-200 pt-8">
           <a 
@@ -125,7 +122,6 @@ const handleCloseNav = () => {
           </a>
         </div>
       </div>
-    </Sidebar>
   </header>
 </template>
 
