@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { PropertyTableEntryNode } from '@piveau/sdk-vue'
 import { computed } from 'vue'
 import KButton from '../base/button/KButton.vue'
@@ -8,6 +9,7 @@ import DataToggler from '../data-toggler/DataToggler.vue'
 import Dropdown from '../dropdown/Dropdown.vue'
 import DropdownItem from '../dropdown/DropdownItem.vue'
 import { PropertyTable } from '../property-table/PropertyTableRow'
+
 
 interface CardProps {
   title: string
@@ -21,13 +23,19 @@ interface CardProps {
   data: PropertyTableEntryNode
   onSave?: () => void
 }
+const { t } = useI18n()
 
 const props = withDefaults(defineProps<CardProps>(), {
-  downloadText: 'Download',
-  saveText: 'Beschreibung speichern',
+  downloadText: '',
+  saveText: '',
   lastUpdated: '',
   onSave: () => {},
 })
+
+// Set default texts using computed properties
+const defaultDownloadText = computed(() => props.downloadText || t('distribution.download'))
+const defaultSaveText = computed(() => props.saveText || t('distribution.save_description'))
+
 
 const dataOrder = ['modified', 'license', 'created', 'languages']
 const resolvedData = computed(() => {
@@ -41,6 +49,8 @@ const resolvedData = computed(() => {
 
   return sortedData
 })
+
+
 </script>
 
 <template>
@@ -65,7 +75,7 @@ const resolvedData = computed(() => {
           </div>
         </div>
 
-        <div class="my-12 lg:my-0 lg:basis-4/12 text-surface-text"> 
+        <div class="my-12 lg:my-0 lg:basis-4/12 text-surface-text">
           <DataToggler v-slot="{ truncated }" :data="resolvedData || []" :limit="1" :expanded="false">
             <PropertyTable
               :node="{
@@ -78,7 +88,7 @@ const resolvedData = computed(() => {
             />
           </DataToggler>
         </div>
-      </div> 
+      </div>
 
       <div class="flex items-center justify-between">
         <div class="flex gap-6">
@@ -90,19 +100,19 @@ const resolvedData = computed(() => {
             download
           >
             <KButton>
-              {{ downloadText }}
+              {{ defaultDownloadText }}
               <i class="icon-[ph--arrow-square-out]" />
             </KButton>
           </a>
 
           <KButton>
-            Preview
+            {{ t('distribution.preview') }}
           </KButton>
-          
+
           <!-- Why is this not showing?? -->
-          <Dropdown severity="secondary" label="Beschreibung speichern"> 
-            <DropdownItem v-for="[key, uri] in Object.entries(linkedData || {})" :key="key" as="a" :href="uri" target="_blank">
-              {{ key }} 
+          <Dropdown severity="secondary" :label="defaultSaveText">
+          <DropdownItem v-for="[key, uri] in Object.entries(linkedData || {})" :key="key" as="a" :href="uri" target="_blank">
+              {{ key }}
             </DropdownItem>
           </Dropdown>
 

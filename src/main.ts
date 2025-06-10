@@ -1,5 +1,5 @@
 import i18n from '@/i18n'
-import router from '@/router.ts'
+import router from '@/router'
 import { defaultConfig, plugin as FormKitPlugin } from '@formkit/vue'
 import { plugin as piveauPlugin } from '@piveau/sdk-vue'
 import { de } from '@piveau/sdk-vue/locale'

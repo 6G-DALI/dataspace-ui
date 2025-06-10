@@ -12,6 +12,9 @@ import Typography from '../base/typography/Typography.vue'
 
 import DetailsPageHeader from './DetailsPageHeader.vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 const props = withDefaults(defineProps<{
   headline?: string
   title?: string
@@ -108,7 +111,7 @@ const truncatedEllipsedDescription = computed(() => {
             <button class="-ml-6 mt-[10px] px-4 py-1 cursor-pointer" @click="router.back()">
               <Typography variant="paragraph-1" class="flex items-center gap-2 text-primary hover:text-primary-hover">
                 <PhCaretLeft />
-                <span>back</span>
+                <span>{{ t('details.back') }}</span>
               </Typography>
             </button>
           </div>
@@ -138,7 +141,7 @@ const truncatedEllipsedDescription = computed(() => {
           :tabs="[
             {
               id: 'dataset',
-              title: 'Info',
+              title: t('details.info_tab'),
               content: truncatedEllipsedDescription || '',
             },
           ]" class=""
@@ -149,7 +152,7 @@ const truncatedEllipsedDescription = computed(() => {
                 <div>
                   <Typography as="h5" variant="by-heading-4" class="mb-8">
                     <slot name="about-this-dataset">
-                      Über diesen Datensatz
+                      {{ t('details.about_dataset') }}
                     </slot>
                   </Typography>
                   <Typography as="p" variant="by-copy-small-regular">
@@ -161,7 +164,7 @@ const truncatedEllipsedDescription = computed(() => {
                   @click="toggleDescription"
                 >
                   <div class="flex flex-col items-center justify-center text-primary text-xs/6 font-bold">
-                    <span>Mehr lesen</span>
+                    <span>{{ t('details.read_more') }}</span>
                     <i v-if="isDescriptionTruncated" class="icon-[ph--caret-down]" />
                     <i v-else class="icon-[ph--caret-up]" />
                   </div>

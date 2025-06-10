@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useDataTruncator } from '../../composables/useDataTruncator'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps<{
   data: any[] | string
 }>()
@@ -21,6 +22,8 @@ function handleToggle() {
   expanded.value = !expanded.value
   toggle()
 }
+const toggleText = computed(() => isExpanded.value ? t('toggler.show_less') : t('toggler.show_more'))
+
 </script>
 
 <template>
@@ -30,7 +33,9 @@ function handleToggle() {
     </slot>
     <span class="by-link cursor-pointer ">
       <button class="inline-flex min-w-fit flex-row items-center gap-2 cursor-pointer" @click="handleToggle">
-        <slot name="label" :is-expanded="isExpanded"><span>{{ isExpanded ? 'Weniger anzeigen' : 'Mehr anzeigen' }}</span></slot>
+        <slot name="label" :is-expanded="isExpanded">
+          <span>{{ toggleText }}</span>
+        </slot>
         <i :class="toggleIcon" />
       </button>
     </span>

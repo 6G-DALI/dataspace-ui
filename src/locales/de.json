@@ -1,4 +1,31 @@
 {
+  "toggler": {
+    "show_less": "Weniger anzeigen",
+    "show_more": "Mehr anzeigen"
+  },
+  "distribution": {
+    "download": "Download",
+    "save_description": "Beschreibung speichern",
+    "preview": "Vorschau",
+    "description": "Beschreibung"
+  },
+  "details": {
+    "dataset": "Datensatz",
+    "back": "Zurück",
+    "info_tab": "Info",
+    "about_dataset": "Über diesen Datensatz",
+    "read_more": "Mehr lesen"
+  },
+  "dataset": {
+    "title": "Datensatz",
+    "provider": "Datenbereitsteller",
+    "updated": "Aktualisiert",
+    "distributions": "Distributionen",
+    "categories": "Kategorien",
+    "additional_info": "Zusätzliche Informationen",
+    "show_more": "Mehr anzeigen",
+    "error": "Fehler"
+  },
   "search": {
     "searchBarPlaceholder": "Search",
     "searchButton": "Search",
@@ -153,7 +180,8 @@
       "firstSteps": "First Steps",
       "about": "über twin.bydata",
       "findAll": "Alle Finden",
-      "findTwins": "Twins Finden"
+      "findTwins": "Twins Finden",
+      "docs": "Dokumentation"
     },
     "hero": {
       "welcome": "TwinByData aus Bayern",

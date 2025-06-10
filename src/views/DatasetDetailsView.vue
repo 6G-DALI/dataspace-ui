@@ -20,6 +20,8 @@ import { useDcatApSearch } from '../sdk/index'
 
 import { getLocalizedValue } from '../sdk/utils/helpers'
 
+import { useI18n } from 'vue-i18n'
+
 function ensureDatasetId(id: Ref): asserts id is Ref<string> {
   if (typeof toValue(id) !== 'string')
     throw new Error('id must be a string')
@@ -92,28 +94,30 @@ const {
   data: getFormattedDistributions,
   limit: 7,
 })
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div>
     <div v-if="error" class="grid size-full place-content-center bg-bg-base">
       <KCard class="size-96">
-          <span class="p-card-title text-2xl font-medium mb-2">Fehler</span>
+        <span class="p-card-title text-2xl font-medium mb-2">{{ t('dataset.error') }}</span>
           <div> {{ errorView }}</div>
       </KCard>
     </div>
     <DetailsPage
-      headline="Datensatz"
+      :headline="t('dataset.title')"
       :title="resultEnhanced?.getTitle || ''"
       :subtitle="resultEnhanced?.getPublisher?.name || ''"
       :dataset-id="datasetId"
       :summary="[
         {
-          title: 'Datenbereitsteller',
+          title: t('dataset.provider'),
           text: resultEnhanced?.getPublisher?.name || '-',
         },
         {
-          title: 'Aktualisiert',
+          title: t('dataset.updated'),
           text: resultEnhanced?.getModified || '-',
         },
       ]" :description-markup="resultEnhanced?.getDescriptionMarkup"
@@ -128,7 +132,7 @@ const {
         <section class="space-y-4">
           <div class="my-12 flex flex-row items-center gap-2">
             <h2 class="text-[2.5rem] font-bold leading-[3rem] text-primary-100">
-              Distributionen
+              {{ t('dataset.distributions') }}
             </h2>
             <KTag class="rounded-full bg-secondary">
               {{
@@ -154,11 +158,11 @@ const {
                   <div class="absolute bottom-0 flex w-full flex-row items-center justify-center">
                     <div>
                       <KButton
-                        :label="`Mehr anzeigen (${getFormattedDistributions.length})`"
+                        :label="`${t('dataset.show_more')} (${getFormattedDistributions.length})`"
                         @click="showAllDistributions"
                       >
                         <i class="icon-[ph--eye-fill]"></i>
-                      </KButton> 
+                      </KButton>
                     </div>
                   </div>
                 </div>
@@ -168,7 +172,7 @@ const {
         </section>
         <div v-if="(resultEnhanced?.getCategories?.length || 0) > 0" class="space-y-3">
           <Typography variant="by-heading-4" class="font-semibold text-primary-100">
-            Kategorien
+            {{ t('dataset.categories') }}
           </Typography>
           <div class="flex flex-row gap-2">
             <KTag
@@ -183,7 +187,7 @@ const {
         <div class="space-y-4">
           <div class="flex flex-col rounded-xl gap-4 bg-surface p-4 pt-12">
             <Typography variant="by-heading-4" class="">
-              Zusätzliche Informationen
+              {{ t('dataset.additional_info') }}
             </Typography>
             <PropertyTable
               v-if="isSuccess" :node="{
