@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
+import router from '@/router'
 
 const { locale } = useI18n()
+const route = useRoute()
 const currentLanguage = ref('en')
 const isDropdownOpen = ref(false)
 const dropdownRef = ref(null)
@@ -12,11 +15,25 @@ const languages = [
   { code: 'de', label: 'Deutsch', flag: '🇩🇪' }
 ]
 
+// Watch for URL query parameter changes
+watch(
+  () => route.query.locale,
+  (newLocale) => {
+    if (newLocale && ['en', 'de'].includes(newLocale as string)) {
+      selectLanguage(newLocale as string)
+    }
+  }
+)
+
 const selectLanguage = (languageCode: string) => {
   currentLanguage.value = languageCode
   locale.value = languageCode
   localStorage.setItem('language', languageCode)
   isDropdownOpen.value = false
+
+  // Update URL query parameter
+  const newQuery = { ...route.query, locale: languageCode }
+  router.replace({ query: newQuery })
 }
 
 const toggleDropdown = () => {
@@ -30,10 +47,18 @@ const closeDropdown = (event: Event) => {
 }
 
 onMounted(() => {
-  const savedLanguage = localStorage.getItem('language')
-  if (savedLanguage && ['en', 'de'].includes(savedLanguage)) {
-    currentLanguage.value = savedLanguage
-    locale.value = savedLanguage
+  // First check URL query parameter
+  const urlLocale = route.query.locale as string
+  if (urlLocale && ['en', 'de'].includes(urlLocale)) {
+    currentLanguage.value = urlLocale
+    locale.value = urlLocale
+  } else {
+    // Fall back to localStorage if no URL parameter
+    const savedLanguage = localStorage.getItem('language')
+    if (savedLanguage && ['en', 'de'].includes(savedLanguage)) {
+      currentLanguage.value = savedLanguage
+      locale.value = savedLanguage
+    }
   }
   document.addEventListener('click', closeDropdown)
 })
