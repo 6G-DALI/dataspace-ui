@@ -1,13 +1,9 @@
-stages:
-  - build
-  - deploy
+# GitLab CI/CD Pipeline for Vue.js Application Deployment to OpenShift
+# This pipeline builds a Vue.js application, creates a Docker image, and deploys it to OpenShift
 
-cache: &global_cache
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .pnpm-store
-    - node_modules/
-  policy: pull-push
+stages:
+  - build    # Stage 1: Build the Vue.js application
+  - deploy   # Stage 2: Deploy the built image to OpenShift
 
 build-asset:
   stage: build
@@ -16,7 +12,8 @@ build-asset:
     <<: *global_cache
 
   tags:
-    - fokus-runner   # use fokus-runner
+    - dps-piveau-runner   # use dps-piveau-runner
+    -
   before_script:
     - npm i -g pnpm
     - pnpm config set store-dir .pnpm-store
@@ -30,47 +27,111 @@ build-asset:
   only:
     - master # only run on master branch because of pull rate limit
 
+
+# =============================================================================
+# BUILD STAGE
+# =============================================================================
+# This stage compiles the Vue.js application and builds a Docker image
 build-and-push:
   stage: build
-  image: docker:stable
+  image: docker:latest
   services:
-    - docker:dind
+    - docker:dind  # Docker-in-Docker service for building images
   variables:
-    IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    # Docker image tags for versioning
     IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
   before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    # Authenticate with GitLab Container Registry
+    - echo "Logging into GitLab Container Registry..."
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
   script:
-    - docker build -t $IMAGE_NAME -t $IMAGE_LATEST .
-    - docker push $IMAGE_NAME
-    - docker push $IMAGE_LATEST
-  dependencies:
-    - build-asset
+    # Build the Docker image using the Dockerfile in the project root
+    - echo "Building Docker image with tags:" $IMAGE_TAG and $IMAGE_LATEST
+    - docker build -t $IMAGE_TAG -t $IMAGE_LATEST .
+
+    # Push both tagged versions to the registry
+    - echo "Pushing Docker images to registry..."
+    - docker push $IMAGE_TAG      # Push commit-specific tag for traceability
+    - docker push $IMAGE_LATEST   # Push latest tag for easy deployment reference
+
   tags:
-    - fokus-runner  #use fokus-runner
+    - dps-piveau-runner  # Use specific GitLab runner with this tag
+
   only:
-    - master
+    - master  # Only run this job on master branch commits
 
-
-notify-deployment-ready:
+# =============================================================================
+# DEPLOYMENT STAGE
+# =============================================================================
+# This stage deploys the built Docker image to OpenShift cluster
+deploy-to-openshift:
   stage: deploy
-  image: curlimages/curl:latest
+  image: quay.io/openshift/origin-cli:latest  # Official OpenShift CLI image
   variables:
-    IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+    # Deployment configuration variables
+    IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest           # Image to deploy
+    OPENSHIFT_PROJECT: piveau                          # OpenShift namespace/project
+    APP_NAME: piveau-vanilla-ui                        # Application name in OpenShift
+
+  before_script:
+    # Verify OpenShift CLI is available and show version
+    - oc version --client
+
+    # Network connectivity testing and debugging
+    - echo "Testing connectivity to OpenShift server..."
+    - echo "OpenShift server:" $OPENSHIFT_SERVER
+    - |
+      # Extract hostname and port from OPENSHIFT_SERVER URL for testing
+      SERVER_HOST=$(echo $OPENSHIFT_SERVER | sed 's|https\?://||' | cut -d: -f1)
+      SERVER_PORT=$(echo $OPENSHIFT_SERVER | sed 's|https\?://||' | cut -d: -f2)
+      echo "Testing connection to $SERVER_HOST:$SERVER_PORT"
+      
+      # Test basic network connectivity to OpenShift API server
+      if command -v nc >/dev/null 2>&1; then
+        nc -zv $SERVER_HOST $SERVER_PORT || echo "Cannot reach $SERVER_HOST:$SERVER_PORT"
+      else
+        echo "nc not available, trying curl..."
+        curl -k --connect-timeout 10 $OPENSHIFT_SERVER/healthz || echo "Cannot reach OpenShift API"
+      fi
+
+    # Authenticate with OpenShift cluster using service account token
+    - echo "Attempting to log into OpenShift..."
+    - oc login --token="$OPENSHIFT_TOKEN" --server="$OPENSHIFT_SERVER" --insecure-skip-tls-verify=true
+
   script:
-    - echo "========================================="
-    - echo "🚀 New image built and pushed successfully!"
-    - echo "========================================="
-    - echo ""
-    - echo "📋 To deploy on your OpenShift cluster, run:"
-    - echo ""
-    - echo "oc import-image piveau-vanilla-ui:latest --from=$IMAGE_LATEST --confirm -n piveau"
-    - echo ""
-    - echo "========================================="
+    # Deploy the application to OpenShift
+    - echo "Deploying $IMAGE_LATEST to OpenShift..."
+
+    # Switch to the target project/namespace
+    - oc project $OPENSHIFT_PROJECT
+
+    # Import the new Docker image into OpenShift's internal registry
+    # This creates an ImageStream that references our GitLab registry image
+    - oc import-image $APP_NAME:latest --from=$IMAGE_LATEST --confirm
+
+    # Check if deployment already exists and handle accordingly
+    - |
+      if oc get deployment $APP_NAME > /dev/null 2>&1; then
+        # If deployment exists, trigger a rolling update with the new image
+        echo "Rolling out new deployment..."
+        oc rollout restart deployment/$APP_NAME
+      
+        # Wait for the rollout to complete (timeout after 5 minutes)
+        oc rollout status deployment/$APP_NAME --timeout=300s
+      else
+        # If no deployment exists, inform user that initial setup is required
+        echo "No existing deployment found. Please create deployment configuration first."
+        echo "You can create a deployment using: oc new-app --image-stream=$APP_NAME"
+      fi
+
   tags:
-    - fokus-runner
+    - dps-piveau-runner  # Use the same runner as build stage
+
   only:
-    - master
+    - master  # Only deploy from master branch
+
   dependencies:
-    - build-and-push
+    - build-and-push  # This job depends on successful completion of build stage
