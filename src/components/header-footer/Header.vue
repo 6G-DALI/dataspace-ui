@@ -57,9 +57,9 @@ const visible = ref(false)
           <!-- Desktop Actions -->
           <div class="hidden md:flex items-center gap-4">
             <LanguageSelector />
-            <DarkModeToggle class="mr-4"/>
+            <DarkModeToggle />
             <a target="_blank" href="https://doc.piveau.eu/general/introduction/"
-               class="flex items-center font-light">
+               class="flex items-center font-light ml-4">
               {{ t('landing-page.header.docs') }}
               <!-- <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-box-arrow-up-right ml-2" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />

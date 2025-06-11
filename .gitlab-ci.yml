@@ -27,6 +27,8 @@ build-asset:
   artifacts:
     paths:
       - dist
+  only:
+    - master # only run on master branch because of pull rate limit
 
 build-and-push:
   stage: build
