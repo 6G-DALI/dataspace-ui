@@ -25,12 +25,13 @@ mirror-node:
 
 build-asset:
   stage: build
+  needs:
+    - mirror-node
   image: $CI_REGISTRY_IMAGE/node:18-alpine
   tags:
     - dps-piveau-runner   # use dps-piveau-runner
 
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - npm i -g pnpm
     - pnpm config set store-dir .pnpm-store
   script:
