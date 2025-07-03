@@ -102,11 +102,11 @@ const truncatedEllipsedDescription = computed(() => {
 </script>
 
 <template>
-  <div class="container mx-auto p-8">
-    <div class="mx-auto mb-12 w-full max-w-content-max space-y-12 pt-1">
-      <section name="dsd-header" class="flex flex-col gap-12">
+  <div class="container mx-auto px-8 pt-3">
+    <div class="mx-auto w-full max-w-content-max space-y-6 pt-1">
+      <section name="dsd-header" class="flex flex-col gap-6">
         <!-- Go previous page -->
-        <div class="flex flex-col gap-12">
+        <div class="flex flex-col gap-6">
           <div>
             <button class="-ml-6 mt-[10px] px-4 py-1 cursor-pointer" @click="router.back()">
               <Typography variant="paragraph-1" class="flex items-center gap-2 text-primary hover:text-primary-hover">
@@ -126,7 +126,7 @@ const truncatedEllipsedDescription = computed(() => {
         </div>
         <!-- Metadata -->
         <slot name="metadata">
-          <div class="mb-12 flex flex-col justify-between md:flex-row">
+          <div class="flex flex-col justify-between md:flex-row">
             <SummaryBox
               v-for="(s, i) in summary" :key="i" class="mb-4 mr-4 flex-1" :title="s.title"
               :text="s.text || '-'"
@@ -136,7 +136,7 @@ const truncatedEllipsedDescription = computed(() => {
           </div>
         </slot>
       </section>
-      <section class="my-12">
+      <section>
         <TabGroup
           :tabs="[
             {

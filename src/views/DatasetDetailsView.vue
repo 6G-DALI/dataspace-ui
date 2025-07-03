@@ -130,7 +130,7 @@ const { t } = useI18n()
 
       <template #sections>
         <section class="space-y-4">
-          <div class="my-12 flex flex-row items-center gap-2">
+          <div class="mt-12 flex flex-row items-center gap-2">
             <h2 class="text-[2.5rem] font-bold leading-[3rem] text-primary-100">
               {{ t('dataset.distributions') }}
             </h2>
@@ -185,7 +185,7 @@ const { t } = useI18n()
         </div>
         <div class="h-px w-full bg-bg-divider" />
         <div class="space-y-4">
-          <div class="flex flex-col rounded-xl gap-4 bg-surface p-4 pt-12">
+          <div class="flex flex-col rounded-xl gap-4 bg-surface p-4">
             <Typography variant="by-heading-4" class="">
               {{ t('dataset.additional_info') }}
             </Typography>
