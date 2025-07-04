@@ -16,9 +16,11 @@
       "imprint": "Imprint",
       "dataPrivacy": "Data Privacy",
       "login": "Login",
-      "contact": "Contact"
+      "contact": "Contact",
+      "linkedData": "Linked Data"
     }
   },
+  
   "catalogues": {
     "searchFilter": "Search filter",
     "count": "Catalogues",

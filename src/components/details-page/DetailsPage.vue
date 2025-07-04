@@ -12,6 +12,8 @@ import Typography from '../base/typography/Typography.vue'
 
 import DetailsPageHeader from './DetailsPageHeader.vue'
 
+import LinkedDataSelector from '../base/links/LinkedDataSelector.vue'
+
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
@@ -107,6 +109,7 @@ const truncatedEllipsedDescription = computed(() => {
       <section name="dsd-header" class="flex flex-col gap-6">
         <!-- Go previous page -->
         <div class="flex flex-col gap-6">
+          <div class="flex justify-between">
           <div>
             <button class="-ml-6 mt-[10px] px-4 py-1 cursor-pointer" @click="router.back()">
               <Typography variant="paragraph-1" class="flex items-center gap-2 text-primary hover:text-primary-hover">
@@ -114,6 +117,8 @@ const truncatedEllipsedDescription = computed(() => {
                 <span>{{ t('details.back') }}</span>
               </Typography>
             </button>
+          </div>
+          <LinkedDataSelector :datasetId="datasetId"/>
           </div>
           <DetailsPageHeader :headline="headline" :title="title" :subtitle="subtitle">
             <template #subtitle>
