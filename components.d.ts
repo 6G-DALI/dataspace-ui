@@ -52,7 +52,7 @@ declare module 'vue' {
     NavigationBar: typeof import('./src/components/header-footer/NavigationBar.vue')['default']
     'PropertyTable.story': typeof import('./src/components/property-table/PropertyTable.story.vue')['default']
     PropertyTableValue: typeof import('./src/components/property-table/PropertyTableValue.vue')['default']
-    ResourceDetailsLinkedDataButton: typeof import('./src/components/details-page/ResourceDetailsLinkedDataButton.vue')['default']
+    ResourceDetailsLinkedDataButton: typeof import('./src/components/base/links/ResourceDetailsLinkedDataButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInfoPanel: typeof import('./src/components/base/search-info-panel/SearchInfoPanel.vue')['default']
