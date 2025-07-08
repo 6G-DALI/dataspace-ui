@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
       port: 8080,
       proxy: {
         '/api/sparql': {
-          target: 'https://open.bydata.de/api/sparql',
+          target: '',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api\/sparql/, ''),
         },
