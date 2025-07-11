@@ -126,7 +126,7 @@ const truncatedEllipsedDescription = computed(() => {
                 <span>{{ subtitle }}</span>
                 <!-- <RouterLink :to="{ name: 'Datasets', query: { catalog: resultEnhanced?.getCatalogId } }" class="by-link" /> -->
               </slot>
-            </template>temp
+            </template>
           </DetailsPageHeader>
         </div>
         <!-- Metadata -->

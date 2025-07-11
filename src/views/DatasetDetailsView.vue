@@ -131,7 +131,7 @@ const { t } = useI18n()
       <template #sections>
         <section class="space-y-4">
           <div class="mt-12 flex flex-row items-center gap-2">
-            <h2 class="text-[2.5rem] font-bold leading-[3rem] text-primary-100">
+            <h2 class="text-[2.5rem] font-bold leading-[3rem] text-surface-text">
               {{ t('dataset.distributions') }}
             </h2>
             <KTag class="rounded-full bg-secondary">
