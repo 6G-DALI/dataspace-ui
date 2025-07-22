@@ -143,7 +143,7 @@
         gemäß Art. 7 Abs. 3 DSGVO Ihre einmal erteilte Einwilligung jederzeit gegenüber uns zu
         widerrufen. Dies hat zur Folge, dass wir die Datenverarbeitung, die auf dieser Einwilligung
         beruhte, für die Zukunft nicht mehr fortführen dürfen;
-      </p>
+      </p><br>
       <p>
         gemäß Art. 15 DSGVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu
         verlangen. Insbesondere können Sie Auskunft über die Verarbeitungszwecke, die Kategorie der
@@ -153,38 +153,38 @@
         Beschwerderechts, die Herkunft ihrer Daten, sofern diese nicht bei uns erhoben wurden, sowie
         über das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling und
         ggf. aussagekräftigen Informationen zu deren Einzelheiten verlangen;
-      </p>
+      </p><br>
       <p>
         gemäß Art. 16 DSGVO unverzüglich die Berichtigung unrichtiger oder Vervollständigung Ihrer
         bei uns gespeicherten personenbezogenen Daten zu verlangen;
-      </p>
+      </p><br>
       <p>
         gemäß Art. 17 DSGVO die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten zu
         verlangen, soweit nicht die Verarbeitung zur Ausübung des Rechts auf freie Meinungsäußerung
         und Information, zur Erfüllung einer rechtlichen Verpflichtung, aus Gründen des öffentlichen
         Interesses oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen
         erforderlich ist;
-      </p>
+      </p><br>
       <p>
         gemäß Art. 18 DSGVO die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu
         verlangen, soweit die Richtigkeit der Daten von Ihnen bestritten wird, die Verarbeitung
         unrechtmäßig ist, Sie aber deren Löschung ablehnen und wir die Daten nicht mehr benötigen,
         Sie jedoch diese zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen
         benötigen oder Sie gemäß Art. 21 DSGVO Widerspruch gegen die Verarbeitung eingelegt haben;
-      </p>
+      </p><br>
       <p>
         gemäß Art. 20 DSGVO Ihre personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem
         strukturierten, gängigen und maschinenlesebaren Format zu erhalten oder die Übermittlung an
         einen anderen Verantwortlichen zu verlangen und
-      </p>
+      </p><br>
       <p>
         gemäß Art. 77 DSGVO sich bei einer Aufsichtsbehörde zu beschweren. In der Regel können Sie
         sich hierfür an die Aufsichtsbehörde ihres üblichen Aufenthaltsortes oder Arbeitsplatzes
         oder unseres Unternehmenssitzes wenden.
-      </p>
+      </p><br>
       <br>
       <div class="alert-success" style="padding: 20px">
-        <b>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</b><br>
+        <b>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</b><br><br>
         Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit
         gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund von Artikel 6
         Absatz 1 Buchstabe e DSGVO (Datenverarbeitung im öffentlichen Interesse) und Artikel 6
