@@ -19,7 +19,7 @@ const socialLinks = computed(() => [
 ])
 
 const rechtlichesLinks = computed(() => [
-  { to: '#', text: t('footer.links.imprint') },
+  { to: '/imprint', text: t('footer.links.imprint') },
   { to: '#', text: t('footer.links.dataPrivacy') },
 ])
 

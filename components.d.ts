@@ -24,6 +24,7 @@ declare module 'vue' {
     'FacetSidebar.story': typeof import('./src/components/facet-sidebar/FacetSidebar.story.vue')['default']
     Footer: typeof import('./src/components/header-footer/Footer.vue')['default']
     Header: typeof import('./src/components/header-footer/Header.vue')['default']
+    Imprint: typeof import('./src/components/header-footer/Imprint.vue')['default']
     'Introduction.story': typeof import('./src/components/base/Introduction.story.vue')['default']
     KButton: typeof import('./src/components/base/button/KButton.vue')['default']
     'KButton.story': typeof import('./src/components/base/button/KButton.story.vue')['default']
