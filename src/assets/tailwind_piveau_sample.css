@@ -25,6 +25,7 @@
 @layer base {
 
   :root {
+
     /************************/
     /***** Piveau Fonts *****/
     /************************/
@@ -42,7 +43,7 @@
     /*****************************/
     --piveau-primary: #7B61FF;
     --piveau-primary-variant: #3B2F79;
-    --piveau-primary-light: #cdc3ff;
+    --piveau-primary-light: #e6e3f5;
     --piveau-primary-disabled: #787878;
     --piveau-secondary: #B5D0D7;
     --piveau-secondary-variant: #2f6f88;

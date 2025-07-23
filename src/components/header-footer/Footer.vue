@@ -24,8 +24,8 @@ const rechtlichesLinks = computed(() => [
 ])
 
 const loginLinks = computed(() => [
-  { to: '/app', text: t('footer.links.login') },
-  { to: '/contact', text: t('footer.links.contact') },
+  { to: '#', text: t('footer.links.login') },
+  { href: 'https://www.piveau.de/#contact', text: t('footer.links.contact') },
 ])
 </script>
 
@@ -125,7 +125,7 @@ const loginLinks = computed(() => [
             >
               <RouterLink
                 :to="link.to"
-                class="hover:text-primary-hover"
+                class="hover:text-secondary-hover"
               >
                 {{ link.text }}
               </RouterLink>
@@ -147,15 +147,24 @@ const loginLinks = computed(() => [
               :key="link.text"
               class="text-copy-sm"
             >
-              <RouterLink
-                :to="link.to"
-                class="
-                  font-bold
-                  hover:text-secondary-hover
-                "
-              >
-                {{ link.text }}
-              </RouterLink>
+              <template v-if="link.href">
+        <a
+          :href="link.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-bold hover:text-secondary-hover"
+        >
+          {{ link.text }}
+        </a>
+      </template>
+      <template v-else>
+        <RouterLink
+          :to="link.to"
+          class="font-bold hover:text-secondary-hover"
+        >
+          {{ link.text }}
+        </RouterLink>
+      </template>
             </li>
           </ul>
         </div>

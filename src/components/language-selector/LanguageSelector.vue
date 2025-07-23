@@ -100,14 +100,15 @@ onUnmounted(() => {
     </button>
 
     <!-- Dropdown Menu -->
-    <div
-      v-show="isDropdownOpen"
-      class="
-        ring-opacity-5 absolute right-0 z-50 mt-2 w-48 rounded-md bg-surface
-        shadow-lg ring-1 ring-black
-        dark:ring-opacity-10 dark:bg-surface-900 dark:ring-white
-      "
-    >
+  <div
+  v-show="isDropdownOpen"
+  class="
+    ring-opacity-5 absolute right-0 z-50 mt-2 w-48 rounded-md bg-surface
+    shadow-lg ring-1 ring-black
+    dark:ring-opacity-10 dark:bg-surface-900 dark:ring-white
+    sm:w-48 w-full left-0 right-0 mx-auto
+  "
+>
       <div class="py-1">
         <button
           v-for="language in languages"

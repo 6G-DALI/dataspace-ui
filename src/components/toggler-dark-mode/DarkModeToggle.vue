@@ -83,4 +83,5 @@ onMounted(() => {
 .dark .dark\:has-checked\:bg-primary-hover:has(:checked) {
   background-color: var(--primary-hover);
 }
+
 </style>

@@ -32,7 +32,7 @@ const PropertyTable = defineComponent({
 
         if (data.type === 'node' && depth <= 0) {
           return !!data.data && data.data.length > 0
-            ? h('tr', { class: 'flex flex-col gap-1 mb-2' }, [
+            ? h('tr', { class: 'flex flex-col gap-1 mb-2 mt-2' }, [
                 h('td', { class: 'block font-medium' }, h(Typography, { as: 'span', variant: 'caption' }, () => data.label || data.id)),
                 h('td', { class: 'block' }, renderNodes(data.data || [], depth + 1)),
               ])
