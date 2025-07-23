@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - '8080:8080'
     environment:
       - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://localhost:3000}
       - VITE_AUTHENTICATION_KEYCLOAK_URL=${VITE_AUTHENTICATION_KEYCLOAK_URL:}
@@ -18,4 +18,3 @@ services:
       - VITE_API_HUB_STORE_URL=${VITE_API_HUB_STORE_URL:-https://demo.piveau.io/api/hub/store/}
       - VITE_API_MIDDLEWARE_URL=${VITE_API_MIDDLEWARE_URL:-http://localhost:5000}
       - VITE_API_SPARQL_URL=${VITE_API_SPARQL_URL:-https://demo.piveau.io/sparql}
-

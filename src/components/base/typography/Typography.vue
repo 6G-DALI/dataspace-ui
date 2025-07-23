@@ -47,62 +47,62 @@ const computedClasses = computed(() =>
   clsx(
     // heading
     {
-      'font-bold text-5xl text-surface-text': props.variant === 'header-1',
-      'font-semibold text-4xl text-surface-text': props.variant === 'header-2',
-      'font-semibold text-3xl text-surface-text': props.variant === 'header-3',
-      'font-semibold text-lg text-surface-text': props.variant === 'header-4',
+      'text-5xl font-bold text-surface-text': props.variant === 'header-1',
+      'text-4xl font-semibold text-surface-text': props.variant === 'header-2',
+      'text-3xl font-semibold text-surface-text': props.variant === 'header-3',
+      'text-lg font-semibold text-surface-text': props.variant === 'header-4',
 
       // by-heading
-      'font-display text-surface-text font-bold text-[3.5rem] leading-[3.5rem] md:text-[4.5rem] md:leading[4.75rem]': props.variant === 'by-heading-1',
-      'font-display text-surface-text font-bold text-[2rem] leading-[2.5rem] md:text-[3rem] md:leading-[3.5rem]': props.variant === 'by-heading-2',
-      'font-sans text-surface-text font-bold text-[1.75rem] leading-[2.375rem] md:font-size[2.5rem] md:leading-[3rem]': props.variant === 'by-heading-3',
-      'font-sans text-surface-text font-bold text-[1.375rem] leading-[2rem] md:text-[1.5rem] md:leading-[2.25rem]': props.variant === 'by-heading-4',
-      'font-sans text-surface-text font-semibold text-[1.125rem] leading-[1.75rem]': props.variant === 'by-heading-5',
+      'md:leading[4.75rem] font-display text-[3.5rem] leading-[3.5rem] font-bold text-surface-text md:text-[4.5rem]': props.variant === 'by-heading-1',
+      'font-display text-[2rem] leading-[2.5rem] font-bold text-surface-text md:text-[3rem] md:leading-[3.5rem]': props.variant === 'by-heading-2',
+      'md:font-size[2.5rem] font-sans text-[1.75rem] leading-[2.375rem] font-bold text-surface-text md:leading-[3rem]': props.variant === 'by-heading-3',
+      'font-sans text-[1.375rem] leading-[2rem] font-bold text-surface-text md:text-[1.5rem] md:leading-[2.25rem]': props.variant === 'by-heading-4',
+      'font-sans text-[1.125rem] leading-[1.75rem] font-semibold text-surface-text': props.variant === 'by-heading-5',
     },
     // paragraph
     {
-      'font-semibold text-base': props.variant === 'paragraph-1',
-      'font-normal text-base': props.variant === 'paragraph-2',
+      'text-base font-semibold': props.variant === 'paragraph-1',
+      'text-base font-normal': props.variant === 'paragraph-2',
     },
     // by-caption
     {
       // .75rem/1.125rem
-      'font-bold uppercase text-xs leading-[1.125rem] text-surface-text': props.variant === 'caption' || props.variant === 'by-caption',
+      'text-xs leading-[1.125rem] font-bold text-surface-text uppercase': props.variant === 'caption' || props.variant === 'by-caption',
     },
     // by-copy
     [
       // large
       {
-        'text-surface-light text-lg font-normal': props.variant === 'by-copy-large-regular',
-        'text-surface-light text-lg font-semibold': props.variant === 'by-copy-large-semibold',
-        'text-surface-light text-lg font-bold': props.variant === 'by-copy-large-bold',
+        'text-lg font-normal text-surface-light': props.variant === 'by-copy-large-regular',
+        'text-lg font-semibold text-surface-light': props.variant === 'by-copy-large-semibold',
+        'text-lg font-bold text-surface-light': props.variant === 'by-copy-large-bold',
       },
       // small
       {
-        'text-surface-light text-sm font-normal': props.variant === 'by-copy-small-regular',
-        'text-surface-light text-sm font-semibold': props.variant === 'by-copy-small-semibold',
-        'text-surface-light text-sm font-bold': props.variant === 'by-copy-small-bold',
+        'text-sm font-normal text-surface-light': props.variant === 'by-copy-small-regular',
+        'text-sm font-semibold text-surface-light': props.variant === 'by-copy-small-semibold',
+        'text-sm font-bold text-surface-light': props.variant === 'by-copy-small-bold',
       },
       // mini
       {
-        'text-surface-light text-xs font-normal': props.variant === 'by-copy-mini-regular',
-        'text-surface-light text-xs font-semibold': props.variant === 'by-copy-mini-semibold',
-        'text-surface-light text-xs font-bold': props.variant === 'by-copy-mini-bold',
+        'text-xs font-normal text-surface-light': props.variant === 'by-copy-mini-regular',
+        'text-xs font-semibold text-surface-light': props.variant === 'by-copy-mini-semibold',
+        'text-xs font-bold text-surface-light': props.variant === 'by-copy-mini-bold',
       },
     ],
     // numeric
     // todo: apply roboto condensed
     {
-      'font-normal text-sm': props.variant === 'numeric',
+      'text-sm font-normal': props.variant === 'numeric',
     },
     // button-text
     {
-      'font-medium text-base uppercase': props.variant === 'button-text',
+      'text-base font-medium uppercase': props.variant === 'button-text',
     },
     // code-or-data-tables
     // todo: apply roboto mono
     {
-      'font-normal text-sm': props.variant === 'code-or-data-tables',
+      'text-sm font-normal': props.variant === 'code-or-data-tables',
     },
   ),
 )

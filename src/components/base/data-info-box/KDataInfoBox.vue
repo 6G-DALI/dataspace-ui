@@ -26,7 +26,13 @@ const computedWrapperComponent = computed(() => {
   <component
     :is="computedWrapperComponent"
     :to="props.to || '/'"
-    class="focus:outline-hidden focus:ring-3 focus:ring-primary-400/50 group relative flex cursor-pointer gap-8 text-clip rounded-lg border border-bg-divider bg-white p-4 transition-colors hover:bg-bg-darker focus:outline-offset-0"
+    class="
+      focus:ring-primary-400/50 focus:ring-3 focus:outline-hidden
+      focus:outline-offset-0
+      group border-bg-divider relative flex cursor-pointer gap-8 rounded-lg
+      border bg-white p-4 text-clip transition-colors
+      hover:bg-bg-darker
+    "
   >
     <div>
       <div class="flex-1">
@@ -36,7 +42,10 @@ const computedWrapperComponent = computed(() => {
               <Typography
                 as="h3"
                 variant="header-3"
-                class="text-primary-800 group-hover:underline"
+                class="
+                  text-primary-800
+                  group-hover:underline
+                "
               >
                 {{ props.title }}
               </Typography>
@@ -56,7 +65,7 @@ const computedWrapperComponent = computed(() => {
     </div>
     <div
       v-if="props.ghost"
-      class="absolute left-0 top-0 size-full bg-white"
+      class="absolute top-0 left-0 size-full bg-white"
     >
       <div class="size-full animate-pulse bg-slate-200" />
     </div>

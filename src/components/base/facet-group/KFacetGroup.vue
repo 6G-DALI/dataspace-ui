@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { Facet } from '../../../utils/types'
 import { useDataTruncator } from '@/composables/useDataTruncator'
+import { ref } from 'vue'
 import PhCaretDown from '~icons/ph/caret-down'
 import Typography from '../typography/Typography.vue'
-import { ref } from 'vue'
 
 const props = defineProps<{
   title?: string
@@ -26,14 +26,17 @@ const {
   data: props.facets,
   limit: 5,
 })
-
 </script>
 
 <template>
   <div
-    class="flex min-w-64 flex-col bg-surface text-surface-text rounded-custom"
+    class="flex min-w-64 flex-col rounded-custom bg-surface text-surface-text"
   >
-    <div class="flex items-center justify-between w-full gap-2 cursor-pointer px-4 py-4 pr-6" 
+    <div
+      class="
+        flex w-full cursor-pointer items-center justify-between gap-2 px-4 py-4
+        pr-6
+      "
       @click="collapsed = !collapsed"
     >
       <slot
@@ -49,9 +52,11 @@ const {
       </slot>
       <button>
         <PhCaretDown
-        class="text-lg font-semibold transition-transform duration-200 ease-in-out"
-        :class="{ 'rotate-180': !collapsed }"
-      />
+          class="
+            text-lg font-semibold transition-transform duration-200 ease-in-out
+          "
+          :class="{ 'rotate-180': !collapsed }"
+        />
       </button>
     </div>
     <div v-if="!collapsed" class="flex-1">
@@ -64,13 +69,16 @@ const {
             <input
               :id="facet.id"
               v-model="model"
-              class="peer absolute left-0 top-0 size-0 opacity-0"
+              class="peer absolute top-0 left-0 size-0 opacity-0"
               type="checkbox"
               :value="facet.id"
               :name="facet.label"
-            > 
+            >
             <div
-              class="max-h-12 w-full px-4 py-3 pr-6 peer-focus-visible:ring-2 peer-focus-visible:ring-black"
+              class="
+                max-h-12 w-full px-4 py-3 pr-6
+                peer-focus-visible:ring-2 peer-focus-visible:ring-black
+              "
               :class="{
                 'text-surface-text hover:bg-neutral-20': !model?.includes(facet.id),
                 'border-b border-b-primary bg-primary-light font-semibold': model?.includes(facet.id),
@@ -78,12 +86,17 @@ const {
               :name="facet.label"
               :value="facet.value || facet.id"
             >
-              <div class="flex flex-1 flex-row text-surface-text flex-nowrap items-center justify-between cursor-pointer">
+              <div
+                class="
+                  flex flex-1 cursor-pointer flex-row flex-nowrap items-center
+                  justify-between text-surface-text
+                "
+              >
                 <div class="truncate">
                   {{ facet.label }}
                 </div>
                 <Typography
-                  class="font-normal text-fg-muted"
+                  class="text-fg-muted font-normal"
                   as="div"
                   variant="button-text"
                 >
@@ -95,7 +108,12 @@ const {
           </label>
         </li>
         <li v-if="isTruncationNeeded">
-          <button class="grid max-h-12 w-full place-content-center border-t-0 bg-surface px-4 py-3 pr-6 cursor-pointer rounded-b-lg" @click="toggleFacetsTruncation">
+          <button
+            class="
+              grid max-h-12 w-full cursor-pointer place-content-center
+              rounded-b-lg border-t-0 bg-surface px-4 py-3 pr-6
+            " @click="toggleFacetsTruncation"
+          >
             <i v-if="isTruncated" class="icon-[ph--caret-down]" />
             <i v-else class="icon-[ph--caret-up]" />
           </button>

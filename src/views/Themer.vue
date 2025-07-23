@@ -1,13 +1,12 @@
-
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
-const fontFamily = ref('Inter');
-const borderRadius = ref('25');
-const fonts = ['Arial', 'Courier New', 'Georgia', 'Century Gothic', 'Times New Roman', 'Verdana', 'Inter'];
+const fontFamily = ref('Inter')
+const borderRadius = ref('25')
+const fonts = ['Arial', 'Courier New', 'Georgia', 'Century Gothic', 'Times New Roman', 'Verdana', 'Inter']
 
 const colors = ref({
   primary: '#7B61FF',
@@ -32,12 +31,11 @@ const colors = ref({
   headerText: '#262626',
   footerBg: '#424242',
   footerText: '#ffffff',
-});
+})
 
-const cssOutput = ref('');
+const cssOutput = ref('')
 
-
-const generateCss = () => {
+function generateCss() {
   cssOutput.value = `
     /************************/
     /***** Piveau Fonts *****/
@@ -84,33 +82,34 @@ const generateCss = () => {
     --piveau-header-text: ${colors.value.headerText};
     --piveau-footer-bg: ${colors.value.footerBg};
     --piveau-footer-text: ${colors.value.footerText};
-    `;
-};
+    `
+}
 
-const updateExample = () => {
-  generateCss();
-};
+function updateExample() {
+  generateCss()
+}
 
-const saveCssConfig = () => {
-  const blob = new Blob([cssOutput.value], { type: 'text/css' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'piveau-theme.css';
-  link.click();
-};
+function saveCssConfig() {
+  const blob = new Blob([cssOutput.value], { type: 'text/css' })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(blob)
+  link.download = 'piveau-theme.css'
+  link.click()
+}
 
-const copyConfig = async () => {
+async function copyConfig() {
   try {
-    await navigator.clipboard.writeText(cssOutput.value);
-    alert(t('themer.copySuccess'));
-  } catch (err) {
-    console.error('Failed to copy: ', err);
+    await navigator.clipboard.writeText(cssOutput.value)
+    alert(t('themer.copySuccess'))
   }
-};
+  catch (err) {
+    console.error('Failed to copy: ', err)
+  }
+}
 
-const resetConfig = () => {
-  fontFamily.value = 'Inter';
-  borderRadius.value = '25';
+function resetConfig() {
+  fontFamily.value = 'Inter'
+  borderRadius.value = '25'
   colors.value = {
     primary: '#7B61FF',
     primaryVariant: '#3B2F79',
@@ -133,208 +132,285 @@ const resetConfig = () => {
     headerText: '#262626',
     footerBg: '#424242',
     footerText: '#ffffff',
-  };
-  generateCss();
-};
+  }
+  generateCss()
+}
 
 watch(
   [fontFamily, borderRadius, colors],
   () => {
-    generateCss();
+    generateCss()
   },
-  { deep: true }
-);
+  { deep: true },
+)
 
-generateCss();
-
+generateCss()
 </script>
+
 <template>
-  <div class="container relative mx-auto grid max-w-content-max mt-10">
-    <div class="config space-y-6 mb-20">
-      <h1 class="font-bold text-[1.375rem] mb-5">{{ t('themer.title') }}</h1>
+  <div class="relative container mx-auto mt-10 grid max-w-content-max">
+    <div class="config mb-20 space-y-6">
+      <h1 class="mb-5 text-[1.375rem] font-bold">
+        {{ t('themer.title') }}
+      </h1>
 
       <!-- Font Family -->
-      <div class="bg-surface p-5 rounded-lg">
+      <div class="rounded-lg bg-surface p-5">
         <div class="input-group-2">
-          <label class="block font-medium mb-2">{{ $t('themer.font.label') }}</label>
-          <select v-model="fontFamily" @change="updateExample" class="p-2 border rounded w-50 mb-5">
-            <option v-for="font in fonts" :key="font" :value="font">{{ font }}</option>
+          <label class="mb-2 block font-medium">{{ $t('themer.font.label') }}</label>
+          <select v-model="fontFamily" class="mb-5 w-50 rounded border p-2" @change="updateExample">
+            <option v-for="font in fonts" :key="font" :value="font">
+              {{ font }}
+            </option>
           </select>
-          <p :style="{ fontFamily }" class="text-lg">{{ $t('themer.piveauSlogan') }}</p>
+          <p :style="{ fontFamily }" class="text-lg">
+            {{ $t('themer.piveauSlogan') }}
+          </p>
         </div>
       </div>
 
       <!-- Colors -->
-      <div class="bg-surface p-5 rounded-lg mt-10">
+      <div class="mt-10 rounded-lg bg-surface p-5">
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.primary') }}</label>
-          <input type="color" v-model="colors.primary" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.primary') }}</label>
+          <input
+            v-model="colors.primary" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.primary }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.primaryVariant') }}</label>
-          <input type="color" v-model="colors.primaryVariant" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.primaryVariant') }}</label>
+          <input
+            v-model="colors.primaryVariant" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.primaryVariant }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.primaryLight') }}</label>
-          <input type="color" v-model="colors.primaryLight" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.primaryLight') }}</label>
+          <input
+            v-model="colors.primaryLight" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.primaryLight }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.secondary') }}</label>
-          <input type="color" v-model="colors.secondary" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.secondary') }}</label>
+          <input
+            v-model="colors.secondary" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.secondary }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.error') }}</label>
-          <input type="color" v-model="colors.error" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.error') }}</label>
+          <input
+            v-model="colors.error" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.error }}</span>
         </div>
 
         <hr class="mb-5">
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.background') }}</label>
-          <input type="color" v-model="colors.background" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.background') }}</label>
+          <input
+            v-model="colors.background" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.background }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.surface') }}</label>
-          <input type="color" v-model="colors.surface" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.surface') }}</label>
+          <input
+            v-model="colors.surface" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.surface }}</span>
         </div>
 
         <hr class="mb-5">
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.textOnPrimary') }}</label>
-          <input type="color" v-model="colors.textOnPrimary" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.textOnPrimary') }}</label>
+          <input
+            v-model="colors.textOnPrimary" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.textOnPrimary }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.textOnSecondary') }}</label>
-          <input type="color" v-model="colors.textOnSecondary" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.textOnSecondary') }}</label>
+          <input
+            v-model="colors.textOnSecondary" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.textOnSecondary }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.textOnBackground') }}</label>
-          <input type="color" v-model="colors.textOnBg" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.textOnBackground') }}</label>
+          <input
+            v-model="colors.textOnBg" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.textOnBg }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.textOnSurface') }}</label>
-          <input type="color" v-model="colors.textOnSurface" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.textOnSurface') }}</label>
+          <input
+            v-model="colors.textOnSurface" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.textOnSurface }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.textOnSurfaceLight') }}</label>
-          <input type="color" v-model="colors.textOnSurfaceLight" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.textOnSurfaceLight') }}</label>
+          <input
+            v-model="colors.textOnSurfaceLight" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.textOnSurfaceLight }}</span>
         </div>
 
         <hr class="mb-5">
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.headerBackground') }}</label>
-          <input type="color" v-model="colors.headerBg" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.headerBackground') }}</label>
+          <input
+            v-model="colors.headerBg" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.headerBg }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.headerText') }}</label>
-          <input type="color" v-model="colors.headerText" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.headerText') }}</label>
+          <input
+            v-model="colors.headerText" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.headerText }}</span>
         </div>
 
         <hr class="mb-5">
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.footerBackground') }}</label>
-          <input type="color" v-model="colors.footerBg" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.footerBackground') }}</label>
+          <input
+            v-model="colors.footerBg" type="color" class="h-8 w-12 rounded p-0"
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.footerBg }}</span>
         </div>
 
         <div class="input-group">
-          <label class="block font-medium mb-2">{{ $t('themer.colors.footerText') }}</label>
-          <input type="color" v-model="colors.footerText" @input="updateExample"
-                 class="w-12 h-8 p-0 rounded" />
+          <label class="mb-2 block font-medium">{{ $t('themer.colors.footerText') }}</label>
+          <input
+            v-model="colors.footerText" type="color" class="
+              h-8 w-12 rounded p-0
+            "
+            @input="updateExample"
+          >
           <span class="ml-2">{{ colors.footerText }}</span>
         </div>
       </div>
 
       <!-- Border Radius -->
-      <div class="bg-surface p-5 rounded-lg">
+      <div class="rounded-lg bg-surface p-5">
         <div class="input-group-2">
-          <label class="block font-medium mb-2">{{ $t('themer.borderRadius.label') }}</label>
-          <select v-model="borderRadius" @change="updateExample" class="p-2 border rounded w-50">
-            <option value="0">{{ $t('themer.borderRadius.square') }}</option>
-            <option value="10">{{ $t('themer.borderRadius.middleRound') }}</option>
-            <option value="25">{{ $t('themer.borderRadius.round') }}</option>
+          <label class="mb-2 block font-medium">{{ $t('themer.borderRadius.label') }}</label>
+          <select v-model="borderRadius" class="w-50 rounded border p-2" @change="updateExample">
+            <option value="0">
+              {{ $t('themer.borderRadius.square') }}
+            </option>
+            <option value="10">
+              {{ $t('themer.borderRadius.middleRound') }}
+            </option>
+            <option value="25">
+              {{ $t('themer.borderRadius.round') }}
+            </option>
           </select>
-          <button :style="{
-                        borderRadius: `${borderRadius}px`,
-                        backgroundColor: colors.primary,
-                        color: colors.textOnPrimary
+          <button
+            :style="{
+              borderRadius: `${borderRadius}px`,
+              backgroundColor: colors.primary,
+              color: colors.textOnPrimary,
 
-                    }" class="mt-2 px-4 py-2 text-white w-50">
+            }" class="mt-2 w-50 px-4 py-2 text-white"
+          >
             {{ $t('themer.exampleButton') }}
           </button>
         </div>
       </div>
-
     </div>
 
     <!-- Code Area -->
     <div class="code-area">
-      <h2 class="font-bold text-[1.375rem] mb-5">{{ $t('themer.generatedCss') }}</h2>
+      <h2 class="mb-5 text-[1.375rem] font-bold">
+        {{ $t('themer.generatedCss') }}
+      </h2>
       <div class="relative">
-                <textarea v-model="cssOutput" rows="20" cols="50"
-                          class="w-full p-4 rounded-lg bg-surface font-mono text-sm"></textarea>
-        <button @click="copyConfig" class="absolute top-2 right-2 p-2 bg-gray-200 rounded hover:bg-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-               class="bi bi-copy text-black" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+        <textarea
+          v-model="cssOutput" rows="20" cols="50"
+          class="font-mono w-full rounded-lg bg-surface p-4 text-sm"
+        />
+        <button
+          class="
+            absolute top-2 right-2 rounded bg-gray-200 p-2
+            hover:bg-gray-300
+          " @click="copyConfig"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-copy text-black" viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"
+            />
           </svg>
         </button>
       </div>
-      <button @click="resetConfig" class="mt-4 px-4 py-2 bg-gray text-black rounded mr-5 rounded-3xl">
+      <button class="mt-4 mr-5 rounded rounded-3xl bg-gray px-4 py-2 text-black" @click="resetConfig">
         {{ $t('themer.resetConfig') }}
       </button>
 
-      <button @click="saveCssConfig" :style="{
-                borderRadius: `${borderRadius}px`,
-                backgroundColor: colors.primary,
-                color: colors.textOnPrimary
-            }" class="mt-2 px-4 py-2 text-white">
+      <button
+        :style="{
+          borderRadius: `${borderRadius}px`,
+          backgroundColor: colors.primary,
+          color: colors.textOnPrimary,
+        }" class="mt-2 px-4 py-2 text-white" @click="saveCssConfig"
+      >
         {{ $t('themer.saveCssConfig') }}
       </button>
-
     </div>
   </div>
 </template>

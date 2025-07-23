@@ -53,10 +53,19 @@ function setActiveTab(tabId: string) {
           v-for="tab in tabs"
           :key="tab.id"
           :disabled="tab.disabled"
-          class="w-full rounded-t-lg border-b-0 px-6 py-4 text-center text-sm font-semibold transition-colors duration-200" :class="[
+          class="
+            w-full rounded-t-lg border-b-0 px-6 py-4 text-center text-sm
+            font-semibold transition-colors duration-200
+          " :class="[
             activeTab === tab.id
-              ? 'bg-white text-primary active:border-primary'
-              : 'hover:text-fg/90 border-transparent bg-surface-100 text-fg-muted hover:bg-surface-50',
+              ? `
+                bg-white text-primary
+                active:border-primary
+              `
+              : `
+                hover:text-fg/90 hover:bg-surface-50
+                text-fg-muted border-transparent bg-surface-100
+              `,
           ]"
           :aria-current="activeTab === tab.id ? 'page' : undefined"
           :aria-selected="activeTab === tab.id"

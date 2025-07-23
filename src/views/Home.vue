@@ -1,58 +1,95 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-
-
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <div>
-    
-
     <!-- ////////////////////// -->
     <!-- Hero Section Prototype -->
     <!-- ////////////////////// -->
 
-    <!-- Idea: 
-         Put search on the first page with "What is piveau?" as search example. 
-         On our demo we could have a sample of own datasets with "what is piveea", 
-         "how to set up piveau", "Gitlab resources of pivea", "latest Docker images", "full Dumentation", 
+    <!-- Idea:
+         Put search on the first page with "What is piveau?" as search example.
+         On our demo we could have a sample of own datasets with "what is piveea",
+         "how to set up piveau", "Gitlab resources of pivea", "latest Docker images", "full Dumentation",
          "what is MQA?", "what is Consus?", "pivea paper" ...
-         
+
          >> so users can find all resources related to piveau and the data management ecosystem
          >> and we can use the search function to show how it works
      -->
 
-
-    <!-- Note: This is only a prototype/draft, open for feedback, ideas and further design/decelopment-->
+    <!-- Note: This is only a prototype/draft, open for feedback, ideas and further design/decelopment -->
     <section>
-      <div class="max-w-(--breakpoint-xl) mx-auto h-screen w-screen bg-surface relative">
-        <div class="mx-auto max-w-prose text-center z-10 px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-          <h1 class="text-4xl font-bold text-surface-text sm:text-5xl z-10">
+      <div
+        class="
+          relative mx-auto h-screen w-screen max-w-(--breakpoint-xl) bg-surface
+        "
+      >
+        <div
+          class="
+            z-10 mx-auto max-w-prose px-4 py-16 text-center
+            sm:px-6 sm:py-24
+            lg:px-8 lg:py-32
+          "
+        >
+          <h1
+            class="
+              z-10 text-4xl font-bold text-surface-text
+              sm:text-5xl
+            "
+          >
             Data Catalogues Done Right with
             <span class="text-primary"> piveau </span>
           </h1>
 
-          <p class="mt-4 text-surface-light sm:text-lg/relaxed">
-            <strong>piveau</strong> is an <strong>open source metadata catalogue solution</strong> that covers 
+          <p
+            class="
+              mt-4 text-surface-light
+              sm:text-lg/relaxed
+            "
+          >
+            <strong>piveau</strong> is an <strong>open source metadata catalogue solution</strong> that covers
             the essential life cycle of your metadata:
             <strong>harvesting, storage and quality assurance</strong>.
-          </p> <br />
+          </p> <br>
           <!-- <ul>
             <li class="list-disc">Designed around <span class="text-primary">Semantic Web technologies</span>, the <span class="text-primary">W3C DCAT standard</span>, and the <span class="text-primary">European DCAT-AP standard</span> for Open Data</li>
             <li class="list-disc">closes the gap between <span class="text-primary">formal metadata specifications</span> and their <span class="text-primary">real-world application</span></li>
           </ul>
             With a strong emphasis on Open Data, piveau is the leading solution for public administrations and non-profit organizations to publish interoperable and flexible metadata catalogues. -->
 
-          <div class="mt-4 flex justify-center gap-4 sm:mt-6 z-10">
-            <RouterLink class="mt-4 flex w-m items-center justify-center gap-2 rounded-3xl px-5 py-3 text-primary-text bg-primary hover:bg-primary-hover hover:text-white transition-colors hover:bg-primary-hover"
-              to="/datasets">
+          <div
+            class="
+              z-10 mt-4 flex justify-center gap-4
+              sm:mt-6
+            "
+          >
+            <RouterLink
+              class="
+                w-m mt-4 flex items-center justify-center gap-2 rounded-3xl
+                bg-primary px-5 py-3 text-primary-text transition-colors
+                hover:bg-primary-hover hover:text-white
+              "
+              to="/datasets"
+            >
               Explore Demo
             </RouterLink>
-            <a  href="https://doc.piveau.eu/general/introduction/" target="_blank" rel="noopener noreferrer"
-                class="mt-4 flex w-m items-center justify-center gap-2 rounded-3xl px-5 py-3 text-gray-700 bg-gray hover:bg-primary-hover hover:text-white" >
-                Documentation 
-              <svg class="size-4 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
+            <a
+              href="https://doc.piveau.eu/general/introduction/" target="_blank" rel="noopener noreferrer"
+              class="
+                w-m mt-4 flex items-center justify-center gap-2 rounded-3xl
+                bg-gray px-5 py-3 text-gray-700
+                hover:bg-primary-hover hover:text-white
+              "
+            >
+              Documentation
+              <svg
+                class="
+                  size-4
+                  rtl:rotate-180
+                " xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
@@ -60,7 +97,6 @@ import { RouterLink } from 'vue-router';
         </div>
       </div>
     </section>
-
 
     <!-- ////////////////////////////////// -->
     <!--        Newsletter Prototype        -->
@@ -103,7 +139,6 @@ import { RouterLink } from 'vue-router';
       </div>
     </section> -->
   </div>
- 
 </template>
 
 <style scoped>

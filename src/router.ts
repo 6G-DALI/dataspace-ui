@@ -44,11 +44,11 @@ const router = createRouter({
     },
     {
       name: 'themer',
-      path:  '/themer',
+      path: '/themer',
       component: Themer,
-      meta : {
+      meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       name: 'imprint',

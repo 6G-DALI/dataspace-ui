@@ -9,14 +9,14 @@ export const i18n = createI18n({
     en: {
       views: {
         app: {
-          
+
         },
       },
     },
     de: {
       views: {
         app: {
-          
+
         },
       },
     },

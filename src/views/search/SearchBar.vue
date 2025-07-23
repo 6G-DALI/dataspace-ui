@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import KButton from '@/components/base/button/KButton.vue'
 import SearchInput from '@/components/search-input/SearchInput.vue'
-
-const { t } = useI18n()
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps<{
   searchAction: Function
 }>()
+
+const { t } = useI18n()
 
 const searchInput = defineModel<string>()
 </script>
@@ -16,7 +16,10 @@ const searchInput = defineModel<string>()
   <div class="mt-[5px] flex-none px-6 py-[1.875rem]">
     <section
       name="top"
-      class="flex flex-col lg:py-16"
+      class="
+        flex flex-col
+        lg:py-16
+      "
     >
       <form
         class="flex gap-3"

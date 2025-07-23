@@ -7,9 +7,14 @@ const direction = defineModel<string>('direction', { default: 'desc' })
 
 <template>
   <section>
-    <div class="flex flex-col gap-x-2 gap-y-4 lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between">
+    <div
+      class="
+        flex flex-col gap-x-2 gap-y-4
+        lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between
+      "
+    >
       <div class="min-w-fit">
-        <p class="font-medium leading-5 text-surface-light">
+        <p class="leading-5 font-medium text-surface-light">
           <slot />
         </p>
       </div>

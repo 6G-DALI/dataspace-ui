@@ -72,7 +72,7 @@ const text = ref('Neue Daten')
       </div>
     </Variant>
     <Variant title="Severity (dark)">
-      <div class="dark flex flex-wrap justify-center gap-3 bg-primary-110 p-4">
+      <div class="dark bg-primary-110 flex flex-wrap justify-center gap-3 p-4">
         <KButton
           :label="text"
           @click="logEvent('click', $event)"

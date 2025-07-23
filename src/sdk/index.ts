@@ -9,8 +9,8 @@ import { schemaCatalog, SchemaDataset } from '@piveau/sdk-core'
 import { dcatApDataset, defineHubSearch, getTranslationFor } from '@piveau/sdk-vue'
 import DOMPurify from 'isomorphic-dompurify'
 import { marked } from 'marked'
-import appConfig from '../../config/appConfig'
 import { useI18n } from 'vue-i18n'
+import appConfig from '../../config/appConfig'
 
 export function useDcatApSearch() {
   const { t } = useI18n()

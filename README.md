@@ -59,7 +59,7 @@ The project uses GitLab CI/CD with the following stages:
 
 ### Deploy Stage
 - **deploy**: Deploys to OpenShift
-    - imports the latest Docker image 
+    - imports the latest Docker image
     - deploys to OpenShift
 
 ### Notes

@@ -1,10 +1,19 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="container relative mx-auto grid grid-cols-1 sm:grid-cols-[minmax(auto,20rem)_1fr]">
+  <div
+    class="
+      relative container mx-auto grid grid-cols-1
+      sm:grid-cols-[minmax(auto,20rem)_1fr]
+    "
+  >
     <div
       name="sidebar"
-      class="relative hidden sm:block sm:max-w-96 lg:min-w-[420px]"
+      class="
+        relative hidden
+        sm:block sm:max-w-96
+        lg:min-w-[420px]
+      "
     >
       <div
         name="stickysidey"

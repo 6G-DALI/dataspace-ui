@@ -2,8 +2,12 @@
 import { useDataTruncator } from '@/composables/useDataTruncator'
 import { computed, toValue } from 'vue'
 
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import PhCaretLeft from '~icons/ph/caret-left'
+
+import LinkedDataSelector from '../base/links/LinkedDataSelector.vue'
+
 import SummaryBox from '../base/summary-box/SummaryBox.vue'
 
 import TabGroup from '../base/tab-group/TabGroup.vue'
@@ -11,11 +15,6 @@ import TabGroup from '../base/tab-group/TabGroup.vue'
 import Typography from '../base/typography/Typography.vue'
 
 import DetailsPageHeader from './DetailsPageHeader.vue'
-
-import LinkedDataSelector from '../base/links/LinkedDataSelector.vue'
-
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
 
 const props = withDefaults(defineProps<{
   headline?: string
@@ -27,6 +26,8 @@ const props = withDefaults(defineProps<{
 }>(), {
   headline: 'Datensatz',
 })
+
+const { t } = useI18n()
 
 const router = useRouter()
 
@@ -110,15 +111,20 @@ const truncatedEllipsedDescription = computed(() => {
         <!-- Go previous page -->
         <div class="flex flex-col gap-6">
           <div class="flex justify-between">
-          <div>
-            <button class="-ml-6 mt-[10px] px-4 py-1 cursor-pointer" @click="router.back()">
-              <Typography variant="paragraph-1" class="flex items-center gap-2 text-primary hover:text-primary-hover">
-                <PhCaretLeft />
-                <span>{{ t('details.back') }}</span>
-              </Typography>
-            </button>
-          </div>
-          <LinkedDataSelector :resource-id="datasetId" resource="datasets"/>
+            <div>
+              <button class="mt-[10px] -ml-6 cursor-pointer px-4 py-1" @click="router.back()">
+                <Typography
+                  variant="paragraph-1" class="
+                    flex items-center gap-2 text-primary
+                    hover:text-primary-hover
+                  "
+                >
+                  <PhCaretLeft />
+                  <span>{{ t('details.back') }}</span>
+                </Typography>
+              </button>
+            </div>
+            <LinkedDataSelector :resource-id="datasetId" resource="datasets" />
           </div>
           <DetailsPageHeader :headline="headline" :title="title" :subtitle="subtitle">
             <template #subtitle>
@@ -131,9 +137,14 @@ const truncatedEllipsedDescription = computed(() => {
         </div>
         <!-- Metadata -->
         <slot name="metadata">
-          <div class="flex flex-col justify-between md:flex-row">
+          <div
+            class="
+              flex flex-col justify-between
+              md:flex-row
+            "
+          >
             <SummaryBox
-              v-for="(s, i) in summary" :key="i" class="mb-4 mr-4 flex-1" :title="s.title"
+              v-for="(s, i) in summary" :key="i" class="mr-4 mb-4 flex-1" :title="s.title"
               :text="s.text || '-'"
             />
             <!-- <SummaryBox class="mb-4 mr-4 flex-1" title="Datenbereitsteller" :text="resultEnhanced?.getPublisher?.name || '-'" />
@@ -165,12 +176,23 @@ const truncatedEllipsedDescription = computed(() => {
                   </Typography>
                 </div>
                 <button
-                  v-if="isDescriptionTruncationNeeded" class="grid w-full place-content-center"
+                  v-if="isDescriptionTruncationNeeded" class="
+                    grid w-full place-content-center
+                  "
                   @click="toggleDescription"
                 >
-                  <div class="flex flex-col items-center justify-center text-primary text-xs/6 font-bold">
+                  <div
+                    class="
+                      flex flex-col items-center justify-center text-xs/6
+                      font-bold text-primary
+                    "
+                  >
                     <span>{{ t('details.read_more') }}</span>
-                    <i v-if="isDescriptionTruncated" class="icon-[ph--caret-down]" />
+                    <i
+                      v-if="isDescriptionTruncated" class="
+                        icon-[ph--caret-down]
+                      "
+                    />
                     <i v-else class="icon-[ph--caret-up]" />
                   </div>
                 </button>

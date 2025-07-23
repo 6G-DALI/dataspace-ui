@@ -6,13 +6,11 @@ import { useDcatApSearch } from '@/sdk'
 import FacetBurgerButton from '@/views/search/FacetBurgerButton.vue'
 import SearchBar from '@/views/search/SearchBar.vue'
 import SearchItems from '@/views/search/SearchItems.vue'
-import Sidebar from 'primevue/sidebar'
 import { ref, toRef } from 'vue'
+import PhXCircle from '~icons/ph/x-circle'
 import { useSearchParams } from '../useSearchParams'
 import { useSelectedFacets } from '../useSelectedFacets'
 import { useDatasetSearchView } from './useDatasetsSearchView'
-import PhXCircle from '~icons/ph/x-circle'
-
 
 const searchInput = defineModel<string>('searchInput', { required: true })
 const hvdModel = defineModel<boolean>('hvd', { required: true })
@@ -50,21 +48,23 @@ const {
 
 <template>
   <!-- Facets toggle sidebar for small devices -->
-  <div 
+  <div
     v-if="sidebarVisible"
     class="fixed inset-0 z-50 flex"
   >
     <div
       class="absolute inset-0 bg-black/70"
       @click="toggleFacetSidebar"
-    ></div>
+    />
 
     <div
-      class="relative z-10 max-w-80 bg-hite shadow-xl p-4 overflow-auto bg-white"
+      class="
+        bg-hite relative z-10 max-w-80 overflow-auto bg-white p-4 shadow-xl
+      "
     >
-      <header class="text-lg font-bold flex justify-between">
+      <header class="flex justify-between text-lg font-bold">
         Search filter
-        <PhXCircle @click="toggleFacetSidebar" class="cursor-pointer text-xl" />
+        <PhXCircle class="cursor-pointer text-xl" @click="toggleFacetSidebar" />
       </header>
       <FacetSidebar
         v-model:model-value="selectedFacets"
@@ -72,15 +72,25 @@ const {
         v-model:livedata="livedataModel"
         :public="true"
         mobile
-        :facets="availableFacetsFormatted" />
+        :facets="availableFacetsFormatted"
+      />
     </div>
   </div>
 
-  <div class="container relative mx-auto grid max-w-content-max grid-cols-1 sm:grid-cols-[minmax(auto,20rem)_1fr]">
+  <div
+    class="
+      relative container mx-auto grid max-w-content-max grid-cols-1
+      sm:grid-cols-[minmax(auto,20rem)_1fr]
+    "
+  >
     <!-- Permanent facets for large devices -->
     <div
       name="sidebar"
-      class="relative hidden sm:block sm:max-w-96 lg:min-w-[420px]"
+      class="
+        relative hidden
+        sm:block sm:max-w-96
+        lg:min-w-[420px]
+      "
     >
       <div
         name="stickysidey"

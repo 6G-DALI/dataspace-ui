@@ -26,13 +26,14 @@ const paginationRange = computed(() => {
 
   let start = current - Math.floor(maxButtons / 2)
   let end = current + Math.floor(maxButtons / 2)
-  
+
   if (start < 1) {
-    start = 1 
+    start = 1
     end = maxButtons
-  } else if (end > total) {
+  }
+  else if (end > total) {
     end = total
-    start = total - maxButtons + 1 
+    start = total - maxButtons + 1
   }
 
   return Array.from({ length: end - start + 1 }, (_, i) => start + i)
@@ -59,7 +60,12 @@ function goToPage(page: number) {
       </slot>
     </template>
     <template v-else>
-      <div v-for="i in itemsCount.value" :key="i" class="flex size-full animate-pulse flex-col gap-6 bg-slate-200 text-content rounded-3xl">
+      <div
+        v-for="i in itemsCount.value" :key="i" class="
+          flex size-full animate-pulse flex-col gap-6 rounded-3xl bg-slate-200
+          text-content
+        "
+      >
         <div class="flex h-64 flex-wrap gap-2" />
       </div>
     </template>
@@ -67,58 +73,67 @@ function goToPage(page: number) {
   <!-- Pagination -->
   <div class="grid w-full place-content-center">
     <nav class="rounded-sm">
-      <div class="flex items-center justify-center flex-wrap px-4 py-2 rounded-xl bg-surface dark:bg-surface-800 text-primary dark:text-white/60">
+      <div
+        class="
+          flex flex-wrap items-center justify-center rounded-xl bg-surface px-4
+          py-2 text-primary
+          dark:bg-surface-800 dark:text-white/60
+        "
+      >
         <button
-          @click="goToPage(1)"
           class="px-4 py-2"
           :class="{
-            'opacity-60' : currentPage === 1 
+            'opacity-60': currentPage === 1,
           }"
+          @click="goToPage(1)"
         >
-          <i class="icon-[ph--caret-double-left] align-middle text-xs"></i>
+          <i class="icon-[ph--caret-double-left] align-middle text-xs" />
         </button>
 
         <button
-          @click="goToPage(currentPage - 1)"
           :class="{
-            'opacity-60' : currentPage === 1 
+            'opacity-60': currentPage === 1,
           }"
           class="px-4 py-2"
+          @click="goToPage(currentPage - 1)"
         >
-          <i class="icon-[ph--caret-left] align-middle text-xs"></i>
+          <i class="icon-[ph--caret-left] align-middle text-xs" />
         </button>
-        
+
         <button
           v-for="page in paginationRange"
           :key="page"
-          @click="goToPage(page)"
-          class=" inline-flex items-center justify-center border-0 rounded-full min-w-[3rem] h-12 m-[0.143rem]"
+          class="
+            m-[0.143rem] inline-flex h-12 min-w-[3rem] items-center
+            justify-center rounded-full border-0
+          "
           :class="{
-            'bg-primary text-white dark:text-surface-0 dark:bg-primary-400/30' : page === currentPage,
-            'text-primary-700 dark:text-white/80 hover:bg-gray-hover' : page !== currentPage
+            'dark:bg-primary-400/30 dark:text-surface-0 bg-primary text-white': page === currentPage,
+            'text-primary-700 hover:bg-gray-hover dark:text-white/80': page !== currentPage,
           }"
+          @click="goToPage(page)"
         >
           {{ page }}
         </button>
 
         <button
+          class="px-4 py-2"
+          :class="{
+            'opacity-60': currentPage === totalPages,
+          }"
           @click="goToPage(currentPage + 1)"
-          class="px-4 py-2"
-          :class="{
-            'opacity-60' : currentPage === totalPages 
-          }"
         >
-          <i class="icon-[ph--caret-right] align-middle text-xs"></i>
+          <i class="icon-[ph--caret-right] align-middle text-xs" />
         </button>
-        
+
         <button
-          @click="goToPage(totalPages)"
           class="px-4 py-2"
           :class="{
-            'opacity-60' : currentPage === totalPages 
+            'opacity-60': currentPage === totalPages,
           }"
+          @click="goToPage(totalPages)"
         >
-          <i class="icon-[ph--caret-double-right] align-middle text-xs"></i>
+          <i class="icon-[ph--caret-double-right] align-middle text-xs" />
         </button>
       </div>
     </nav>

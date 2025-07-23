@@ -8,15 +8,15 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['close-nav'])
+
 const links = [
   { to: '/', label: 'landing-page.header.home' },
   { to: '/datasets', label: 'landing-page.header.datasets' },
   { to: '/catalogues', label: 'landing-page.header.catalogues' },
 ]
 
-const emit = defineEmits(['close-nav'])
-
-const handleNavigate = (navigate) => {
+function handleNavigate(navigate) {
   navigate()
   emit('close-nav')
 }

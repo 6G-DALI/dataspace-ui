@@ -6,108 +6,94 @@ You can/should replace the usage of this component when Vue Router supports exte
 13.06.18
 **/
 
-<template>
-  <a @click="trackLink" @mousedown.middle="trackLink" :download="download" :href="url" :rel="rel" :target="target" :type="type" v-if="isExternal">
-    <slot></slot>
-    <svg
-        v-if="showExternalLinkIcon && isExternal && !isTooltip"
-        class="external-icon"
-    >
-      <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-      <path d="M5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7H5V5h7V3H5z"/>
-    </svg>
-  </a>
-
-  <router-link :to="to" :rel="rel" v-else :exact="exact">
-    <slot></slot>
-
-  </router-link>
-
-</template>
-
 <script>
-  export default {
-    props: {
-      to: {
-        default: '',
-        required: false,
-      },
-      path: {
-        default: '',
-        required: false,
-      },
-      query: {
-        default: '',
-        required: false,
-      },
-      fragment: {
-        default: '',
-        required: false,
-      },
-      type: {
-        default: null,
-        required: false,
-      },
-      target: {
-        default: '_self',
-        required: false,
-      },
-      exact: {
-        default: false,
-        required: false,
-      },
-      rel: {
-        default: 'noopener',
-        required: false,
-      },
-      download: {
-        default: null,
-        required: false,
-      },
-      // Use this if you want to track a link explicitly as download instead of an external link.
-      matomoTrackDownload: [Boolean, Object],
-      // Use this to manually report clicked links to Matomo
-      // Useful for URL destinations, that are on the same domain but not inside this application, so that Matomo is unable to track page views (e.g. RSS feed).
-      matomoTrackPageView: [Boolean, Object],
+import appConfig from '../../../../config/appConfig'
 
-      isTooltip: {
-        default: false,
-        required: false,
+export default {
+  props: {
+    to: {
+      default: '',
+      required: false,
+    },
+    path: {
+      default: '',
+      required: false,
+    },
+    query: {
+      default: '',
+      required: false,
+    },
+    fragment: {
+      default: '',
+      required: false,
+    },
+    type: {
+      default: null,
+      required: false,
+    },
+    target: {
+      default: '_self',
+      required: false,
+    },
+    exact: {
+      default: false,
+      required: false,
+    },
+    rel: {
+      default: 'noopener',
+      required: false,
+    },
+    download: {
+      default: null,
+      required: false,
+    },
+    // Use this if you want to track a link explicitly as download instead of an external link.
+    matomoTrackDownload: [Boolean, Object],
+    // Use this to manually report clicked links to Matomo
+    // Useful for URL destinations, that are on the same domain but not inside this application, so that Matomo is unable to track page views (e.g. RSS feed).
+    matomoTrackPageView: [Boolean, Object],
+
+    isTooltip: {
+      default: false,
+      required: false,
+    },
+  },
+  computed: {
+    readPath: {
+      get() {
+        return (this.path && typeof this.path === 'string') ? this.path : ''
       },
     },
-    computed: {
-      readPath: {
-        get() {
-          return (this.path && typeof this.path === 'string') ? this.path : '';
-        },
-      },
-      readQuery: {
-        get() {
-          if (!this.query) return '';
-          if (typeof this.query === 'object') return `?${Object.keys(this.query).map(key => `${key}=${this.query[key]}`).join('&')}`;
-          if (typeof this.query === 'string') return /^\?([a-zA-Z]+[=].*)([&][a-zA-Z]+[=].*)*$/.test(this.query) ? this.query : '';
-          return '';
-        },
-      },
-      readFragment: {
-        get() {
-          return (this.fragment && typeof this.fragment === 'string') ? `${this.fragment}` : '';
-        },
-      },
-      isExternal: {
-        get() {
-          return !(typeof this.to === 'object') && (/^(http(s)?|ftp|mailto|tel):/.test(this.to) || /^\//.test(this.readPath) || /^\?/.test(this.readQuery) || /^#/.test(this.readFragment));
-        },
-      },
-      url: {
-        get() {
-          return `${this.to}${this.readPath}${this.readQuery}${this.readFragment}`;
-        },
+    readQuery: {
+      get() {
+        if (!this.query)
+          return ''
+        if (typeof this.query === 'object')
+          return `?${Object.keys(this.query).map(key => `${key}=${this.query[key]}`).join('&')}`
+        if (typeof this.query === 'string')
+          return /^\?([a-z]+[=].*)(&[a-z]+[=].*)*$/i.test(this.query) ? this.query : ''
+        return ''
       },
     },
-    methods: {
-      trackLink() {
-        /* eslint-disable */
+    readFragment: {
+      get() {
+        return (this.fragment && typeof this.fragment === 'string') ? `${this.fragment}` : ''
+      },
+    },
+    isExternal: {
+      get() {
+        return !(typeof this.to === 'object') && (/^(http(s)?|ftp|mailto|tel):/.test(this.to) || /^\//.test(this.readPath) || /^\?/.test(this.readQuery) || this.readFragment.startsWith('#'))
+      },
+    },
+    url: {
+      get() {
+        return `${this.to}${this.readPath}${this.readQuery}${this.readFragment}`
+      },
+    },
+  },
+  methods: {
+    trackLink() {
+      /* eslint-disable */
         if (this.matomoTrackPageView) {
           this.$piwik.trackPageView(`${window.location.origin}${this.path}`, '', {});
           /* eslint-disable */
@@ -140,12 +126,31 @@ You can/should replace the usage of this component when Vue Router supports exte
     },
     data() {
       return {
-        showExternalLinkIcon: this.$env.content.datasets.facets.showExternalLinkIcon,
+        showExternalLinkIcon: appConfig.showExternalLinkIcon || true,
 
       };
     },
   };
 </script>
+
+<template>
+  <a @click="trackLink" @mousedown.middle="trackLink" :download="download" :href="url" :rel="rel" :target="target" :type="type" v-if="isExternal">
+    <slot></slot>
+    <svg
+        v-if="showExternalLinkIcon && isExternal && !isTooltip"
+        class="external-icon"
+    >
+      <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+      <path d="M5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7H5V5h7V3H5z"/>
+    </svg>
+  </a>
+
+  <router-link :to="to" :rel="rel" v-else :exact="exact">
+    <slot></slot>
+
+  </router-link>
+
+</template>
 
 <style lang="scss" scoped>
 </style>

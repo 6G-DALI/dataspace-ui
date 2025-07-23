@@ -13,7 +13,7 @@ const sortDirectionClass = computed(() =>
       'icon-[ph--arrow-up]': sortDirection.value === 'asc',
       'icon-[ph--arrow-down]': sortDirection.value === 'desc',
     },
-  ])
+  ]),
 )
 const checked = computed({
   get() {
@@ -32,7 +32,7 @@ const sortOptions = computed(() => [
 ])
 const sort = defineModel<string>('sort', { default: 'modified' })
 
-const selectedOption = computed(() => sortOptions.value.find((opt) => opt.id === sort.value)?.name ?? '')
+const selectedOption = computed(() => sortOptions.value.find(opt => opt.id === sort.value)?.name ?? '')
 
 function toggleDropdown() {
   showDropdown.value = !showDropdown.value
@@ -48,19 +48,31 @@ function toggle() {
 </script>
 
 <template>
-  <div class="relative w-full flex">
-    <div class="relative rounded-r-none md:w-56 inline-flex rounded-full bg-surface border cursor-pointer">
+  <div class="relative flex w-full">
+    <div
+      class="
+        relative inline-flex cursor-pointer rounded-full rounded-r-none border
+        bg-surface
+        md:w-56
+      "
+    >
       <button
-        @click="toggleDropdown"
         aria-haspopup="listbox"
-        class="flex-auto font-light px-3 py-2 flex items-center justify-between">
+        class="flex flex-auto items-center justify-between px-3 py-2 font-light"
+        @click="toggleDropdown"
+      >
         {{ selectedOption }}
-        <i class="icon-[ph--caret-down] text-surface-text text-xs" />
+        <i class="icon-[ph--caret-down] text-xs text-surface-text" />
       </button>
 
       <div
         v-if="showDropdown"
-        class="absolute z-10 w-full  top-full border dark:border rounded-md shadow-md bg-surface-0 dark:bg-surface-800 text-surface-800 dark:text-white/80 dark:border-surface-700 max-h-[200px] py-3"
+        class="
+          absolute top-full z-10 max-h-[200px] w-full rounded-md border
+          bg-surface-0 py-3 text-surface-800 shadow-md
+          dark:border dark:border-surface-700 dark:bg-surface-800
+          dark:text-white/80
+        "
       >
         <ul
           v-for="option in sortOptions"
@@ -68,11 +80,17 @@ function toggle() {
           :value="option.id"
           tabindex="0"
           @keydown.enter="selectOption(option.id, option.name)"
-          >
+        >
           <li
+            class="
+              dark:bg-primary-400/40 dark:text-white/80
+              text-primary-700 m-0 cursor-pointer px-5 py-3 leading-none
+              font-light
+              hover:bg-gray-hover
+            "
+            :class="{ 'bg-blue-400/20': option.id === sort }"
             @click="selectOption(option.id, option.name)"
-            class="leading-none m-0 py-3 px-5 font-light dark:bg-primary-400/40 text-primary-700 dark:text-white/80 cursor-pointer hover:bg-gray-hover"
-            :class="{ 'bg-blue-400/20': option.id === sort }">
+          >
             {{ option.name }}
           </li>
         </ul>
@@ -80,11 +98,17 @@ function toggle() {
     </div>
 
     <button
+      class="
+        flex cursor-pointer items-center rounded-full rounded-l-none border
+        border-surface-200 bg-surface pr-4 pl-3 font-light
+        dark:border-surface-700
+      "
       @click="toggle"
-      class="rounded-l-none pl-3 pr-4 rounded-full border border-surface-200 dark:border-surface-700 cursor-pointer bg-surface font-light flex items-center">
+    >
       <i
         :class="sortDirectionClass"
-        class="!text-xs" />
+        class="!text-xs"
+      />
       {{
         checked
           ? t('kdw.components.sort-split-button.SortSplitButton.toggleButton.ascending')

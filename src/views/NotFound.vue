@@ -3,11 +3,16 @@ import Typography from '../components/base/typography/Typography.vue'
 </script>
 
 <template>
-  <div class="container mx-auto max-w-(--breakpoint-xl) mx-auto px-4 py-12 lg:px-6 lg:py-12 ml-50 mt-10">
+  <div
+    class="
+      container mx-auto mt-10 ml-50 max-w-(--breakpoint-xl) px-4 py-12
+      lg:px-6 lg:py-12
+    "
+  >
     <Typography
       as="h1"
       variant="by-heading-1"
-      class="max-w-(--breakpoint-xl) mx-auto py-8"
+      class="mx-auto max-w-(--breakpoint-xl) py-8"
     >
       404 Not Found
     </Typography>
@@ -18,7 +23,10 @@ import Typography from '../components/base/typography/Typography.vue'
     >
       <a
         href="/"
-        class="by-link text-primary-70 hover:underline"
+        class="
+          by-link text-primary-70
+          hover:underline
+        "
       >
         Die angeforderte Seite wurde nicht gefunden. Sie können es erneut von der Homepage aus versuchen.
       </a>
@@ -30,7 +38,10 @@ import Typography from '../components/base/typography/Typography.vue'
     >
       <a
         href="/"
-        class="by-link text-primary-70 hover:underline"
+        class="
+          by-link text-primary-70
+          hover:underline
+        "
       >
         Kontaktieren Sie uns bezüglich dieser Fehlermeldung.
       </a>

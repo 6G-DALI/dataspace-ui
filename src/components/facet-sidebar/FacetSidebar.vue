@@ -28,7 +28,12 @@ const model = useVModel(props, 'modelValue', emit, { passive: true })
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 py-8 pr-10 lg:mt-48">
+  <div
+    class="
+      flex flex-col gap-6 py-8 pr-10
+      lg:mt-48
+    "
+  >
     <div
       v-if="ghost"
       class="h-[720px] w-full animate-pulse rounded-lg border bg-surface-200"

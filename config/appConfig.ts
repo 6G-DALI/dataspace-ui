@@ -1,7 +1,7 @@
 import developmentConfig from './config.dev.js'
 import productionConfig from './config.js'
 
-interface Configuration {
+export interface Configuration {
   appUrl: string
   keycloakUrl: string
   keycloakRealm: string
@@ -10,13 +10,4 @@ interface Configuration {
   piveauHubSearchUrl: string
 }
 
-let appConfig: Record<string, any>
-
-if (import.meta.env.MODE === 'production') {
-  appConfig = productionConfig
-}
-else {
-  appConfig = developmentConfig
-}
-
-export default appConfig
+export default import.meta.env.MODE === 'production' ? productionConfig : developmentConfig

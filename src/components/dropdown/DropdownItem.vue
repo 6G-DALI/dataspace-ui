@@ -10,7 +10,11 @@ const props = defineProps<{
   <MenuItem v-slot="{ active }">
     <component
       :is="props.as || 'button'"
-      class="flex w-48 items-start px-6 py-2 text-neutral-100 hover:cursor-pointer hover:bg-neutral-20 active:bg-neutral-10 "
+      class="
+        flex w-48 items-start px-6 py-2 text-neutral-100
+        hover:cursor-pointer hover:bg-neutral-20
+        active:bg-neutral-10
+      "
       :class="{ 'bg-neutral-20': active }"
       v-bind="$attrs"
     >

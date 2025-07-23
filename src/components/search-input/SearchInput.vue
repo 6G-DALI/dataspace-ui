@@ -16,7 +16,12 @@ const searchValue = defineModel<string>()
     v-model="searchValue"
     :placeholder="props.placeholder"
     size="small"
-    class="custom-input text-surface-800 dark:text-surface-200 bg-surface-0 dark:bg-surface-900 border focus:outline-hidden" />
+    class="
+      custom-input border bg-surface-0 text-surface-800
+      focus:outline-hidden
+      dark:bg-surface-900 dark:text-surface-200
+    "
+  >
 </template>
 
 <style scoped>

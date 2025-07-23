@@ -8,19 +8,19 @@ import DOMPurify from 'isomorphic-dompurify'
 import { marked } from 'marked'
 
 import { computed, shallowReactive, toValue } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import KButton from '../components/base/button/KButton.vue'
-import KCard from '../components/base/card/KCard.vue'
 
+import KCard from '../components/base/card/KCard.vue'
 import KTag from '../components/base/tag/KTag.vue'
 import Typography from '../components/base/typography/Typography.vue'
 import DistributionCard from '../components/distribution-card/DistributionCard.vue'
 import { PropertyTable } from '../components/property-table/PropertyTableRow'
+
 import { useDcatApSearch } from '../sdk/index'
 
 import { getLocalizedValue } from '../sdk/utils/helpers'
-
-import { useI18n } from 'vue-i18n'
 
 function ensureDatasetId(id: Ref): asserts id is Ref<string> {
   if (typeof toValue(id) !== 'string')
@@ -100,10 +100,10 @@ const { t } = useI18n()
 
 <template>
   <div>
-    <div v-if="error" class="grid size-full place-content-center bg-bg-base">
+    <div v-if="error" class="bg-bg-base grid size-full place-content-center">
       <KCard class="size-96">
-        <span class="p-card-title text-2xl font-medium mb-2">{{ t('dataset.error') }}</span>
-          <div> {{ errorView }}</div>
+        <span class="p-card-title mb-2 text-2xl font-medium">{{ t('dataset.error') }}</span>
+        <div> {{ errorView }}</div>
       </KCard>
     </div>
     <DetailsPage
@@ -123,7 +123,11 @@ const { t } = useI18n()
       ]" :description-markup="resultEnhanced?.getDescriptionMarkup"
     >
       <template #subtitle="{ subtitle }">
-        <RouterLink :to="{ name: 'Datasets', query: { catalog: resultEnhanced?.getCatalogId } }" class="by-link">
+        <RouterLink
+          :to="{ name: 'Datasets', query: { catalog: resultEnhanced?.getCatalogId } }" class="
+            by-link
+          "
+        >
           {{ subtitle }}
         </RouterLink>
       </template>
@@ -131,7 +135,7 @@ const { t } = useI18n()
       <template #sections>
         <section class="space-y-4">
           <div class="mt-12 flex flex-row items-center gap-2">
-            <h2 class="text-[2.5rem] font-bold leading-[3rem] text-surface-text">
+            <h2 class="text-[2.5rem] leading-[3rem] font-bold text-surface-text">
               {{ t('dataset.distributions') }}
             </h2>
             <KTag class="rounded-full bg-secondary">
@@ -140,7 +144,7 @@ const { t } = useI18n()
               }}
             </KTag>
           </div>
-          <div class="h-px w-full bg-bg-divider" />
+          <div class="bg-bg-divider h-px w-full" />
           <div name="distribution-cards" class="relative">
             <template v-for="(distribution, i) in truncatedFormattedDistributions" :key="distribution.id">
               <div name="distribution-card-wrapper" class="relative">
@@ -153,15 +157,23 @@ const { t } = useI18n()
                 <div
                   v-if="i === truncatedFormattedDistributions.length - 1 && isDistributionsTruncated"
                   name="distribution-card-overlay"
-                  class="bg-linear-to-b absolute left-0 top-0 size-full from-transparent from-0% to-white to-55%"
+                  class="
+                    absolute top-0 left-0 size-full bg-linear-to-b
+                    from-transparent from-0% to-white to-55%
+                  "
                 >
-                  <div class="absolute bottom-0 flex w-full flex-row items-center justify-center">
+                  <div
+                    class="
+                      absolute bottom-0 flex w-full flex-row items-center
+                      justify-center
+                    "
+                  >
                     <div>
                       <KButton
                         :label="`${t('dataset.show_more')} (${getFormattedDistributions.length})`"
                         @click="showAllDistributions"
                       >
-                        <i class="icon-[ph--eye-fill]"></i>
+                        <i class="icon-[ph--eye-fill]" />
                       </KButton>
                     </div>
                   </div>
@@ -170,8 +182,14 @@ const { t } = useI18n()
             </template>
           </div>
         </section>
-        <div v-if="(resultEnhanced?.getCategories?.length || 0) > 0" class="space-y-3">
-          <Typography variant="by-heading-4" class="font-semibold text-primary-100">
+        <div
+          v-if="(resultEnhanced?.getCategories?.length || 0) > 0" class="
+            space-y-3
+          "
+        >
+          <Typography
+            variant="by-heading-4" class="text-primary-100 font-semibold"
+          >
             {{ t('dataset.categories') }}
           </Typography>
           <div class="flex flex-row gap-2">
@@ -183,9 +201,9 @@ const { t } = useI18n()
             </KTag>
           </div>
         </div>
-        <div class="h-px w-full bg-bg-divider" />
+        <div class="bg-bg-divider h-px w-full" />
         <div class="space-y-4">
-          <div class="flex flex-col rounded-xl gap-4 bg-surface p-4">
+          <div class="flex flex-col gap-4 rounded-xl bg-surface p-4">
             <Typography variant="by-heading-4" class="">
               {{ t('dataset.additional_info') }}
             </Typography>

@@ -2,9 +2,9 @@
 # This pipeline builds a Vue.js application, creates a Docker image, and deploys it to OpenShift
 
 stages:
-  - prepare  # Stage 0: Mirror Node.js image to GitLab registry
-  - build    # Stage 1: Build the Vue.js application
-  - deploy   # Stage 2: Deploy the built image to OpenShift
+  - prepare # Stage 0: Mirror Node.js image to GitLab registry
+  - build # Stage 1: Build the Vue.js application
+  - deploy # Stage 2: Deploy the built image to OpenShift
 
 mirror-node:
   stage: prepare
@@ -29,7 +29,7 @@ build-asset:
     - mirror-node
   image: $CI_REGISTRY_IMAGE/node:18-alpine
   tags:
-    - dps-piveau-runner   # use dps-piveau-runner
+    - dps-piveau-runner # use dps-piveau-runner
 
   before_script:
     - npm i -g pnpm
@@ -44,7 +44,6 @@ build-asset:
   only:
     - master # only run on master branch because of pull rate limit
 
-
 # =============================================================================
 # BUILD STAGE
 # =============================================================================
@@ -53,7 +52,7 @@ build-and-push:
   stage: build
   image: docker:latest
   services:
-    - docker:dind  # Docker-in-Docker service for building images
+    - docker:dind # Docker-in-Docker service for building images
   variables:
     # Docker image tags for versioning
     IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
@@ -71,14 +70,14 @@ build-and-push:
 
     # Push both tagged versions to the registry
     - echo "Pushing Docker images to registry..."
-    - docker push $IMAGE_TAG      # Push commit-specific tag for traceability
-    - docker push $IMAGE_LATEST   # Push latest tag for easy deployment reference
+    - docker push $IMAGE_TAG # Push commit-specific tag for traceability
+    - docker push $IMAGE_LATEST # Push latest tag for easy deployment reference
 
   tags:
-    - dps-piveau-runner  # Use specific GitLab runner with this tag
+    - dps-piveau-runner # Use specific GitLab runner with this tag
 
   only:
-    - master  # Only run this job on master branch commits
+    - master # Only run this job on master branch commits
 
 # =============================================================================
 # DEPLOYMENT STAGE
@@ -86,12 +85,12 @@ build-and-push:
 # This stage deploys the built Docker image to OpenShift cluster
 deploy-to-openshift:
   stage: deploy
-  image: quay.io/openshift/origin-cli:latest  # Official OpenShift CLI image
+  image: quay.io/openshift/origin-cli:latest # Official OpenShift CLI image
   variables:
     # Deployment configuration variables
-    IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest           # Image to deploy
-    OPENSHIFT_PROJECT: piveau                          # OpenShift namespace/project
-    APP_NAME: piveau-vanilla-ui                        # Application name in OpenShift
+    IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest # Image to deploy
+    OPENSHIFT_PROJECT: piveau # OpenShift namespace/project
+    APP_NAME: piveau-vanilla-ui # Application name in OpenShift
 
   before_script:
     # Verify OpenShift CLI is available and show version
@@ -105,7 +104,7 @@ deploy-to-openshift:
       SERVER_HOST=$(echo $OPENSHIFT_SERVER | sed 's|https\?://||' | cut -d: -f1)
       SERVER_PORT=$(echo $OPENSHIFT_SERVER | sed 's|https\?://||' | cut -d: -f2)
       echo "Testing connection to $SERVER_HOST:$SERVER_PORT"
-      
+
       # Test basic network connectivity to OpenShift API server
       if command -v nc >/dev/null 2>&1; then
         nc -zv $SERVER_HOST $SERVER_PORT || echo "Cannot reach $SERVER_HOST:$SERVER_PORT"
@@ -135,7 +134,7 @@ deploy-to-openshift:
         # If deployment exists, trigger a rolling update with the new image
         echo "Rolling out new deployment..."
         oc rollout restart deployment/$APP_NAME
-      
+
         # Wait for the rollout to complete (timeout after 5 minutes)
         oc rollout status deployment/$APP_NAME --timeout=300s
       else
@@ -145,10 +144,10 @@ deploy-to-openshift:
       fi
 
   tags:
-    - dps-piveau-runner  # Use the same runner as build stage
+    - dps-piveau-runner # Use the same runner as build stage
 
   only:
-    - master  # Only deploy from master branch
+    - master # Only deploy from master branch
 
   dependencies:
-    - build-and-push  # This job depends on successful completion of build stage
+    - build-and-push # This job depends on successful completion of build stage

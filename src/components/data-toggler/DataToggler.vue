@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useDataTruncator } from '../../composables/useDataTruncator'
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useDataTruncator } from '../../composables/useDataTruncator'
+
 const props = defineProps<{
   data: any[] | string
 }>()
-
+const { t } = useI18n()
 const expanded = defineModel<boolean>('expanded', { default: true })
 const limit = defineModel<number>('limit', { default: Number.POSITIVE_INFINITY })
 
@@ -23,7 +23,6 @@ function handleToggle() {
   toggle()
 }
 const toggleText = computed(() => isExpanded.value ? t('toggler.show_less') : t('toggler.show_more'))
-
 </script>
 
 <template>
@@ -31,8 +30,10 @@ const toggleText = computed(() => isExpanded.value ? t('toggler.show_less') : t(
     <slot :truncated="truncated" :is-expanded="isExpanded">
       {{ truncated }}
     </slot>
-    <span class="by-link cursor-pointer ">
-      <button class="inline-flex min-w-fit flex-row items-center gap-2 cursor-pointer" @click="handleToggle">
+    <span class="by-link cursor-pointer">
+      <button
+        class="inline-flex min-w-fit cursor-pointer flex-row items-center gap-2" @click="handleToggle"
+      >
         <slot name="label" :is-expanded="isExpanded">
           <span>{{ toggleText }}</span>
         </slot>

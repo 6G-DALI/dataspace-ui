@@ -49,7 +49,7 @@ export default {
           text: 'var(--header-text)',
         },
 
-       'footer-bg': {
+        'footer-bg': {
           DEFAULT: 'var(--footer-bg)',
           text: 'var(--footer-text)',
         },

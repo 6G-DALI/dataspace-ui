@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { cva } from 'class-variance-authority'
+import { computed } from 'vue'
 
 const props = defineProps({
   variant: {
@@ -9,35 +9,49 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: 'large'
+    default: 'large',
   },
   icon: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
-const button = cva('rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom', {
+const button = cva(`
+  inline-flex min-w-fit items-center justify-center rounded-3xl
+  border-transparent text-center align-bottom font-medium
+`, {
   variants: {
     variant: {
-      primary: 'text-white dark:text-surface-900 bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed',
-      secondary: 'text-secondary-text dark:text-secondary-dark-text bg-secondary dark:bg-secondary-dark hover:bg-secondary-hover dark:hover:bg-secondary-dark-hover active:bg-secondary-pressed dark:active:bg-secondary-dark-pressed',
+      primary: `
+        dark:bg-primary-dark dark:text-surface-900
+        dark:hover:bg-primary-dark-hover dark:active:bg-primary-dark-pressed
+        bg-primary text-white
+        hover:bg-primary-hover
+        active:bg-primary
+      `,
+      secondary: `
+        dark:text-secondary-dark-text dark:bg-secondary-dark
+        dark:hover:bg-secondary-dark-hover dark:active:bg-secondary-dark-pressed
+        bg-secondary text-secondary-text
+        hover:bg-secondary-hover
+        active:bg-secondary-pressed
+      `,
     },
     size: {
-      small: 'h-8 text-sm px-4 py-2',
-      large: 'h-12 text-lg px-4 py-3',
-    }
+      small: 'h-8 px-4 py-2 text-sm',
+      large: 'h-12 px-4 py-3 text-lg',
+    },
   },
 })
 
 const buttonClass = computed(() =>
-  button({ variant: props.variant, size: props.size}),
+  button({ variant: props.variant, size: props.size }),
 )
 </script>
 
 <template>
   <button :class="buttonClass">
-    <slot></slot>
+    <slot />
   </button>
 </template>
-

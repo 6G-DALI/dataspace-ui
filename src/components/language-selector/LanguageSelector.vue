@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
+import router from '@/router'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import router from '@/router'
 
 const { locale } = useI18n()
 const route = useRoute()
@@ -12,7 +12,7 @@ const dropdownRef = ref(null)
 
 const languages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' }
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
 ]
 
 // Watch for URL query parameter changes
@@ -22,10 +22,10 @@ watch(
     if (newLocale && ['en', 'de'].includes(newLocale as string)) {
       selectLanguage(newLocale as string)
     }
-  }
+  },
 )
 
-const selectLanguage = (languageCode: string) => {
+function selectLanguage(languageCode: string) {
   currentLanguage.value = languageCode
   locale.value = languageCode
   localStorage.setItem('language', languageCode)
@@ -36,11 +36,11 @@ const selectLanguage = (languageCode: string) => {
   router.replace({ query: newQuery })
 }
 
-const toggleDropdown = () => {
+function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value
 }
 
-const closeDropdown = (event: Event) => {
+function closeDropdown(event: Event) {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
     isDropdownOpen.value = false
   }
@@ -52,7 +52,8 @@ onMounted(() => {
   if (urlLocale && ['en', 'de'].includes(urlLocale)) {
     currentLanguage.value = urlLocale
     locale.value = urlLocale
-  } else {
+  }
+  else {
     // Fall back to localStorage if no URL parameter
     const savedLanguage = localStorage.getItem('language')
     if (savedLanguage && ['en', 'de'].includes(savedLanguage)) {
@@ -69,12 +70,18 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative" ref="dropdownRef">
+  <div ref="dropdownRef" class="relative">
     <!-- Dropdown Button -->
     <button
-      @click="toggleDropdown"
-      class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-surface hover:text-primary-hover rounded-md hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-surface-900"
+      class="
+        flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium
+        text-surface transition-colors
+        hover:bg-surface-100 hover:text-primary-hover
+        focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none
+        dark:hover:bg-surface-800 dark:focus:ring-offset-surface-900
+      "
       :class="{ 'bg-surface-100 dark:bg-surface-800': isDropdownOpen }"
+      @click="toggleDropdown"
     >
       <!-- Current Language Flag -->
       <span class="text-sm">
@@ -88,7 +95,7 @@ onUnmounted(() => {
 
       <!-- Dropdown Arrow -->
       <svg
-        class="w-4 h-4 transition-transform duration-200"
+        class="h-4 w-4 transition-transform duration-200"
         :class="{ 'rotate-180': isDropdownOpen }"
         fill="none"
         stroke="currentColor"
@@ -101,17 +108,26 @@ onUnmounted(() => {
     <!-- Dropdown Menu -->
     <div
       v-show="isDropdownOpen"
-      class="absolute right-0 mt-2 w-48 bg-surface dark:bg-surface-900 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10 z-50"
+      class="
+        ring-opacity-5 absolute right-0 z-50 mt-2 w-48 rounded-md bg-surface
+        shadow-lg ring-1 ring-black
+        dark:ring-opacity-10 dark:bg-surface-900 dark:ring-white
+      "
     >
       <div class="py-1">
         <button
           v-for="language in languages"
           :key="language.code"
-          @click="selectLanguage(language.code)"
-          class="flex items-center gap-3 w-full px-4 py-2 text-sm text-surface-text hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-primary-hover transition-colors"
+          class="
+            flex w-full items-center gap-3 px-4 py-2 text-sm text-surface-text
+            transition-colors
+            hover:bg-surface-100 hover:text-primary-hover
+            dark:hover:bg-surface-800
+          "
           :class="{
-            'bg-primary-50 dark:bg-primary-900/20 text-primary': currentLanguage === language.code
+            'bg-primary-50 text-primary dark:bg-primary-900/20': currentLanguage === language.code,
           }"
+          @click="selectLanguage(language.code)"
         >
           <!-- Language Flag -->
           <span class="text-base">{{ language.flag }}</span>
@@ -119,13 +135,13 @@ onUnmounted(() => {
           <!-- Language Details -->
           <div class="flex flex-col items-start">
             <span class="font-medium">{{ language.label }}</span>
-            <span class="text-xs text-surface-text-muted">{{ language.code.toUpperCase() }}</span>
+            <span class="text-surface-text-muted text-xs">{{ language.code.toUpperCase() }}</span>
           </div>
 
           <!-- Selected Indicator -->
           <svg
             v-if="currentLanguage === language.code"
-            class="w-4 h-4 ml-auto text-primary"
+            class="ml-auto h-4 w-4 text-primary"
             fill="currentColor"
             viewBox="0 0 20 20"
           >

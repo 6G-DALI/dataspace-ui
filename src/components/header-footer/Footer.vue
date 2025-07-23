@@ -1,6 +1,6 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
@@ -30,11 +30,23 @@ const loginLinks = computed(() => [
 </script>
 
 <template>
-  <footer class="bg-footer-bg text-footer-bg-text py-16 px-8">
-    <div class="space-y-32 container mx-auto max-w-7xl">
-      <div class="flex flex-col flex-wrap justify-between gap-x-10 gap-y-20 md:flex-row xl:gap-10">
+  <footer class="bg-footer-bg px-8 py-16 text-footer-bg-text">
+    <div class="container mx-auto max-w-7xl space-y-32">
+      <div
+        class="
+          flex flex-col flex-wrap justify-between gap-x-10 gap-y-20
+          md:flex-row
+          xl:gap-10
+        "
+      >
         <!-- Sitemap Section -->
-        <div class="mr-10 w-full md:w-3/12 xl:w-2/12">
+        <div
+          class="
+            mr-10 w-full
+            md:w-3/12
+            xl:w-2/12
+          "
+        >
           <h3 class="mb-4 text-xl font-semibold">
             {{ t('footer.sections.sitemap') }}
           </h3>
@@ -67,7 +79,13 @@ const loginLinks = computed(() => [
         </div>
 
         <!-- Social Media Section -->
-        <div class="w-full md:w-3/12 xl:w-2/12">
+        <div
+          class="
+            w-full
+            md:w-3/12
+            xl:w-2/12
+          "
+        >
           <h3 class="mb-4 text-xl font-semibold">
             {{ t('footer.sections.socialMedia') }}
           </h3>
@@ -89,7 +107,13 @@ const loginLinks = computed(() => [
         </div>
 
         <!-- Legal Section -->
-        <div class="mr-10 w-full md:w-3/12 xl:w-2/12">
+        <div
+          class="
+            mr-10 w-full
+            md:w-3/12
+            xl:w-2/12
+          "
+        >
           <h3 class="mb-4 text-xl font-semibold">
             {{ t('footer.sections.legal') }}
           </h3>
@@ -110,7 +134,13 @@ const loginLinks = computed(() => [
         </div>
 
         <!-- Login Section -->
-        <div class="w-full md:w-3/12 xl:w-2/12">
+        <div
+          class="
+            w-full
+            md:w-3/12
+            xl:w-2/12
+          "
+        >
           <ul class="flex flex-col gap-4">
             <li
               v-for="link in loginLinks"
@@ -119,7 +149,10 @@ const loginLinks = computed(() => [
             >
               <RouterLink
                 :to="link.to"
-                class="hover:text-secondary-hover font-bold"
+                class="
+                  font-bold
+                  hover:text-secondary-hover
+                "
               >
                 {{ link.text }}
               </RouterLink>

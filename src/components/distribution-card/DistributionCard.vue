@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import type { PropertyTableEntryNode } from '@piveau/sdk-vue'
 import { computed } from 'vue'
-import KButton from '../base/button/KButton.vue'
+import { useI18n } from 'vue-i18n'
+import LinkedDataSelector from '../base/links/LinkedDataSelector.vue'
 import KTag from '../base/tag/KTag.vue'
 import Typography from '../base/typography/Typography.vue'
 import DataToggler from '../data-toggler/DataToggler.vue'
 import Dropdown from '../dropdown/Dropdown.vue'
 import DropdownItem from '../dropdown/DropdownItem.vue'
 import { PropertyTable } from '../property-table/PropertyTableRow'
-import LinkedDataSelector from '../base/links/LinkedDataSelector.vue'
 
 interface CardProps {
   title: string
@@ -24,8 +23,6 @@ interface CardProps {
   data: PropertyTableEntryNode
   onSave?: () => void
 }
-const { t } = useI18n()
-
 const props = withDefaults(defineProps<CardProps>(), {
   downloadText: '',
   saveText: '',
@@ -33,10 +30,11 @@ const props = withDefaults(defineProps<CardProps>(), {
   onSave: () => {},
 })
 
+const { t } = useI18n()
+
 // Set default texts using computed properties
 const defaultDownloadText = computed(() => props.downloadText || t('distribution.download'))
 const defaultSaveText = computed(() => props.saveText || t('distribution.save_description'))
-
 
 const dataOrder = ['modified', 'license', 'created', 'languages']
 const resolvedData = computed(() => {
@@ -50,25 +48,35 @@ const resolvedData = computed(() => {
 
   return sortedData
 })
-
-
 </script>
 
 <template>
-  <div class="mb-3 rounded-xl border-b-none bg-surface p-4">
+  <div class="border-b-none mb-3 rounded-xl bg-surface p-4">
     <div>
       <div class="flex items-start justify-between">
         <Typography as="h2" variant="by-heading-4" class="text-surface-text">
           {{ title }}
         </Typography>
-        <KTag class="hidden md:block">
+        <KTag
+          class="
+            hidden
+            md:block
+          "
+        >
           {{ format }}
         </KTag>
       </div>
 
-      <div class="my-0 flex flex-col lg:flex-row lg:justify-between lg:gap-28">
+      <div
+        class="
+          my-0 flex flex-col
+          lg:flex-row lg:justify-between lg:gap-28
+        "
+      >
         <div class="flex flex-1 flex-col gap-6">
-          <div class="markdown-content mt-4 text-sm leading-6 text-surface-light" v-html="description" />
+          <div
+            class="markdown-content mt-4 text-sm leading-6 text-surface-light" v-html="description"
+          />
           <div class="flex">
             <KTag class="md:hidden">
               {{ format }}
@@ -76,7 +84,12 @@ const resolvedData = computed(() => {
           </div>
         </div>
 
-        <div class="lg:my-0 lg:basis-4/12 text-surface-text">
+        <div
+          class="
+            text-surface-text
+            lg:my-0 lg:basis-4/12
+          "
+        >
           <DataToggler v-slot="{ truncated }" :data="resolvedData || []" :limit="1" :expanded="false">
             <PropertyTable
               :node="{
@@ -99,25 +112,43 @@ const resolvedData = computed(() => {
             nofollow
             noreferrer
             download
-            class="text-white dark:text-surface-900 bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom h-8 text-sm px-4 py-2"
+            class="
+              dark:bg-primary-dark dark:text-surface-900
+              dark:hover:bg-primary-dark-hover
+              dark:active:bg-primary-dark-pressed
+              inline-flex h-8 min-w-fit items-center justify-center rounded-3xl
+              border-transparent bg-primary px-4 py-2 text-center align-bottom
+              text-sm font-medium text-white
+              hover:bg-primary-hover
+              active:bg-primary
+            "
           >
-            
+
             {{ defaultDownloadText }}
             <i class="icon-[ph--arrow-square-out]" />
-           
+
           </a>
 
-         <!--  <KButton>
+          <!--  <KButton>
             {{ t('distribution.preview') }}
           </KButton> -->
 
-         
-          <LinkedDataSelector :resource-id="distributionId" resource="distributions" class="text-white dark:text-surface-900 bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom h-8 text-sm px-4 py-2"/>
-          
+          <LinkedDataSelector
+            :resource-id="distributionId" resource="distributions" class="
+              dark:bg-primary-dark dark:text-surface-900
+              dark:hover:bg-primary-dark-hover
+              dark:active:bg-primary-dark-pressed
+              inline-flex h-8 min-w-fit items-center justify-center rounded-3xl
+              border-transparent bg-primary px-4 py-2 text-center align-bottom
+              text-sm font-medium text-white
+              hover:bg-primary-hover
+              active:bg-primary
+            "
+          />
 
           <!-- Why is this not showing?? -->
           <Dropdown severity="secondary" :label="defaultSaveText">
-          <DropdownItem v-for="[key, uri] in Object.entries(linkedData || {})" :key="key" as="a" :href="uri" target="_blank">
+            <DropdownItem v-for="[key, uri] in Object.entries(linkedData || {})" :key="key" as="a" :href="uri" target="_blank">
               {{ key }}
             </DropdownItem>
           </Dropdown>
