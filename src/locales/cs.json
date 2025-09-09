@@ -95,7 +95,11 @@
           "toggleButton": {
             "ascending": "Vzestupně",
             "descending": "Sestupně"
-          }
+          },
+          "toggler": {
+      "show_less": "Zobrazit méně",
+      "show_more": "Zobrazit více"
+    }
         }
       }
     }

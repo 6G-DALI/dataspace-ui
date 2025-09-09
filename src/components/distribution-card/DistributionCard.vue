@@ -18,36 +18,33 @@ interface CardProps {
   saveText?: string
   lastUpdated?: string
   downloadUrl: string
-  linkedData?: Record<string, string>
+  linkedData?: Record<string, any>
   distributionId: string
   data: PropertyTableEntryNode
   onSave?: () => void
 }
 const props = withDefaults(defineProps<CardProps>(), {
-  downloadText: '',
-  saveText: '',
-  lastUpdated: '',
+  downloadText: 'Download',
+  saveText: 'Linked Data',
   onSave: () => {},
 })
 
 const { t } = useI18n()
 
-// Set default texts using computed properties
-const defaultDownloadText = computed(() => props.downloadText || t('distribution.download'))
-const defaultSaveText = computed(() => props.saveText || t('distribution.save_description'))
-
 const dataOrder = ['modified', 'license', 'created', 'languages']
 const resolvedData = computed(() => {
   const sortedData = [...props.data.data || []].sort((a, b) => {
-    // eslint-disable-next-line unicorn/prefer-includes
     const aIndex = dataOrder.indexOf(a.id) === -1 ? dataOrder.length : dataOrder.indexOf(a.id)
-    // eslint-disable-next-line unicorn/prefer-includes
     const bIndex = dataOrder.indexOf(b.id) === -1 ? dataOrder.length : dataOrder.indexOf(b.id)
     return aIndex - bIndex
   })
 
   return sortedData
 })
+
+//properties for button text
+const defaultDownloadText = computed(() => props.downloadText || 'Download')
+const defaultSaveText = computed(() => props.saveText || 'Linked Data')
 </script>
 
 <template>
@@ -114,34 +111,20 @@ const resolvedData = computed(() => {
             download
             class="text-white dark:text-surface-900 bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom h-8 text-sm px-5 py-5"
           >
-
             {{ defaultDownloadText }}
             <i class="icon-[ph--arrow-square-out] ml-2" />
-           
           </a>
 
-          <!--  <KButton>
-            {{ t('distribution.preview') }}
-          </KButton> -->
-
-         
           <LinkedDataSelector :resource-id="distributionId" resource="distributions" class="text-white dark:text-surface-900 bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom h-8 text-sm px-5 py-5"/>
-          
 
-          <!-- Why is this not showing?? -->
           <Dropdown severity="secondary" :label="defaultSaveText">
             <DropdownItem v-for="[key, uri] in Object.entries(linkedData || {})" :key="key" as="a" :href="uri" target="_blank">
               {{ key }}
             </DropdownItem>
           </Dropdown>
-
-          <!-- <button
-            @click="onSave"
-            class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
-            {{ saveText }}
-          </button> -->
         </div>
       </div>
     </div>
   </div>
 </template>
+

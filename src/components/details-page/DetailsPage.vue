@@ -15,6 +15,8 @@ import TabGroup from '../base/tab-group/TabGroup.vue'
 import Typography from '../base/typography/Typography.vue'
 
 import DetailsPageHeader from './DetailsPageHeader.vue'
+import DistributionCard from '../distribution-card/DistributionCard.vue'
+import KTag from '../base/tag/KTag.vue'
 
 const props = withDefaults(defineProps<{
   headline?: string
@@ -23,64 +25,16 @@ const props = withDefaults(defineProps<{
   datasetId: string
   summary?: { title: string, text: string }[]
   descriptionMarkup?: string
+  distributions?: any[]
 }>(), {
   headline: 'Datensatz',
+  distributions: () => []
 })
 
 const { t } = useI18n()
 
 const router = useRouter()
 
-// const { useResource: getDataset } = useDcatApSearch()
-
-// const { isSuccess, query, resultEnhanced } = shallowReactive(
-//   getDataset(datasetId),
-// )
-
-// const getFormattedDistributions = computed(() => {
-//   if (!isSuccess.value)
-//     return []
-//   if (!resultEnhanced.value?.getDistributions)
-//     return []
-
-//   return resultEnhanced.value.getDistributions.map((dist) => {
-//     return {
-//       title: dist.title ?? dist.id ?? '',
-//       description: dist.description ?? '',
-//       descriptionMarkup: DOMPurify.sanitize(marked(dist.description ?? '', { async: false })),
-//       downloadUrls: dist.accessUrls || [],
-//       format: dist.format ?? '',
-//       id: dist.id,
-//       accessUrls: dist.accessUrls,
-//       modified: dist.modified ?? '',
-//       data: {
-//         type: 'node',
-//         id: 'root',
-//         label: 'root',
-//         data: dist.getPropertyTable,
-//       } satisfies PropertyTableEntryNode,
-//       linkedData: {
-//         'RDF/XML': dist.getLinkedData.rdf,
-//         'Turtle': dist.getLinkedData.ttl,
-//         'Notation3': dist.getLinkedData.n3,
-//         'N-Tripes': dist.getLinkedData.nt,
-//         'JSON-LD': dist.getLinkedData.jsonld,
-//       },
-//     }
-//   })
-// })
-
-// const { getTitle, getId, getDescription, getPropertyTable, getFormattedDistributions, getCategories } = toRefs(resultEnhanced)
-// const { isError: searchError, error } = query
-// // Parse AxiosError to get the error message
-// const errorView = computed(() => {
-//   if (searchError.value) {
-//     return error.value?.message || 'An error occurred'
-//   }
-//   return ''
-// })
-
-// Dataset desecription truncator "show more"
 const { data: truncatedDescription, toggle: toggleDescription, isTruncated: isDescriptionTruncated, isTruncationNeeded: isDescriptionTruncationNeeded } = useDataTruncator({
   data: computed(() => props.descriptionMarkup || ''),
   limit: 550,
@@ -94,21 +48,20 @@ const truncatedEllipsedDescription = computed(() => {
 })
 
 // Distribution truncator ("show more")
-// const {
-//   data: truncatedFormattedDistributions,
-//   toggle: showAllDistributions,
-//   isTruncated: isDistributionsTruncated,
-// } = useDataTruncator({
-//   data: getFormattedDistributions,
-//   limit: 7,
-// })
+const {
+  data: truncatedFormattedDistributions,
+  toggle: showAllDistributions,
+  isTruncated: isDistributionsTruncated,
+} = useDataTruncator({
+  data: computed(() => props.distributions),
+  limit: 7,
+})
 </script>
 
 <template>
   <div class="container mx-auto px-8 pt-3">
     <div class="mx-auto w-full max-w-content-max space-y-6 pt-1">
       <section name="dsd-header" class="flex flex-col gap-6">
-        <!-- Go previous page -->
         <div class="flex flex-col gap-12">
           <div class="flex justify-between">
           <div>
@@ -125,12 +78,10 @@ const truncatedEllipsedDescription = computed(() => {
             <template #subtitle>
               <slot name="subtitle" :subtitle="subtitle">
                 <span>{{ subtitle }}</span>
-                <!-- <RouterLink :to="{ name: 'Datasets', query: { catalog: resultEnhanced?.getCatalogId } }" class="by-link" /> -->
               </slot>
             </template>
           </DetailsPageHeader>
         </div>
-        <!-- Metadata -->
         <slot name="metadata">
           <div
             class="
@@ -142,8 +93,6 @@ const truncatedEllipsedDescription = computed(() => {
               v-for="(s, i) in summary" :key="i" class="mr-4 mb-4 flex-1" :title="s.title"
               :text="s.text || '-'"
             />
-            <!-- <SummaryBox class="mb-4 mr-4 flex-1" title="Datenbereitsteller" :text="resultEnhanced?.getPublisher?.name || '-'" />
-              <SummaryBox class="mb-4 mr-4 flex-1" title="Aktualisiert" :text="resultEnhanced?.getModified || '-'" /> -->
           </div>
         </slot>
       </section>
@@ -197,93 +146,81 @@ const truncatedEllipsedDescription = computed(() => {
         </TabGroup>
       </section>
       <slot name="sections">
-        <!-- <section class="space-y-4">
-            <div class="my-12 flex flex-row items-center gap-2">
-              <h2 class="text-[2.5rem] font-bold leading-[3rem] text-primary-100">
-                Distributionen
-              </h2>
-              <KTag interactive class="rounded-full bg-primary-90">
-                {{
-                  getFormattedDistributions?.length
-                }}
-              </KTag>
-            </div>
-            <div class="h-px w-full bg-bg-divider" />
-            <div name="distribution-cards" class="relative">
-              <template v-for="(distribution, i) in truncatedFormattedDistributions" :key="distribution.id">
-                <div name="distribution-card-wrapper" class="relative">
-                  <DistributionCard
-                    :title="distribution.title || ''"
-                    :description="distribution.descriptionMarkup || ''"
-                    :format="distribution.format || 'Unknown'"
-                    :download-url="distribution.downloadUrls?.[0]!"
-                    :last-updated="distribution.modified"
-                    :data="distribution.data"
-                    :linked-data="distribution.linkedData"
-                  />
-                  <div
-                    v-if="i === truncatedFormattedDistributions.length - 1 && isDistributionsTruncated"
-                    name="distribution-card-overlay"
-                    class="absolute left-0 top-0 size-full bg-linear-to-b from-transparent from-0% to-white to-55%"
-                  >
-                    <div class="absolute bottom-0 flex w-full flex-row items-center justify-center">
-                      <div>
-                        <KButton
-                          icon="icon-[ph--eye-fill]"
-                          size="small"
-                          severity="secondary"
-                          :label="`Mehr anzeigen (${getFormattedDistributions.length})`"
-                          icon-pos="left" @click="showAllDistributions"
-                        />
-                      </div>
+        <section v-if="distributions && distributions.length > 0" class="space-y-4">
+          <div class="my-12 flex flex-row items-center gap-2">
+            <h2 class="text-[2.5rem] font-bold leading-[3rem] text-primary-100">
+              Distributionen
+            </h2>
+            <KTag interactive class="rounded-full bg-primary-90">
+              {{ distributions?.length }}
+            </KTag>
+          </div>
+          <div class="h-px w-full bg-bg-divider" />
+          <div name="distribution-cards" class="relative">
+            <template v-for="(distribution, i) in truncatedFormattedDistributions" :key="distribution.id">
+              <div name="distribution-card-wrapper" class="relative">
+                <DistributionCard
+                  :title="distribution.title || ''"
+                  :description="distribution.descriptionMarkup || ''"
+                  :format="distribution.format || 'Unknown'"
+                  :download-url="distribution.downloadUrls?.[0]!"
+                  :last-updated="distribution.modified"
+                  :data="distribution.data"
+                  :linked-data="distribution.linkedData"
+                  :distribution-id="distribution.id"
+                  :download-text="'Download'"
+                  :save-text="'Linked Data'"
+                />
+                <div
+                  v-if="i === truncatedFormattedDistributions.length - 1 && isDistributionsTruncated"
+                  name="distribution-card-overlay"
+                  class="absolute left-0 top-0 size-full bg-linear-to-b from-transparent from-0% to-white to-55%"
+                >
+                  <div class="absolute bottom-0 flex w-full flex-row items-center justify-center">
+                    <div>
+                      <!--button-->
+                      <button
+                        class="
+                          inline-flex items-center justify-center gap-2
+                          px-4 py-2 text-sm font-medium text-white
+                          bg-primary hover:bg-primary-hover active:bg-primary-pressed
+                          rounded-full border-0 cursor-pointer
+                          transition-colors duration-200
+                        "
+                        @click="showAllDistributions"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                          <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
+                        </svg>
+                        <span>Mehr anzeigen ({{ distributions.length }})</span>
+                      </button>
                     </div>
                   </div>
                 </div>
-              </template>
-            </div>
-          </section>
-          <div
-            v-if="(resultEnhanced?.getCategories?.length || 0) > 0"
-            class="space-y-3"
-          >
-            <Typography
-              variant="by-heading-4"
-              class="font-semibold text-primary"
-            >
-              Kategorien
-            </Typography>
-            <div class="flex flex-row gap-2">
-              <KTag
-                v-for="category in resultEnhanced?.getCategories"
-                :key="category.id"
-                interactive
-                @click="router.push({ name: 'Datasets', query: { categories: category.id } })"
+              </div>
+            </template>
+            <!-- Show Less-->
+            <div v-if="!isDistributionsTruncated && distributions.length > 7" class="flex justify-center mt-4">
+              <button
+                class="
+                  inline-flex items-center justify-center gap-2
+                  px-4 py-2 text-sm font-medium text-white
+                  bg-primary hover:bg-primary-hover active:bg-primary-pressed
+                  rounded-full border-0 cursor-pointer
+                  transition-colors duration-200
+                "
+                @click="showAllDistributions"
               >
-                {{ getLocalizedValue({ obj: category.label, fallbackLocale: 'de' }) }}
-              </KTag>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M53.92,34.62A8,8,0,1,0,42.08,45.38L61.32,66.55C25,88.84,9.38,123.2,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208a127.11,127.11,0,0,0,52.07-10.83l22,24.21a8,8,0,1,0,11.84-10.76Zm47.33,75.84,41.67,45.85a32,32,0,0,1-41.67-45.85ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.16,133.16,0,0,1,25,128c4.69-8.79,19.66-33.39,47.35-49.38l18,19.75a48,48,0,0,0,63.66,70l14.73,16.2A112,112,0,0,1,128,192Zm6-95.43a8,8,0,0,1,3-15.72,48.16,48.16,0,0,1,38.77,42.64,8,8,0,0,1-7.22,8.71,6.39,6.39,0,0,1-.75,0,8,8,0,0,1-8-7.26A32.09,32.09,0,0,0,134,96.57Zm113.28,34.69c-.42.94-10.55,23.37-33.36,43.8a8,8,0,1,1-10.67-11.92A132.77,132.77,0,0,0,231.05,128a133.15,133.15,0,0,0-23.12-30.77C185.67,75.19,158.78,64,128,64a118.37,118.37,0,0,0-19.36,1.57A8,8,0,1,1,106,49.79,134,134,0,0,1,128,48c34.88,0,66.57,13.26,91.66,38.35,18.83,18.83,27.3,37.62,27.65,38.41A8,8,0,0,1,247.31,131.26Z"></path>
+                </svg>
+                <span>Weniger anzeigen</span>
+              </button>
             </div>
           </div>
-          <div class="h-px w-full bg-bg-divider" />
-          <div class="space-y-4">
-            <div class="flex flex-col gap-4 pt-12">
-              <Typography
-                variant="by-heading-4"
-                class="text-primary"
-              >
-                Zusätzliche Informationen
-              </Typography>
-              <PropertyTable
-                v-if="isSuccess"
-                :node="{
-                  type: 'node',
-                  id: 'a',
-                  label: 'a',
-                  data: resultEnhanced?.getPropertyTable2 || undefined,
-                }"
-              />
-            </div>
-          </div> -->
+        </section>
       </slot>
     </div>
   </div>
 </template>
+
