@@ -87,7 +87,7 @@ const defaultSaveText = computed(() => props.saveText || 'Linked Data')
             lg:my-0 lg:basis-4/12
           "
         >
-          <DataToggler v-slot="{ truncated }" :data="resolvedData || []" :limit="7" :expanded="false">
+          <DataToggler v-slot="{ truncated }" :data="resolvedData || []" :limit="1" :expanded="false">
             <PropertyTable
               :node="{
                 id: 'root',
