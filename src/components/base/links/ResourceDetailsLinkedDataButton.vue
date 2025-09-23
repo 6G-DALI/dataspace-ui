@@ -37,11 +37,11 @@ export default {
   methods: {
     createLinkedDataURL() {
       if (this.resources === 'distributions') {
-        return `${appConfig.piveauHubSearchUrl}distributions/${this.resourcesId}.${this.format}`
+        return `${appConfig.piveauHubRepoUrl}distributions/${this.resourcesId}.${this.format}`
       } if (this.resources === 'datasets') {
-        return `${appConfig.piveauHubSearchUrl}datasets/${this.resourcesId}.${this.format}?useNormalizedId=true&locale=${this.$route.query.locale}`
+        return `${appConfig.piveauHubRepoUrl}datasets/${this.resourcesId}.${this.format}?useNormalizedId=true&locale=${this.$route.query.locale}`
       } if (this.resources === 'catalogues') {
-        return `${appConfig.piveauHubSearchUrl}catalogues/${this.resourcesId}.${this.format}`
+        return `${appConfig.piveauHubRepoUrl}catalogues/${this.resourcesId}.${this.format}`
       }
       return ''
     },
