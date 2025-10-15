@@ -90,6 +90,7 @@ generate-and-upload-sbom:
   tags:
     - dps-piveau-runner
   before_script:
+    - apk add --no-cache curl # Install curl
     - npm i -g pnpm # Ensure pnpm is available
     - pnpm config set store-dir .pnpm-store
   script:
