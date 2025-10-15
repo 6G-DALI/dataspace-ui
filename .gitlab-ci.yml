@@ -4,7 +4,8 @@
 stages:
   - prepare # Stage 0: Mirror Node.js image to GitLab registry
   - build # Stage 1: Build the Vue.js application
-  - deploy # Stage 2: Deploy the built image to OpenShift
+  - sbom # Stage 2: Generate and upload SBOM
+  - deploy # Stage 3: Deploy the built image to OpenShift
 
 mirror-node:
   stage: prepare
@@ -78,6 +79,36 @@ build-and-push:
 
   only:
     - master # Only run this job on master branch commits
+
+# =============================================================================
+# SBOM STAGE
+# =============================================================================
+# This stage generates an SBOM and uploads it to Dependency-Track
+generate-and-upload-sbom:
+  stage: sbom
+  image: $CI_REGISTRY_IMAGE/node:18-alpine # Use the mirrored node image
+  tags:
+    - dps-piveau-runner
+  before_script:
+    - npm i -g pnpm # Ensure pnpm is available
+    - pnpm config set store-dir .pnpm-store
+  script:
+    - pnpm install --no-frozen-lockfile # Install dependencies including @cyclonedx/bom
+    - pnpm sbom # Generate sbom.json
+    - |
+      if [ -f "sbom.json" ]; then
+        echo "Uploading SBOM to Dependency-Track..."
+        curl -X PUT -H "X-Api-Key: $DEPENDENCY_TRACK_API_KEY" -F "bom=@sbom.json" "$DEPENDENCY_TRACK_BASE_URL/api/v1/bom"
+        echo "SBOM upload complete."
+      else
+        echo "sbom.json not found. SBOM generation might have failed."
+        exit 1
+      fi
+  artifacts:
+    paths:
+      - sbom.json # Optionally keep the SBOM as an artifact
+  only:
+    - master
 
 # =============================================================================
 # DEPLOYMENT STAGE

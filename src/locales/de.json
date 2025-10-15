@@ -242,7 +242,7 @@
   },
   "catalogFacets": {
     "facets": {
-      "country": "HerkunftMAJID",
+      "country": "Herkunft",
       "superCatalog": "Superkatalog"
     }
   },
