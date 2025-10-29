@@ -53,9 +53,9 @@ const computedWrapperComponent = computed(() => {
         <slot name="body">
           <div class="grid grid-cols-12 gap-2">
             <!-- Description -->
-            <p class="col-span-12 line-clamp-6 text-surface-light lg:col-span-8 break-words overflow-hidden max-w-full text-sm">
+            <div class="col-span-12 line-clamp-6 text-surface-light lg:col-span-8 break-words overflow-hidden max-w-full text-sm">
                <div class="markdown-content" v-html="description" />
-            </p>
+            </div>
             <slot name="sidebar">
               <!-- File Format Tags -->
               <SummaryBox

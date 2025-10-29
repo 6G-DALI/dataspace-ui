@@ -88,7 +88,7 @@
         personenbezogenen Daten nur an Dritte, d.h. andere natürliche oder juristische Personen
         außer Ihnen (der betroffenen Person), dem Verantwortlichen oder dem Auftragsverarbeiter und
         deren zur Datenverarbeitung befugten Mitarbeiter weiter, wenn:
-        <br><br>
+        </p>
         <ul>
           <li>für den Fall, dass für die Weitergabe nach Art. 6 Abs. 1 S. 1 lit. c DSGVO eine gesetzliche
             Verpflichtung besteht, bspw. an Finanz- oder Strafverfolgungsbehörden;</li>
@@ -100,6 +100,7 @@
             Einrichtungen und Strafverfolgungsbehörden erfolgen.
           </li>
         </ul>
+        <p>
         Die weitergegebenen Daten dürfen von dem Dritten ausschließlich zu den genannten Zwecken
         verwendet werden.
         <br>
