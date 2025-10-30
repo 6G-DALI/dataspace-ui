@@ -27,7 +27,7 @@ const checked = computed({
 const sortOptions = computed(() => [
   { name: t('kdw.components.sort-split-button.SortSplitButton.sortOptions.modified'), id: 'modified' },
   { name: t('kdw.components.sort-split-button.SortSplitButton.sortOptions.relevance'), id: 'relevance' },
-  { name: t('kdw.components.sort-split-button.SortSplitButton.sortOptions.title'), id: 'title.de' },
+  { name: t('kdw.components.sort-split-button.SortSplitButton.sortOptions.title'), id: 'title.en' },
   { name: t('kdw.components.sort-split-button.SortSplitButton.sortOptions.issued'), id: 'issued' },
 ])
 const sort = defineModel<string>('sort', { default: 'modified' })
@@ -40,6 +40,11 @@ function toggleDropdown() {
 
 function selectOption(id: string, name: string) {
   sort.value = id
+  if (id === 'title.en') {
+        sortDirection.value = 'asc';
+    } else {
+        sortDirection.value = 'desc';
+    }
 }
 
 function toggle() {
@@ -89,7 +94,7 @@ function toggle() {
               hover:bg-gray-hover
             "
             :class="{ 'bg-blue-400/20': option.id === sort }"
-            @click="selectOption(option.id, option.name)"
+            @click="selectOption(option.id)"
           >
             {{ option.name }}
           </li>
