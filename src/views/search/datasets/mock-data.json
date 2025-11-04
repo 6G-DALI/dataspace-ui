@@ -1,0 +1,126 @@
+{
+  "success" : true,
+  "result" : {
+    "count" : 1,
+    "results" : [ {
+      "info" : {
+        "dataset-id" : "d3e0c751df01f85d0572",
+        "dataset-uri" : "http://data.europa.eu/88u/dataset/5448d3e0c751df01f85d0572",
+        "score" : 170
+      },
+      "accessibility" : [ {
+        "downloadUrlAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "accessUrlStatusCode" : [ {
+          "name" : "1100",
+          "percentage" : 100.0
+        } ]
+      }, {
+        "downloadUrlStatusCode" : [ {
+          "name" : "200",
+          "percentage" : 100.0
+        } ]
+      } ],
+      "reusability" : [ {
+        "accessRightsAvailability" : false
+      }, {
+        "licenceAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "accessRightsVocabularyAlignment" : false
+      }, {
+        "contactPointAvailability" : false
+      }, {
+        "publisherAvailability" : true
+      } ],
+      "contextuality" : [ {
+        "byteSizeAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "rightsAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "dataset" : [ {
+          "dateModifiedAvailability" : true
+        }, {
+          "dateIssuedAvailability" : true
+        } ]
+      }, {
+        "distributions" : [ {
+          "dateModifiedAvailability" : [ {
+            "name" : "yes",
+            "percentage" : 100.0
+          }, {
+            "name" : "no",
+            "percentage" : 0.0
+          } ]
+        }, {
+          "dateIssuedAvailability" : [ {
+            "name" : "yes",
+            "percentage" : 100.0
+          }, {
+            "name" : "no",
+            "percentage" : 0.0
+          } ]
+        } ]
+      } ],
+      "findability" : [ {
+        "keywordAvailability" : true
+      }, {
+        "categoryAvailability" : false
+      }, {
+        "spatialAvailability" : false
+      }, {
+        "temporalAvailability" : false
+      } ],
+      "interoperability" : [ {
+        "dcatApCompliance" : false
+      }, {
+        "formatAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "mediaTypeAvailability" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      }, {
+        "formatMediaTypeVocabularyAlignment" : [ {
+          "name" : "yes",
+          "percentage" : 100.0
+        }, {
+          "name" : "no",
+          "percentage" : 0.0
+        } ]
+      } ]
+    } ]
+  }
+}

@@ -19,6 +19,8 @@ import DistributionCard from '../distribution-card/DistributionCard.vue'
 import KTag from '../base/tag/KTag.vue'
 import KButton from '../base/button/KButton.vue'
 
+import DataQuality from '@/views/search/datasets/DataQuality.vue'
+
 const props = withDefaults(defineProps<{
   headline?: string
   title?: string
@@ -102,7 +104,10 @@ const showQualityPage = ref(false);
           </div>
         </slot>
       </section>
-      <div v-if="!showQualityPage">
+      <div v-if="showQualityPage">
+        <DataQuality />
+      </div>
+      <div v-else>
       <section>
         <TabGroup
           :tabs="[

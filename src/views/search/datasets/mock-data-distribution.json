@@ -1,0 +1,195 @@
+{
+  "success" : true,
+  "result" : {
+    "count" : 4,
+    "results" : [ [ {
+      "info" : {
+        "distribution-id" : "ef849c46-c6eb-441e-a0d6-ffe6e026c4d2",
+        "distribution-uri" : "http://data.europa.eu/88u/distribution/ef849c46-c6eb-441e-a0d6-ffe6e026c4d2",
+        "distribution-title" : "Export au format geojson (v2.3.1)"
+      },
+      "accessibility" : [ {
+        "downloadUrlAvailability" : true
+      }, {
+        "accessUrlStatusCode" : 1100
+      }, {
+        "downloadUrlStatusCode" : 200
+      } ],
+      "reusability" : [ {
+        "licenceAvailability" : true
+      } ],
+      "contextuality" : [ {
+        "byteSizeAvailability" : true
+      }, {
+        "rightsAvailability" : true
+      }, {
+        "dateModifiedAvailability" : true
+      }, {
+        "dateIssuedAvailability" : true
+      } ],
+      "interoperability" : [ {
+        "formatAvailability" : true
+      }, {
+        "mediaTypeAvailability" : true
+      }, {
+        "formatMediaTypeVocabularyAlignment" : true
+      } ],
+      "validation" : {
+        "errors" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "warnings" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "infos" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "itemCount" : 0
+      }
+    } ], [ {
+      "info" : {
+        "distribution-id" : "a0b17c9b-aeac-45a2-bd91-b81c65a37de4",
+        "distribution-uri" : "http://data.europa.eu/88u/distribution/a0b17c9b-aeac-45a2-bd91-b81c65a37de4",
+        "distribution-title" : "consolidation-etalab-schema-irve-statique-v-2.3.1-20251031.csv"
+      },
+      "accessibility" : [ {
+        "downloadUrlAvailability" : true
+      }, {
+        "accessUrlStatusCode" : 1100
+      }, {
+        "downloadUrlStatusCode" : 200
+      } ],
+      "reusability" : [ {
+        "licenceAvailability" : true
+      } ],
+      "contextuality" : [ {
+        "byteSizeAvailability" : true
+      }, {
+        "rightsAvailability" : true
+      }, {
+        "dateModifiedAvailability" : true
+      }, {
+        "dateIssuedAvailability" : true
+      } ],
+      "interoperability" : [ {
+        "formatAvailability" : true
+      }, {
+        "mediaTypeAvailability" : true
+      }, {
+        "formatMediaTypeVocabularyAlignment" : true
+      } ],
+      "validation" : {
+        "errors" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "warnings" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "infos" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "itemCount" : 0
+      }
+    } ], [ {
+      "info" : {
+        "distribution-id" : "ab947772-d970-4179-93b5-087baa990554",
+        "distribution-uri" : "http://data.europa.eu/88u/distribution/ab947772-d970-4179-93b5-087baa990554",
+        "distribution-title" : "Consolidation de la dernière version à date du schéma (v2.3.1) - 20251029"
+      },
+      "accessibility" : [ {
+        "downloadUrlAvailability" : true
+      }, {
+        "accessUrlStatusCode" : 1100
+      }, {
+        "downloadUrlStatusCode" : 200
+      } ],
+      "reusability" : [ {
+        "licenceAvailability" : true
+      } ],
+      "contextuality" : [ {
+        "byteSizeAvailability" : true
+      }, {
+        "rightsAvailability" : true
+      }, {
+        "dateModifiedAvailability" : true
+      }, {
+        "dateIssuedAvailability" : true
+      } ],
+      "interoperability" : [ {
+        "formatAvailability" : true
+      }, {
+        "mediaTypeAvailability" : true
+      }, {
+        "formatMediaTypeVocabularyAlignment" : true
+      } ],
+      "validation" : {
+        "errors" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "warnings" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "infos" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "itemCount" : 0
+      }
+    } ], [ {
+      "info" : {
+        "distribution-id" : "9f399d86-e93c-4623-b2e7-4b07419bcf40",
+        "distribution-uri" : "http://data.europa.eu/88u/distribution/9f399d86-e93c-4623-b2e7-4b07419bcf40",
+        "distribution-title" : "Documentation sur la consolidation - 20251029"
+      },
+      "accessibility" : [ {
+        "downloadUrlAvailability" : true
+      }, {
+        "accessUrlStatusCode" : 1100
+      }, {
+        "downloadUrlStatusCode" : 200
+      } ],
+      "reusability" : [ {
+        "licenceAvailability" : true
+      } ],
+      "contextuality" : [ {
+        "byteSizeAvailability" : true
+      }, {
+        "rightsAvailability" : true
+      }, {
+        "dateModifiedAvailability" : true
+      }, {
+        "dateIssuedAvailability" : true
+      } ],
+      "interoperability" : [ {
+        "formatAvailability" : true
+      }, {
+        "mediaTypeAvailability" : true
+      }, {
+        "formatMediaTypeVocabularyAlignment" : true
+      } ],
+      "validation" : {
+        "errors" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "warnings" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "infos" : {
+          "count" : 0,
+          "items" : [ ]
+        },
+        "itemCount" : 0
+      }
+    } ] ]
+  }
+}
