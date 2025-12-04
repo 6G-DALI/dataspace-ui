@@ -108,7 +108,8 @@
     "quality": "Datenqualität",
     "info_tab": "Info",
     "about_dataset": "Über diesen Datensatz",
-    "read_more": "Mehr lesen"
+    "read_more": "Mehr lesen",
+    "overview": "Datensatz Übersicht"
   },
   "dataset": {
     "title": "Datensatz",

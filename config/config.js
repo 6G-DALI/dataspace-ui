@@ -9,4 +9,5 @@ export default {
   piveauHubStoreUrl: '$VITE_API_HUB_STORE_URL',
   middlewareUrl: '$VITE_API_MIDDLEWARE_URL',
   piveauSparqlUrl: '$VITE_API_SPARQL_URL',
+  piveauDataQualityUrl: '$VITE_API_DATA_QUALITY_URL'
 }

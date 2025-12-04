@@ -87,7 +87,9 @@ const showQualityPage = ref(false);
               </slot>
             </template>
             </DetailsPageHeader>
-            <KButton size="small" @click="showQualityPage = !showQualityPage">{{ t('details.quality') }}</KButton>
+            <KButton size="small" @click="showQualityPage = !showQualityPage">
+              {{ showQualityPage ? t('details.overview') : t('details.quality') }}
+            </KButton>
           </div>
         </div>
         <slot name="metadata">
