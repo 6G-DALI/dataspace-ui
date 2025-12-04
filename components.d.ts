@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Accordion: typeof import('./src/components/base/dropdown-list/Accordion.vue')['default']
     AppLink: typeof import('./src/components/base/links/AppLink.vue')['default']
     DarkModeToggle: typeof import('./src/components/toggler-dark-mode/DarkModeToggle.vue')['default']
     'DataInfoBox.story': typeof import('./src/components/base/data-info-box/DataInfoBox.story.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     Dropdown: typeof import('./src/components/dropdown/Dropdown.vue')['default']
     'Dropdown.story': typeof import('./src/components/dropdown/Dropdown.story.vue')['default']
     DropdownItem: typeof import('./src/components/dropdown/DropdownItem.vue')['default']
+    DropdownList: typeof import('./src/components/base/dropdown-list/DropdownList.vue')['default']
     FacetSidebar: typeof import('./src/components/facet-sidebar/FacetSidebar.vue')['default']
     'FacetSidebar.story': typeof import('./src/components/facet-sidebar/FacetSidebar.story.vue')['default']
     Footer: typeof import('./src/components/header-footer/Footer.vue')['default']

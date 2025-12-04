@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDataTruncator } from '@/composables/useDataTruncator'
-import { computed, toValue } from 'vue'
+import { computed, ref, toValue } from 'vue'
 
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -17,6 +17,9 @@ import Typography from '../base/typography/Typography.vue'
 import DetailsPageHeader from './DetailsPageHeader.vue'
 import DistributionCard from '../distribution-card/DistributionCard.vue'
 import KTag from '../base/tag/KTag.vue'
+import KButton from '../base/button/KButton.vue'
+
+import DataQuality from '@/views/search/datasets/DataQuality.vue'
 
 const props = withDefaults(defineProps<{
   headline?: string
@@ -56,6 +59,8 @@ const {
   data: computed(() => props.distributions),
   limit: 7,
 })
+
+const showQualityPage = ref(false);
 </script>
 
 <template>
@@ -74,13 +79,18 @@ const {
           </div>
           <LinkedDataSelector :resource-id="datasetId" resource="datasets" class="mt-4" />
           </div>
-          <DetailsPageHeader :headline="headline" :title="title" :subtitle="subtitle">
+          <div class="flex justify-between items-center">
+            <DetailsPageHeader :headline="headline" :title="title" :subtitle="subtitle">
             <template #subtitle>
               <slot name="subtitle" :subtitle="subtitle">
                 <span>{{ subtitle }}</span>
               </slot>
             </template>
-          </DetailsPageHeader>
+            </DetailsPageHeader>
+            <KButton size="small" @click="showQualityPage = !showQualityPage">
+              {{ showQualityPage ? t('details.overview') : t('details.quality') }}
+            </KButton>
+          </div>
         </div>
         <slot name="metadata">
           <div
@@ -96,6 +106,10 @@ const {
           </div>
         </slot>
       </section>
+      <div v-if="showQualityPage">
+        <DataQuality :id="props.datasetId"/>
+      </div>
+      <div v-else>
       <section>
         <TabGroup
           :tabs="[
@@ -220,6 +234,7 @@ const {
           </div>
         </section>
       </slot>
+      </div>
     </div>
   </div>
 </template>

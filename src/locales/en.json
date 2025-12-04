@@ -1,4 +1,11 @@
 {
+  "data-quality": {
+    "title": "Metadata quality",
+    "description": "The Metadata Quality Assurance is intended to help data providers and data portals to check their metadata against various indicators.",
+    "distribution": "Distributions Meta Data Quality",
+    "distribution-description": "The following lists the quality measurement of all distributions of the dataset.",
+    "no-data-available": "No metadata quality available for this dataset."
+  },
   "footer": {
     "sections": {
       "sitemap": "Sitemap",
@@ -98,9 +105,11 @@
   "details": {
     "dataset": "Dataset",
     "back": "Back",
+    "quality": "Data Quality",
     "info_tab": "Info",
     "about_dataset": "About this dataset",
-    "read_more": "Read more"
+    "read_more": "Read more",
+    "overview": "Dataset Overview"
   },
   "dataset": {
     "title": "Dataset",

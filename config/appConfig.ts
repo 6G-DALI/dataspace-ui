@@ -8,6 +8,7 @@ export interface Configuration {
   keycloakClientId: string
   supersetUrl: string
   piveauHubSearchUrl: string
+  piveauDataQualityUrl: string
 }
 
 export default import.meta.env.MODE === 'production' ? productionConfig : developmentConfig

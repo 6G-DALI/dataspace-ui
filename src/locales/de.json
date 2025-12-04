@@ -1,4 +1,11 @@
 {
+  "data-quality": {
+    "title": "Metadaten Qualität",
+    "description": "Die Metadaten-Qualitätssicherung soll Datenanbietern und Datenportalen dabei helfen, ihre Metadaten anhand verschiedener Indikatoren zu überprüfen.",
+    "distribution": "Distributionen Metadaten Qualität",
+    "distribution-description": "Im Folgenden sind die Qualitätsmessungen aller Distributionen des Datensatzes aufgeführt.",
+    "no-data-available": "Für diesen Datensatz ist keine Metadaten Qualität verfügbar."
+  },
   "footer": {
     "sections": {
       "sitemap": "Seitenübersicht",
@@ -98,9 +105,11 @@
   "details": {
     "dataset": "Datensatz",
     "back": "Zurück",
+    "quality": "Datenqualität",
     "info_tab": "Info",
     "about_dataset": "Über diesen Datensatz",
-    "read_more": "Mehr lesen"
+    "read_more": "Mehr lesen",
+    "overview": "Datensatz Übersicht"
   },
   "dataset": {
     "title": "Datensatz",
