@@ -30,7 +30,7 @@ build-asset:
     - mirror-node
   image: $CI_REGISTRY_IMAGE/node:18-alpine
   tags:
-    - dps-piveau-runner # use dps-piveau-runner
+    - fokus-runner # use fokus-runner
 
   before_script:
     - npm i -g pnpm
@@ -75,7 +75,7 @@ build-and-push:
     - docker push $IMAGE_LATEST # Push latest tag for easy deployment reference
 
   tags:
-    - dps-piveau-runner # Use specific GitLab runner with this tag
+    - fokus-runner # Use specific GitLab runner with this tag
 
   only:
     - master # Only run this job on master branch commits
@@ -88,7 +88,7 @@ generate-and-upload-sbom:
   stage: sbom
   image: $CI_REGISTRY_IMAGE/node:18-alpine # Use the mirrored node image
   tags:
-    - dps-piveau-runner
+    - fokus-runner
   before_script:
     - apk add --no-cache curl # Install curl
     - npm i -g pnpm # Ensure pnpm is available
@@ -176,7 +176,7 @@ deploy-to-openshift:
       fi
 
   tags:
-    - dps-piveau-runner # Use the same runner as build stage
+    - fokus-runner # Use the same runner as build stage
 
   only:
     - master # Only deploy from master branch
