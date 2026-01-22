@@ -114,6 +114,7 @@ export function useDatasetSearchView<TF extends string, TM, TS extends EnhancedS
       title: dcat.getTitle || '',
       publisher: dcat.getPublisher?.name || '',
       description: dcat.getDescription || '',
+      getDescriptionMarkup: dcat.getDescriptionMarkup || '',
       formats: dcat.getFormats || [],
       datasetType: (dcat as any)?.public === false ? 'kritis' : 'opendata',
       summary: dcat.getSummary || [],

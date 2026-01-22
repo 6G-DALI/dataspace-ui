@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DataInfoCard from '@/components/base/data-info-box/DataInfoCard.vue'
 import { computed, defineProps } from 'vue'
+
 import { useSearchParams } from './useSearchParams'
 
 const props = defineProps<{
@@ -53,7 +54,7 @@ function goToPage(page: number) {
         <DataInfoCard
           :to="{ name: 'dataset-details', params: { datasetId: item.id } }"
           :title="item.title"
-          :description="item.description"
+          :description="item?.getDescriptionMarkup"
           :file-formats="item.formats"
           :properties="item.summary"
         />
