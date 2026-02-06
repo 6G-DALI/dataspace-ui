@@ -1,4 +1,3 @@
-vue
 <!-- src/components/header-footer/Header.vue -->
 <script setup>
 import KButton from '@/components/base/button/KButton.vue'
@@ -17,15 +16,15 @@ const visible = ref(false)
     <div class="lg:container mx-auto px-2 md:px-10 py-8">
       <div class="flex items-center gap-4">
         <!-- Left: Logo -->
-        <div class="flex items-center">
+        <div class="flex items-center flex-shrink-0">
           <RouterLink class="block" to="/">
             <img src="/piveau-logo-gray.svg" alt="piveau logo" class="logo logo-light w-25">
             <img src="/piveau-logo.png" alt="piveau logo" class="logo logo-dark w-24">
           </RouterLink>
         </div>
 
-        <!-- Center: Navigation (allowed to shrink) -->
-        <div class="flex min-w-0 flex-1 justify-center">
+        <!-- Center: Navigation -->
+        <div class="flex flex-1 justify-center">
           <div class="hidden md:block">
             <NavigationBar />
           </div>
