@@ -1,6 +1,6 @@
 <!-- NavigationLinks.vue -->
 <script setup>
-const props = defineProps({
+defineProps({
   direction: {
     type: String,
     default: 'horizontal',
@@ -8,7 +8,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['close-nav'])
+const emit = defineEmits(['closeNav'])
 
 const links = [
   { to: '/', label: 'landing-page.header.home' },
@@ -18,7 +18,7 @@ const links = [
 
 function handleNavigate(navigate) {
   navigate()
-  emit('close-nav')
+  emit('closeNav')
 }
 </script>
 
@@ -33,15 +33,16 @@ function handleNavigate(navigate) {
       :key="index"
       v-slot="{ href, navigate, isActive, isExactActive }"
       :to="link.to"
+      custom
     >
-      <div
+      <a
         class="header-icon-container text-base leading-[1.625rem] text-header-bg-text"
         :class="{ active: isActive && isExactActive }"
         :href="href"
         @click="handleNavigate(navigate)"
       >
         {{ link.label ? $t(link.label) : link.name }}
-      </div>
+      </a>
     </RouterLink>
   </div>
 </template>

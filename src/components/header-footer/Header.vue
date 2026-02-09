@@ -13,7 +13,7 @@ const visible = ref(false)
 
 <template>
   <header class="border-gray-200 bg-header-bg text-header-bg-text">
-    <div class="lg:container mx-auto px-2 md:px-10 py-8">
+    <div class="lg:container mx-auto px-2 py-8 md:px-10">
       <div class="flex items-center gap-4">
         <!-- Left: Logo -->
         <div class="flex items-center flex-shrink-0">
@@ -25,7 +25,7 @@ const visible = ref(false)
 
         <!-- Center: Navigation -->
         <div class="flex min-w-0 flex-1 justify-center">
-          <div class="hidden min-w-0 md:block">
+          <div class="hidden min-w-0 overflow-hidden md:block">
             <NavigationBar />
           </div>
         </div>
@@ -38,7 +38,7 @@ const visible = ref(false)
             </KButton>
           </div>
 
-          <div class="hidden items-center gap-1 md:flex mr-5 px-8">
+          <div class="mr-2 hidden items-center gap-1 md:flex lg:mr-5 lg:px-8">
             <LanguageSelector />
             <DarkModeToggle />
           </div>
