@@ -24,14 +24,14 @@ const visible = ref(false)
         </div>
 
         <!-- Center: Navigation -->
-        <div class="flex flex-1 justify-center">
-          <div class="hidden md:block">
+        <div class="flex min-w-0 flex-1 justify-center">
+          <div class="hidden min-w-0 md:block">
             <NavigationBar />
           </div>
         </div>
 
         <!-- Right: Actions (kept to the right, no overlap) -->
-        <div class="flex items-center justify-end gap-3 sm:gap-6">
+        <div class="flex shrink-0 items-center justify-end gap-3 sm:gap-6">
           <div class="md:hidden">
             <KButton variant="null" class="text-header-bg-text" @click="visible = !visible">
               <i class="icon-[ph--list]" />

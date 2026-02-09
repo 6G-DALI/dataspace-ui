@@ -49,8 +49,14 @@ function handleNavigate(navigate) {
 <style>
 #thenavguy.nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 1rem;
   align-items: center;
+}
+
+@media (min-width: 1024px) {
+  #thenavguy.nav-links {
+    gap: 2.5rem;
+  }
 }
 
 #thenavguy.nav-links.vertical {
