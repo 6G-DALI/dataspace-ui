@@ -77,8 +77,8 @@ onUnmounted(() => {
       class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-surface hover:text-primary-hover rounded-md hover:bg-header-bg dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 dark:focus:bg-header-bg"
       :class="{ 'bg-surface-100 dark:bg-surface-800': isDropdownOpen }"
     >
-      <!-- Current Language Flag -->
-      <span class="text-sm">
+      <!-- Current Language Flag (hidden at md+ to avoid header overlap at ~770px) -->
+      <span class="text-sm md:hidden">
         {{ languages.find(lang => lang.code === currentLanguage)?.flag }}
       </span>
 
