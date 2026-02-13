@@ -1,3 +1,5 @@
+<script setup lang="ts">
+</script>
 <template>
   <div class="bg-surface px-10 py-10 sm:px-6 sm:py-24 lg:px-60 lg:py-15">
     <h1>Datenschutzerklärung</h1>
@@ -37,6 +39,23 @@
         Datenschutzbeauftragter bzw. unter datenschutz@zv.fraunhofer.de erreichbar.
         Sie können sich jederzeit bei Fragen zum Datenschutzrecht oder Ihren Betroffenenrechten
         direkt an unseren Datenschutzbeauftragten wenden.
+      </p><br>
+      <hr>
+      <h3>Keycloak als Identity Provider</h3><br><p>
+        Für die Anmeldung und Verwaltung von Benutzerkonten nutzen wir Keycloak
+        als Identity Provider. Dabei verarbeitet Keycloak die für die
+        Authentifizierung erforderlichen Daten (z.B. Benutzername, E-Mail-Adresse
+        sowie technische Identifikationsmerkmale). Die Verarbeitung erfolgt zur
+        Bereitstellung des Login- und Kontoservices.</p><br><p>
+        Im Rahmen der Anmeldung werden Authentifizierungsereignisse protokolliert
+        (z.B. Zeitpunkt der Anmeldung, Erfolg oder Fehlschlag, IP-Adresse,
+        verwendeter Client/Browser). Diese Protokolle dienen der Sicherheit,
+        Fehleranalyse und dem Schutz vor Missbrauch.
+      </p><br><p>
+        Zudem setzt Keycloak Session-Daten und Session-Cookies, um den
+        Anmeldevorgang und die laufende Sitzung technisch zu ermöglichen. Die
+        Session-Daten werden nach Ablauf der Sitzung oder gemäß konfigurierter
+        Aufbewahrungsfristen automatisch entfernt.
       </p><br>
       <hr>
       <h3>Verarbeitung personenbezogener Daten und Zwecke der Verarbeitung</h3><br>
