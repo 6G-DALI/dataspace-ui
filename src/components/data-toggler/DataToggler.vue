@@ -30,10 +30,10 @@ const toggleText = computed(() => isExpanded.value ? t('toggler.show_less') : t(
     <slot :truncated="truncated" :is-expanded="isExpanded">
       {{ truncated }}
     </slot>
-    <span class="by-link cursor-pointer">
+    <span class="inline-block">
       <button
-        class="inline-flex min-w-fit cursor-pointer flex-row items-center gap-2 mb-5" @click="handleToggle"
-      >
+        class="by-link cursor-pointer inline-flex items-center gap-2 mb-5" 
+        @click="handleToggle">
         <slot name="label" :is-expanded="isExpanded">
           <span>{{ toggleText }}</span>
         </slot>

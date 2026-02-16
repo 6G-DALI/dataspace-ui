@@ -78,7 +78,7 @@ const showBack = computed(() => {
           <div class="flex justify-between">
             <div>
               <button
-                v-if="showBack" class="mt-[14px] -ml-6 cursor-pointer px-4 py-1" @click="router.back()"
+                v-if="showBack" class="mt-[14px] -ml-6 cursor-pointer py-1" @click="router.back()"
               >
                 <Typography
                   variant="paragraph-1" class="
@@ -151,7 +151,7 @@ const showBack = computed(() => {
                   </div>
                   <button
                     v-if="isDescriptionTruncationNeeded" class="
-                      grid w-full place-content-center
+                      mx-auto
                     "
                     @click="toggleDescription"
                   >
