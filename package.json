@@ -28,8 +28,8 @@
     "@fontsource-variable/inter": "^5.0.16",
     "@fontsource-variable/space-grotesk": "^5.1.0",
     "@headlessui/vue": "^1.7.23",
-    "@piveau/sdk-core": "0.0.0-beta.0",
-    "@piveau/sdk-vue": "1.0.0-beta.5",
+    "@piveau/sdk-core": "0.0.0-beta.6",
+    "@piveau/sdk-vue": "1.0.0-beta.13",
     "@tailwindcss/postcss": "^4.1.5",
     "@tanstack/vue-query": "^5.24.1",
     "@vueuse/core": "^10.8.0",
@@ -56,8 +56,8 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
-    "@cyclonedx/bom": "^3.1.0",
     "@antfu/eslint-config": "^4.5.1",
+    "@cyclonedx/bom": "^3.1.0",
     "@histoire/plugin-vue": "^0.17.17",
     "@iconify-json/mdi": "^1.1.64",
     "@iconify-json/ph": "^1.1.12",

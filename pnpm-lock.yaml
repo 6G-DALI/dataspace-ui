@@ -18,11 +18,11 @@ importers:
         specifier: ^1.7.23
         version: 1.7.23(vue@3.5.13(typescript@5.6.3))
       '@piveau/sdk-core':
-        specifier: 0.0.0-beta.0
-        version: 0.0.0-beta.0
+        specifier: 0.0.0-beta.6
+        version: 0.0.0-beta.6
       '@piveau/sdk-vue':
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5(typescript@5.6.3)(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))
+        specifier: 1.0.0-beta.13
+        version: 1.0.0-beta.13(typescript@5.6.3)(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))
       '@tailwindcss/postcss':
         specifier: ^4.1.5
         version: 4.1.5
@@ -993,11 +993,11 @@ packages:
     resolution: {integrity: sha512-dfUnCxiN9H4ap84DvD2ubjw+3vUNpstxa0TneY/Paat8a3R4uQZDLSvWjmznAY/DoahqTHl9V46HF/Zs3F29pg==}
     engines: {node: '>= 10.0.0'}
 
-  '@piveau/sdk-core@0.0.0-beta.0':
-    resolution: {integrity: sha512-7FgA+YF0akDN65LtgCXzTH2yTNQ14j16zUH9sZeXBWKBRSqw4cv2Rv1c0peIJVooELR+mNtraavVeJyVkjH/jQ==}
+  '@piveau/sdk-core@0.0.0-beta.6':
+    resolution: {integrity: sha512-TdW55bLIkqGocaaxGCaz8uqfleUJGmTK8UBtCuguGkk+Xs6fL4KUTVXeadpT4chMqI63MC6aUInfZIK+9w3N3w==}
 
-  '@piveau/sdk-vue@1.0.0-beta.5':
-    resolution: {integrity: sha512-NvJkYKPYLsktKMAisd294Hvyj7oUdciG2UDdRZSoZVndQT3SeIcsdYOxlXCH1iKB8IzvEaTlYkDqN9S/D/trfQ==}
+  '@piveau/sdk-vue@1.0.0-beta.13':
+    resolution: {integrity: sha512-bIaWsYkibbs3mo8MU+4fYCXaVGVpH3GbOmqzuToBRiS4WI/sdmSOQX9XzXQUF/J5saimuLrRh+hCY7wfy3+IVg==}
     peerDependencies:
       vue-router: '>=4'
     peerDependenciesMeta:
@@ -1232,6 +1232,9 @@ packages:
     resolution: {integrity: sha512-lGFf08pbkEac0NYgVf4hdANpAgApRjNByLXB+WBip3qj1iendOIyAwP2GKkKbQMNVy2r1xxDf0ssfWscoiC+Vw==}
     engines: {node: '>=8.10'}
     hasBin: true
+
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
   '@stylistic/eslint-plugin@4.2.0':
     resolution: {integrity: sha512-8hXezgz7jexGHdo5WN6JBEIPHCSFyyU4vgbxevu4YLVS5vl+sxqAAGyXSzfNDyR6xMNSH5H1x67nsXcYMOHtZA==}
@@ -5494,22 +5497,22 @@ snapshots:
       '@parcel/watcher-win32-x64': 2.5.1
     optional: true
 
-  '@piveau/sdk-core@0.0.0-beta.0':
+  '@piveau/sdk-core@0.0.0-beta.6':
     dependencies:
       axios: 1.8.2
       zod: 3.24.1
     transitivePeerDependencies:
       - debug
 
-  '@piveau/sdk-vue@1.0.0-beta.5(typescript@5.6.3)(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))':
+  '@piveau/sdk-vue@1.0.0-beta.13(typescript@5.6.3)(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))':
     dependencies:
-      '@piveau/sdk-core': 0.0.0-beta.0
+      '@piveau/sdk-core': 0.0.0-beta.6
+      '@standard-schema/spec': 1.1.0
       '@tanstack/vue-query': 5.66.0(vue@3.5.13(typescript@5.6.3))
       '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.6.3))
       '@vueuse/router': 10.11.1(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))(vue@3.5.13(typescript@5.6.3))
       merge-anything: 6.0.2
       vue: 3.5.13(typescript@5.6.3)
-      vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
       zod: 3.24.1
     optionalDependencies:
       vue-router: 4.5.0(vue@3.5.13(typescript@5.6.3))
@@ -5661,6 +5664,8 @@ snapshots:
       commander: 4.1.1
       ignore: 5.3.2
       p-map: 4.0.0
+
+  '@standard-schema/spec@1.1.0': {}
 
   '@stylistic/eslint-plugin@4.2.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3)':
     dependencies:
