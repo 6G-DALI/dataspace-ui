@@ -4,7 +4,6 @@
  * to create a feature project specific SDK.
  */
 
-import type { EnhancedSearchResult } from '../composables/useDatasetsSearchView'
 import { schemaCatalog, SchemaDataset } from '@piveau/sdk-core'
 import { dcatApDataset, defineHubSearch, getTranslationFor } from '@piveau/sdk-vue'
 import DOMPurify from 'isomorphic-dompurify'
@@ -39,7 +38,7 @@ export function useDcatApSearch() {
 
       const getDescriptionMarkup = DOMPurify.sanitize(marked(baseGetters.getDescription || '', { async: false }))
 
-      const enhanced: EnhancedSearchResult = {
+      const enhanced = {
         getId: dataset.id || '',
         getTitle: baseGetters.getTitle || '',
         getDescription: baseGetters.getDescription || '',
@@ -51,6 +50,7 @@ export function useDcatApSearch() {
           { title: t('search.provider'), text: baseGetters.getPublisher?.name || '' },
           { title: t('search.license'), text: baseGetters.getLicenses?.[0] || '' },
         ],
+        getKeywords: dataset.keywords || []
       }
 
       return {
@@ -79,7 +79,7 @@ export function useDcatApCatalogSearch() {
     (dataset, localeInstance) => {
       const { currentLocale: locale } = localeInstance
 
-      const enhanced: EnhancedSearchResult = {
+      const enhanced = {
         getId: dataset.id || '',
         getTitle: getTranslationFor(dataset.title, [locale]) || '',
         getDescription: getTranslationFor(dataset.description, [locale]) || '',

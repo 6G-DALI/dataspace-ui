@@ -41,7 +41,6 @@ const { useResource: getDataset } = useDcatApSearch()
 const { isSuccess, query, resultEnhanced } = shallowReactive(
   getDataset(datasetId),
 )
-
 const getFormattedDistributions = computed(() => {
   if (!isSuccess.value)
     return []
@@ -219,6 +218,17 @@ const { t } = useI18n()
               @click="router.push({ name: 'Datasets', query: { categories: category.id } })"
             >
               {{ getLocalizedValue({ obj: category.label, fallbackLocale: 'de' }) }}
+            </KTag>
+          </div>
+        </div>
+        <div v-if="(resultEnhanced?.getKeywords?.length || 0) > 0" class="space-y-3 mt-8">
+          <Typography variant="by-heading-4" class="font-semibold text-primary-100">
+             {{ t('dataset.keywords') }}
+          </Typography>
+          <div class="flex flex-row flex-wrap gap-2 mt-5">
+            <KTag
+              v-for="keyword in resultEnhanced?.getKeywords" :key="keyword.id">
+              {{ keyword.label }}
             </KTag>
           </div>
         </div>
