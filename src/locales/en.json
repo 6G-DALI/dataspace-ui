@@ -119,7 +119,8 @@
     "categories": "Categories",
     "additional_info": "Additional Information",
     "show_more": "Show more",
-    "error": "Error"
+    "error": "Error",
+    "keywords": "Keywords"
   },
   "authentication": {
     "logged_out": "You have been logged out."
