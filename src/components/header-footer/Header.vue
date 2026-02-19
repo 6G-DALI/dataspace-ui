@@ -13,8 +13,8 @@ const visible = ref(false)
 
 <template>
   <header class="border-gray-200 bg-header-bg text-header-bg-text">
-    <div class="lg:container mx-auto px-2 py-8 md:px-10">
-      <div class="flex items-center gap-4 pr-2 md:pr-6">
+    <div class="container mx-auto px-2 py-8">
+      <div class="flex items-center gap-4">
         <!-- Left: Logo -->
         <div class="flex items-center flex-shrink-0">
           <RouterLink class="block" to="/">

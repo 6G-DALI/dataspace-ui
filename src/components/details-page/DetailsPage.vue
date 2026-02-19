@@ -71,14 +71,14 @@ const showBack = computed(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-8">
-    <div class="mx-auto w-full max-w-content-max space-y-6">
+  <div class="container mx-auto">
+    <div class="mx-auto w-full space-y-6">
       <section name="dsd-header" class="flex flex-col gap-6">
         <div class="flex flex-col gap-6">
           <div class="flex justify-between">
             <div>
               <button
-                v-if="showBack" class="mt-[14px] -ml-6 cursor-pointer py-1" @click="router.back()"
+                v-if="showBack" class="mt-[14px] 2xl:-ml-[1.7em] cursor-pointer py-1" @click="router.back()"
               >
                 <Typography
                   variant="paragraph-1" class="
