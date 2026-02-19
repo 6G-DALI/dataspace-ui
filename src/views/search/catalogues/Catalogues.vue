@@ -81,7 +81,7 @@ const {
   </div>
   <div
     class="
-      relative container mx-auto flex max-w-content-max flex-col px-2
+      relative container mx-auto flex flex-col px-2
       md:flex-row md:gap-x-16
     "
   >

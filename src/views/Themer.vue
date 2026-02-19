@@ -148,7 +148,7 @@ generateCss()
 </script>
 
 <template>
-  <div class="relative container mx-auto mt-10 grid max-w-content-max">
+  <div class="relative container mx-auto mt-10 grid">
     <div class="config mb-20 space-y-6">
       <h1 class="mb-5 text-[1.375rem] font-bold">
         {{ t('themer.title') }}
