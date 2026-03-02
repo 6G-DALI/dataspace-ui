@@ -13,9 +13,10 @@ const props = defineProps<{
 }>()
 
 const searchParams = useSearchParams()
-const currentPage = searchParams.queryParams.page
+const backendPage = searchParams.queryParams.page
+const currentPage = computed(() => backendPage.value + 1)
 const itemsCount = computed(() => searchParams?.queryParams?.limit ?? 10)
-const totalPages = computed(() => Math.ceil(props.getSearchResultsPagesCount) - 1)
+const totalPages = computed(() => Math.ceil(props.getSearchResultsPagesCount))
 const paginationRange = computed(() => {
   const total = totalPages.value
   const current = currentPage.value
@@ -42,7 +43,7 @@ const paginationRange = computed(() => {
 
 function goToPage(page: number) {
   if (page >= 1 && page <= totalPages.value) {
-    currentPage.value = page
+    backendPage.value = page - 1
   }
 }
 </script>
@@ -84,7 +85,7 @@ function goToPage(page: number) {
         <button
           class="px-4 py-2"
           :class="{
-            'opacity-60': currentPage === 1,
+            'opacity-60': currentPage === 0,
           }"
           @click="goToPage(1)"
         >
