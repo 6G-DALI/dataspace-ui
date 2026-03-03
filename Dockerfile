@@ -1,10 +1,10 @@
 # Stage 1: Dependencies
-FROM node:22.13-slim AS deps
+FROM node:24-slim AS deps
 WORKDIR /app
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN npm i -g corepack@latest && \
-    corepack prepare pnpm@9 && \
+    corepack prepare pnpm@10 && \
     corepack enable
 
 # Copy only files needed for installation
@@ -12,12 +12,12 @@ COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --no-frozen-lockfile
 
 # Stage 2: Builder
-FROM node:22.13-slim AS builder
+FROM node:24-slim AS builder
 WORKDIR /app
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN npm i -g corepack@latest && \
-    corepack prepare pnpm@9 && \
+    corepack prepare pnpm@10 && \
     corepack enable
 COPY --from=deps /pnpm /pnpm
 COPY --from=deps /app/node_modules ./node_modules

@@ -18,9 +18,9 @@ mirror-node:
     # Login to Docker Hub using access token
     - echo $DOCKER_HUB_ACCESS_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin docker.io
   script:
-    - docker pull node:18-alpine
-    - docker tag node:18-alpine $CI_REGISTRY_IMAGE/node:18-alpine
-    - docker push $CI_REGISTRY_IMAGE/node:18-alpine
+    - docker pull node:24-alpine
+    - docker tag node:24-alpine $CI_REGISTRY_IMAGE/node:24-alpine
+    - docker push $CI_REGISTRY_IMAGE/node:24-alpine
   only:
     - master
 
@@ -28,7 +28,7 @@ build-asset:
   stage: build
   needs:
     - mirror-node
-  image: $CI_REGISTRY_IMAGE/node:18-alpine
+  image: $CI_REGISTRY_IMAGE/node:24-alpine
   tags:
     - fokus-runner # use fokus-runner
 
@@ -86,7 +86,7 @@ build-and-push:
 # This stage generates an SBOM and uploads it to Dependency-Track
 generate-and-upload-sbom:
   stage: sbom
-  image: $CI_REGISTRY_IMAGE/node:18-alpine # Use the mirrored node image
+  image: $CI_REGISTRY_IMAGE/node:24-alpine # Use the mirrored node image
   tags:
     - fokus-runner
   before_script:
