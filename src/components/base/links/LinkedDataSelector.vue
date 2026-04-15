@@ -42,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import { log } from 'console'
 import { defineAsyncComponent, ref } from 'vue'
 
 const props = defineProps({
@@ -69,8 +70,12 @@ function toggleDropdown() {
     const elements = document.querySelectorAll('.distributionButton')
   for (let index = 0; index < elements.length; index++) {
     const element = elements[index];
+    console.log(element);
+    
    element.classList.remove("active");
+   
   }
+
 
   // showDropdown.value = !showDropdown.value
 }
