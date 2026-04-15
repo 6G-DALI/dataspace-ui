@@ -231,10 +231,10 @@ onMounted(() => {
     <!-- Main Content -->
     <main class="container mx-auto p-1">
       <section class="mb-10">
-        <h3 class="mb-2 text-2xl font-semibold text-gray-700">
+        <h3 class="mb-2 text-2xl font-semibold text-gray-700 dark:text-white">
           {{ $t('data-quality.title') }}
         </h3>
-        <p class="mb-6 text-gray-600">
+        <p class="mb-6 text-gray-600 dark:text-white">
           {{ $t('data-quality.description') }}
         </p>
 
@@ -245,11 +245,11 @@ onMounted(() => {
             lg:grid-cols-3
           ">
           <div v-for="card in relevantDatasetMetrics" :key="card.title" class="rounded-xl bg-surface p-5">
-            <h4 class="text-pistis-700 mb-4 text-xl font-semibold">
+            <h4 class="text-pistis-700 mb-4 text-xl font-semibold dark:text-white">
               {{ card.title }}
             </h4>
             <ul class="space-y-3 text-sm">
-              <li v-for="line in card.items" :key="line.title" class="flex items-center justify-between">
+              <li v-for="line in card.items" :key="line.title" class="flex items-center justify-between dark:text-white">
                 <span class="wrap-anywhere">{{ Object.keys(line)[0] }}</span>
                 <KTag>{{ line[Object.keys(line)[0]] }}</KTag>
               </li>
@@ -257,7 +257,7 @@ onMounted(() => {
           </div>
         </div>
         <div v-else>
-          <p class="italic">
+          <p class="italic dark:text-white">
             {{ $t('data-quality.no-data-available') }}
           </p>
         </div>
@@ -265,11 +265,11 @@ onMounted(() => {
 
       <!-- Distribution Quality Section -->
       <section class="mb-10">
-        <h3 class="mb-2 text-2xl font-semibold text-gray-700">
+        <h3 class="mb-2 text-2xl font-semibold text-gray-700 dark:text-white">
           {{ $t('data-quality.distribution') }}
         </h3>
 
-        <p class="mb-6 text-gray-600">
+        <p class="mb-6 text-gray-600 dark:text-white">
           {{ $t('data-quality.distribution-description') }}
         </p>
 
@@ -277,7 +277,7 @@ onMounted(() => {
           <DropdownList :items="accordionItems" />
         </div>
         <div v-else>
-          <p class="italic">
+          <p class="italic dark:text-white">
             {{ $t('data-quality.no-data-available') }}
           </p>
         </div>

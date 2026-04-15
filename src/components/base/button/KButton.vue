@@ -26,7 +26,7 @@ const button = cva(`
       primary: `
         dark:bg-primary-dark dark:text-surface-900
         dark:hover:bg-primary-dark-hover dark:active:bg-primary-dark-pressed
-        bg-primary text-white
+        bg-primary text-white dark:text-white
         hover:bg-primary-hover
         active:bg-primary
       `,

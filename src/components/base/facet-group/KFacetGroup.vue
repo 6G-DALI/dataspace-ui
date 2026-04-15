@@ -35,7 +35,8 @@ const {
     <div
       class="
         flex w-full cursor-pointer items-center justify-between gap-2 px-4 py-4
-        pr-6
+        pr-6 hover:bg-[var(--surface-100)] 
+        dark:hover:bg-[var(--surface-700)]
       "
       @click="collapsed = !collapsed"
     >
@@ -76,11 +77,11 @@ const {
             >
             <div
               class="
-                max-h-12 w-full px-4 py-3 pr-6
-                peer-focus-visible:ring-2 peer-focus-visible:ring-black
+                max-h-12 w-full px-4 py-3 pr-6 
+                peer-focus-visible:ring-2 peer-focus-visible:ring-black cursor-pointer
               "
               :class="{
-                'text-surface-text hover:bg-neutral-20': !model?.includes(facet.id),
+                'text-surface-text hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]': !model?.includes(facet.id),
                 'border-b border-b-primary bg-primary-light font-semibold': model?.includes(facet.id),
               }"
               :name="facet.label"
@@ -88,7 +89,7 @@ const {
             >
               <div
                 class="
-                  flex flex-1 cursor-pointer flex-row flex-nowrap items-center
+                  flex flex-1 flex-row flex-nowrap items-center
                   justify-between text-surface-text
                 "
               >
@@ -111,6 +112,7 @@ const {
             class="
               grid max-h-12 w-full cursor-pointer place-content-center
               rounded-b-lg border-t-0 bg-surface px-4 py-3 pr-6
+              hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
             " @click="toggleFacetsTruncation"
           >
             <i v-if="isTruncated" class="icon-[ph--caret-down]" />

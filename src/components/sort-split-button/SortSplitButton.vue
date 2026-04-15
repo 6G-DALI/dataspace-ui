@@ -58,7 +58,7 @@ function toggle() {
       class="
         relative inline-flex cursor-pointer rounded-full rounded-r-none border
         bg-surface
-        md:w-56
+        md:w-56 hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
     >
       <button
@@ -91,7 +91,7 @@ function toggle() {
               dark:bg-primary-400/40 dark:text-white/80
               text-primary-700 m-0 cursor-pointer px-5 py-3 leading-none
               font-light
-              hover:bg-gray-hover
+              hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
             "
             :class="{ 'bg-blue-400/20': option.id === sort }"
             @click="selectOption(option.id)"
@@ -106,7 +106,7 @@ function toggle() {
       class="
         flex cursor-pointer items-center rounded-full rounded-l-none border
         border-surface-200 bg-surface pr-4 pl-3 font-light
-        dark:border-surface-700
+        hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
       @click="toggle"
     >

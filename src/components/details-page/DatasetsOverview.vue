@@ -149,6 +149,7 @@ const {
                 name="distribution-card-overlay" class="
                   absolute top-0 left-0 size-full bg-linear-to-b
                   from-transparent from-0% to-white to-55%
+                  dark:to-neutral-900 dark:to-55%
                 "
               >
                 <div

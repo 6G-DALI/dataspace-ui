@@ -19,7 +19,7 @@ const PropertyTable = defineComponent({
         return h('span', data.data)
 
       if (data.type === 'href')
-        return h('span', h('a', { class: 'text-primary hover:text-primary', href: data.data.href }, data.data.label))
+        return h('span', h('a', { class: 'text-primary hover:text-primary-hover hover:underline', href: data.data.href }, data.data.label))
 
       return h('span', JSON.stringify(data))
     }

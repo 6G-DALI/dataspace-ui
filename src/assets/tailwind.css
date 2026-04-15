@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 @config '../../tailwind.config.ts';
 
 /*

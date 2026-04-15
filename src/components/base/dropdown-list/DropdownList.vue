@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="item in items" :key="item.title" class="rounded-xl bg-surface mb-4">
+        <div v-for="item in items" :key="item.title" class="rounded-xl bg-surface mb-4 dark:text-white">
             <button class="w-full text-left p-3 font-semibold flex items-center justify-between" @click="toggle(item)">
                 {{ item.label }}
                 <i class="icon-[ph--caret-down] mr-3" /> 
