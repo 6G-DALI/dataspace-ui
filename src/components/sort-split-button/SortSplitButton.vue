@@ -56,14 +56,14 @@ function toggle() {
   <div class="relative flex w-full text-sm">
     <div
       class="
-        relative inline-flex cursor-pointer rounded-full rounded-r-none border
+        relative z-50 inline-flex cursor-pointer rounded-full rounded-r-none border
         bg-surface
         md:w-56 hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
     >
       <button
         aria-haspopup="listbox"
-        class="flex flex-auto items-center justify-between px-3 py-2 font-light"
+        class="z-20 flex flex-auto items-center justify-between px-3 py-2 font-light"
         @click="toggleDropdown"
       >
         {{ selectedOption }}
@@ -73,7 +73,7 @@ function toggle() {
       <div
         v-if="showDropdown"
         class="
-          absolute top-full z-10 max-h-[200px] w-full rounded-md border
+          dropdown absolute top-full z-10 max-h-[200px] w-full rounded-md border
           bg-surface-0 py-3 text-surface-800 shadow-md
           dark:border dark:border-surface-700 dark:bg-surface-800
           dark:text-white/80
@@ -123,4 +123,8 @@ function toggle() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.dropdown {
+  top: 50%;
+}
+</style>

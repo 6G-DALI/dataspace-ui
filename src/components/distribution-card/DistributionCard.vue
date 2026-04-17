@@ -93,7 +93,7 @@ const defaultSaveText = computed(() => props.saveText || 'Linked Data')
       </div>
 
       <div class="flex items-center justify-between">
-        <div class="flex gap-6">
+        <div class="flex gap-4">
           <a :href="downloadUrl" target="_blank" nofollow noreferrer download
             class="text-white bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom h-8 text-sm px-5 py-5">
             {{ defaultDownloadText }}

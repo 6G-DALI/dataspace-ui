@@ -13,8 +13,8 @@ const visible = ref(false)
 
 <template>
   <header class="border-gray-200 bg-header-bg text-header-bg-text">
-    <div class="container mx-auto px-2 py-8">
-      <div class="flex items-center gap-4">
+    <div class="container mx-auto px-2 py-8 relative">
+      <div class="flex items-center justify-between">
         <!-- Left: Logo -->
         <div class="flex items-center flex-shrink-0">
           <RouterLink class="block" to="/">
@@ -24,7 +24,7 @@ const visible = ref(false)
         </div>
 
         <!-- Center: Navigation -->
-        <div class="flex min-w-0 flex-1 justify-center px-2">
+        <div class="flex nav-center absolute min-w-0 flex-1 justify-center px-2">
           <div class="hidden min-w-0 overflow-x-auto md:block">
             <NavigationBar />
           </div>
@@ -100,10 +100,13 @@ const visible = ref(false)
 </template>
 
 <style>
+.nav-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
 .brand {
   margin-left: 20px;
   display: flex;
-
 }
 
 .logo-dark {
@@ -120,5 +123,10 @@ const visible = ref(false)
 
 :root[data-theme="dark"] .logo-light {
   display: none;
+}
+.navgationbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 </style>
