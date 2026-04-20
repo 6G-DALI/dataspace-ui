@@ -25,7 +25,7 @@ const { t } = useI18n()
     <section>
       <div>
         <section>
-          <div class="relative mx-auto h-screen w-screen max-w-(--breakpoint-xl) bg-surface">
+          <div class="relative mx-auto min-h-screen w-full max-w-[var(--breakpoint-xl)] bg-surface">
             <div
               class="
             z-10 mx-auto max-w-prose px-4 py-16 text-center
@@ -38,12 +38,12 @@ const { t } = useI18n()
                 <span class="text-primary"> {{ t('home.piveau.title.brand') }} </span>
               </h1>
 
-              <p class="mt-4 text-surface-light sm:text-lg/relaxed">
+              <p class="mt-5 text-surface-light sm:text-lg/relaxed">
                 <strong>{{ t('home.piveau.brand') }}</strong>
                 {{ t('home.piveau.description.part1') }}
                 <strong>{{ t('home.piveau.description.part2Strong') }}</strong>
                 {{ t('home.piveau.description.part3') }}
-                <strong>{{ t('home.piveau.description.part4Strong') }}</strong>.
+                <strong>{{ t('home.piveau.description.part4Strong') }}</strong>
               </p>
               <br>
 
@@ -136,5 +136,7 @@ const { t } = useI18n()
 </template>
 
 <style scoped>
-
+.text-surface-light {
+ 
+}
 </style>
