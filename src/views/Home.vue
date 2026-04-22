@@ -25,7 +25,7 @@ const { t } = useI18n()
     <section>
       <div>
         <section>
-          <div class="relative mx-auto min-h-screen w-full max-w-[var(--breakpoint-xl)] bg-surface">
+          <div class="relative mx-auto min-h-screen w-full max-w-[var(--breakpoint-xl)] bg-gradient-to-b from-[var(--piveau-primary-light)] to-[var(--piveau-surface)] dark:from-[var(--piveau-background-dark)] dark:to-[var(--piveau-surface)]">
             <div
               class="
             z-10 mx-auto max-w-prose px-4 py-16 text-center
@@ -33,6 +33,7 @@ const { t } = useI18n()
             lg:px-8 lg:py-32
           "
             >
+      
               <h1 class="z-10 text-4xl font-bold text-surface-text sm:text-5xl">
                 {{ t('home.piveau.title.before') }}
                 <span class="text-primary"> {{ t('home.piveau.title.brand') }} </span>
@@ -47,7 +48,7 @@ const { t } = useI18n()
               </p>
               <br>
 
-              <div class="z-10 mt-4 flex justify-center gap-4 sm:mt-6">
+              <div class="z-10 mt-4 flex justify-center gap-4 sm:mt-3">
                 <RouterLink
                   class="
                 w-m mt-4 flex items-center justify-center gap-2 rounded-3xl
@@ -136,7 +137,5 @@ const { t } = useI18n()
 </template>
 
 <style scoped>
-.text-surface-light {
- 
-}
+
 </style>

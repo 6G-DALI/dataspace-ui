@@ -1678,14 +1678,14 @@
   "home": {
     "piveau": {
       "title": {
-        "before": "Ein Datenmanagement-Ökosystem für den öffentlichen Sektor: ",
+        "before": "Datenmanagement leicht gemacht mit",
         "brand": "piveau"
       },
       "brand": "",
       "description": {
         "part1": "",
         "part2Strong": "",
-        "part3": "Es bietet Komponenten und Werkzeuge für die Unterstützung der kompletten Verarbeitungskette von der Erfassung, Aggregation, Bereitstellung bis zur Nutzung der Daten.",
+        "part3": "piveau ist eine Open-Source-Lösung zur Verwaltung von Metadaten: vom Erfassen und Speichern bis zur Qualitätssicherung",
         "part4Strong": ""
       },
       "actions": {

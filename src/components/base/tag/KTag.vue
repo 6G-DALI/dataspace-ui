@@ -19,6 +19,7 @@ const props = defineProps<{
   icon?: string
   iconLeft?: boolean
   iconRight?: boolean
+  fixedWidth?: boolean
 }>()
 
 const { small, light, outline, interactive, disabled, unselected } = toRefs(props)
@@ -49,11 +50,12 @@ const combinedAttrs = computed(() => {
       v-bind="combinedAttrs"
       :class="{
         'rounded-3xl bg-secondary px-4 py-1 text-neutral-100 dark:text-white': !isInteractive,
+        'w-[4.5rem] ml-2': !isInteractive && props.fixedWidth
       }"
     >
       <div
         class="
-          flex min-w-0 flex-nowrap items-center gap-2 text-secondary-text
+          flex min-w-0 flex-nowrap items-center justify-center gap-2 text-secondary-texts
         " :class="{ 'flex-row-reverse': props.iconRight }"
       >
         <PhX v-if="props.removable && !hasIcon" />

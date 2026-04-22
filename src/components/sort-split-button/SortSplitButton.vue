@@ -53,13 +53,13 @@ function toggle() {
 </script>
 
 <template>
-  <div class="relative flex w-full text-sm" :class="{ 'radius-open': showDropdown }">
+  <div class="relative flex w-full text-sm":class="{ 'radius-open': showDropdown }">
     <div
       class="
         relative 
-        z-50 inline-flex cursor-pointer rounded-full rounded-r-none border
-        bg-surface
-        md:w-56 hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
+        z-50 flex cursor-pointer bl-rounded border
+        bg-surface w-56
+        hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
       :class="{ 'rounded-bl-none': showDropdown,  }"
     >
@@ -127,6 +127,9 @@ function toggle() {
 
 <style scoped>
 .radius-open .relative {
-  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 0;
+}
+.bl-rounded {
+  border-radius: 1.2rem 0 0 1.2rem;
 }
 </style>
