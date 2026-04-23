@@ -57,7 +57,7 @@ function toggle() {
     <div
       class="
         relative 
-        z-50 flex cursor-pointer bl-rounded border
+        z-20 flex cursor-pointer bl-rounded border
         bg-surface w-56
         hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
