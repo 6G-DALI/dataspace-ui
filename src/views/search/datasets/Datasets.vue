@@ -78,7 +78,7 @@ const {
   <div
     class="
       relative container mx-auto flex flex-col px-2
-      md:flex-row md:gap-x-16
+      gap-x-10 md:flex-row 2xl:gap-x-16
     "
   >
     <!-- Permanent facets for large devices -->

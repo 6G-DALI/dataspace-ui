@@ -1,4 +1,5 @@
 <script setup>
+
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -39,6 +40,42 @@ const loginLinks = computed(() => [
           xl:gap-10
         "
       >
+        <!-- Login Section -->
+        <div
+          class="
+            w-full
+            md:w-3/12
+            xl:w-2/12
+          "
+        >
+        <img src="/piveau-logo.png" alt="piveau logo" class="mb-6 w-24">
+          <ul class="flex flex-col gap-4">
+            <li
+              v-for="link in loginLinks"
+              :key="link.text"
+              class="text-copy-sm"
+            >
+              <template v-if="link.href">
+        <a
+          :href="link.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-bold hover:text-secondary-hover"
+        >
+          {{ link.text }}
+        </a>
+      </template>
+      <template v-else>
+        <RouterLink
+          :to="link.to"
+          class="font-bold hover:text-secondary-hover"
+        >
+          {{ link.text }}
+        </RouterLink>
+      </template>
+            </li>
+          </ul>
+        </div>
         <!-- Sitemap Section -->
         <div
           class="
@@ -133,41 +170,7 @@ const loginLinks = computed(() => [
           </ul>
         </div>
 
-        <!-- Login Section -->
-        <div
-          class="
-            w-full
-            md:w-3/12
-            xl:w-2/12
-          "
-        >
-          <ul class="flex flex-col gap-4">
-            <li
-              v-for="link in loginLinks"
-              :key="link.text"
-              class="text-copy-sm"
-            >
-              <template v-if="link.href">
-        <a
-          :href="link.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-bold hover:text-secondary-hover"
-        >
-          {{ link.text }}
-        </a>
-      </template>
-      <template v-else>
-        <RouterLink
-          :to="link.to"
-          class="font-bold hover:text-secondary-hover"
-        >
-          {{ link.text }}
-        </RouterLink>
-      </template>
-            </li>
-          </ul>
-        </div>
+      
       </div>
     </div>
   </footer>

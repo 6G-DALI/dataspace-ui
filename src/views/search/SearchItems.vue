@@ -85,11 +85,11 @@ function goToPage(page: number) {
         <button
           class="px-4 py-2"
           :class="{
-            'opacity-60': currentPage === 0,
+            'opacity-60': currentPage === 1,
           }"
           @click="goToPage(1)"
         >
-          <i class="icon-[ph--caret-double-left] align-middle text-xs" />
+          <i class="icon-[ph--caret-double-left] align-middle text-xs" :class="{ 'color-purple-300': currentPage === 1 }" />
         </button>
 
         <button

@@ -53,17 +53,19 @@ function toggle() {
 </script>
 
 <template>
-  <div class="relative flex w-full text-sm">
+  <div class="relative flex w-full text-sm":class="{ 'radius-open': showDropdown }">
     <div
       class="
-        relative inline-flex cursor-pointer rounded-full rounded-r-none border
-        bg-surface
-        md:w-56 hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
+        relative 
+        z-50 flex cursor-pointer bl-rounded border
+        bg-surface w-56
+        hover:bg-[var(--surface-100)] dark:hover:bg-[var(--surface-700)]
       "
+      :class="{ 'rounded-bl-none': showDropdown,  }"
     >
       <button
         aria-haspopup="listbox"
-        class="flex flex-auto items-center justify-between px-3 py-2 font-light"
+        class="filterButton z-20 flex flex-auto items-center justify-between px-3 py-2 font-light"
         @click="toggleDropdown"
       >
         {{ selectedOption }}
@@ -73,8 +75,8 @@ function toggle() {
       <div
         v-if="showDropdown"
         class="
-          absolute top-full z-10 max-h-[200px] w-full rounded-md border
-          bg-surface-0 py-3 text-surface-800 shadow-md
+          absolute top-full z-10 max-h-[200px] w-full rounded-md rounded-t-none border
+          bg-surface-0 py-1 text-surface-800 shadow-md
           dark:border dark:border-surface-700 dark:bg-surface-800
           dark:text-white/80
         "
@@ -123,4 +125,11 @@ function toggle() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.radius-open .relative {
+  border-bottom-left-radius: 0;
+}
+.bl-rounded {
+  border-radius: 1.2rem 0 0 1.2rem;
+}
+</style>

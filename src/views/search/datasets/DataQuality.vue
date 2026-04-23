@@ -251,7 +251,7 @@ onMounted(() => {
             <ul class="space-y-3 text-sm">
               <li v-for="line in card.items" :key="line.title" class="flex items-center justify-between dark:text-white">
                 <span class="wrap-anywhere">{{ Object.keys(line)[0] }}</span>
-                <KTag>{{ line[Object.keys(line)[0]] }}</KTag>
+                <KTag fixedWidth>{{ line[Object.keys(line)[0]] }}</KTag>
               </li>
             </ul>
           </div>
