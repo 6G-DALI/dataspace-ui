@@ -10,5 +10,12 @@ export default {
   piveauSparqlUrl: 'https://demo.piveau.io/sparql',
   piveauDataQualityUrl: import.meta.env.VITE_API_DATA_QUALITY_URL ?? 'https://demo.piveau.io/api/metrics/cache/',
   servicesCatalogue: import.meta.env.VITE_SERVICES_CATALOGUE || '6g-dali-services',
-
+  projectTitle: import.meta.env.VITE_PROJECT_TITLE || '',
+  projectUrl: import.meta.env.VITE_PROJECT_URL || '',
+  socialLinkedIn: import.meta.env.VITE_SOCIAL_LINKEDIN || '',
+  socialTwitter: import.meta.env.VITE_SOCIAL_TWITTER || '',
+  socialYouTube: import.meta.env.VITE_SOCIAL_YOUTUBE || '',
+  socialFacebook: import.meta.env.VITE_SOCIAL_FACEBOOK || '',
+  socialGitHub: import.meta.env.VITE_SOCIAL_GITHUB || '',
+  contactEmail: import.meta.env.VITE_CONTACT_EMAIL || '',
 }

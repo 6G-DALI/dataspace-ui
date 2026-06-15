@@ -9,5 +9,13 @@ export default {
   piveauHubStoreUrl: '$VITE_API_HUB_STORE_URL',
   middlewareUrl: '$VITE_API_MIDDLEWARE_URL',
   piveauSparqlUrl: '$VITE_API_SPARQL_URL',
-  piveauDataQualityUrl: '$VITE_API_DATA_QUALITY_URL'
+  piveauDataQualityUrl: '$VITE_API_DATA_QUALITY_URL',
+  projectTitle: '$VITE_PROJECT_TITLE',
+  projectUrl: '$VITE_PROJECT_URL',
+  socialLinkedIn: '$VITE_SOCIAL_LINKEDIN',
+  socialTwitter: '$VITE_SOCIAL_TWITTER',
+  socialYouTube: '$VITE_SOCIAL_YOUTUBE',
+  socialFacebook: '$VITE_SOCIAL_FACEBOOK',
+  socialGitHub: '$VITE_SOCIAL_GITHUB',
+  contactEmail: '$VITE_CONTACT_EMAIL',
 }

@@ -2,6 +2,7 @@
 
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import appConfig from '@config/appConfig'
 
 const { t } = useI18n()
 
@@ -14,11 +15,11 @@ const seitenLinks = computed(() => [
 
 const socialLinks = computed(() =>
   [
-    { href: import.meta.env.VITE_SOCIAL_LINKEDIN,  text: 'LinkedIn'  },
-    { href: import.meta.env.VITE_SOCIAL_TWITTER,   text: 'X / Twitter' },
-    { href: import.meta.env.VITE_SOCIAL_YOUTUBE,   text: 'YouTube'   },
-    { href: import.meta.env.VITE_SOCIAL_FACEBOOK,  text: 'Facebook'  },
-    { href: import.meta.env.VITE_SOCIAL_GITHUB,    text: 'GitHub'    },
+    { href: appConfig.socialLinkedIn,  text: 'LinkedIn'  },
+    { href: appConfig.socialTwitter,   text: 'X / Twitter' },
+    { href: appConfig.socialYouTube,   text: 'YouTube'   },
+    { href: appConfig.socialFacebook,  text: 'Facebook'  },
+    { href: appConfig.socialGitHub,    text: 'GitHub'    },
   ].filter(l => !!l.href)
 )
 
@@ -29,7 +30,7 @@ const rechtlichesLinks = computed(() => [
 
 const loginLinks = computed(() => [
   { to: '#', text: t('footer.links.login') },
-  ...(import.meta.env.VITE_CONTACT_EMAIL ? [{ href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL}`, text: import.meta.env.VITE_CONTACT_EMAIL }] : []),
+  ...(appConfig.contactEmail ? [{ href: `mailto:${appConfig.contactEmail}`, text: appConfig.contactEmail }] : []),
 ])
 </script>
 

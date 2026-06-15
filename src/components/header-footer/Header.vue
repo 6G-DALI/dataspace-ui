@@ -4,13 +4,14 @@ import KButton from '@/components/base/button/KButton.vue'
 import LanguageSelector from '@/components/language-selector/LanguageSelector.vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import appConfig from '@config/appConfig'
 import DarkModeToggle from '../toggler-dark-mode/DarkModeToggle.vue'
 import NavigationBar from './NavigationBar.vue'
 
 const { t } = useI18n()
 const visible = ref(false)
-const projectTitle = import.meta.env.VITE_PROJECT_TITLE
-const projectUrl = import.meta.env.VITE_PROJECT_URL
+const projectTitle = appConfig.projectTitle
+const projectUrl = appConfig.projectUrl
 </script>
 
 <template>
