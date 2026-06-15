@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppLink: typeof import('./src/components/base/links/AppLink.vue')['default']
+    CatalogueLogo: typeof import('./src/components/catalogue-logo/CatalogueLogo.vue')['default']
     DarkModeToggle: typeof import('./src/components/toggler-dark-mode/DarkModeToggle.vue')['default']
     'DataInfoBox.story': typeof import('./src/components/base/data-info-box/DataInfoBox.story.vue')['default']
     DataInfoCard: typeof import('./src/components/base/data-info-box/DataInfoCard.vue')['default']

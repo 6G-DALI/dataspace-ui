@@ -29,7 +29,7 @@ const rechtlichesLinks = computed(() => [
 
 const loginLinks = computed(() => [
   { to: '#', text: t('footer.links.login') },
-  { href: 'mailto:info@sparkworks.net', text: 'info@sparkworks.net' },
+  ...(import.meta.env.VITE_CONTACT_EMAIL ? [{ href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL}`, text: import.meta.env.VITE_CONTACT_EMAIL }] : []),
 ])
 </script>
 

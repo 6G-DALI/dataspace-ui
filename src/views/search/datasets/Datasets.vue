@@ -6,11 +6,16 @@ import { useDcatApSearch } from '@/sdk'
 import FacetBurgerButton from '@/views/search/FacetBurgerButton.vue'
 import SearchBar from '@/views/search/SearchBar.vue'
 import SearchItems from '@/views/search/SearchItems.vue'
-import { ref, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
+import { useRoute } from 'vue-router'
 import PhXCircle from '~icons/ph/x-circle'
 import { useSearchParams } from '../useSearchParams'
 import { useSelectedFacets } from '../useSelectedFacets'
 import { useDatasetSearchView } from './useDatasetsSearchView'
+import CatalogueLogo from '@/components/catalogue-logo/CatalogueLogo.vue'
+
+const route = useRoute()
+const activeCatalogueId = computed(() => route.query.catalog as string || '')
 
 const searchInput = defineModel<string>('searchInput', { required: true })
 const hvdModel = defineModel<boolean>('hvd', { required: true })
@@ -90,10 +95,8 @@ const {
         lg:w-90
       "
     >
-      <div
-        name="stickysidey"
-        class=""
-      >
+      <div name="stickysidey" class="">
+        <CatalogueLogo v-if="activeCatalogueId" :catalogue-id="activeCatalogueId" />
         <FacetSidebar
           v-model:model-value="selectedFacets"
           v-model:hvd="hvdModel"
