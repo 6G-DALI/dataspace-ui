@@ -25,7 +25,7 @@ FROM nginx:alpine
 EXPOSE 8080
 
 COPY --from=builder /app/dist /usr/share/nginx/html/
-COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 COPY config/default.env /default.env
 COPY runtimeconfig.sh /
 
