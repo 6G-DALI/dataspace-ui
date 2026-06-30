@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import appConfig from '../../../config/appConfig'
+import eurStagingLogo from '../../assets/images/eur.svg'
 
 const props = defineProps<{ catalogueId: string }>()
 
 const FOAF_LOGO   = 'http://xmlns.com/foaf/0.1/logo'
 const DCT_SPATIAL = 'http://purl.org/dc/terms/spatial'
+
+// Per-catalogue logo overrides. When a catalogue id is listed here the bundled
+// image is always used, regardless of the foaf:logo / dct:spatial metadata
+// returned by the hub.
+const LOGO_OVERRIDES: Record<string, string> = {
+  '6g-dali-staging-eur': eurStagingLogo,
+}
 
 const ALPHA3_TO_2: Record<string, string> = {
   AUT:'at', BEL:'be', BGR:'bg', HRV:'hr', CYP:'cy', CZE:'cz', DNK:'dk',
@@ -25,6 +33,11 @@ async function fetchLogo(id: string) {
   flagCode.value = null
   title.value    = ''
   if (!id) return
+
+  // Static override wins over hub metadata, and persists even if the hub is
+  // unreachable. The title is still fetched below to label the logo.
+  if (LOGO_OVERRIDES[id]) logoUrl.value = LOGO_OVERRIDES[id]
+
   try {
     const hubUrl = (appConfig as any).piveauHubRepoUrl
     const r = await fetch(`${hubUrl}catalogues/${id}`, {
@@ -45,9 +58,9 @@ async function fetchLogo(id: string) {
       title.value = first?.['@value'] || first || ''
     }
 
-    // foaf:logo
+    // foaf:logo (skipped when a static override is in effect)
     const logo = node[FOAF_LOGO] || node['foaf:logo']
-    if (logo) {
+    if (logo && !logoUrl.value) {
       const first = Array.isArray(logo) ? logo[0] : logo
       logoUrl.value = first?.['@id'] || first?.['@value'] || (typeof first === 'string' ? first : null)
     }
