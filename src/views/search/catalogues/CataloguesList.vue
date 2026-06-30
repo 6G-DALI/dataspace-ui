@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import SearchItems from '@/views/search/SearchItems.vue'
+import { computed } from 'vue'
 import CataloguesListItem from './CataloguesListItem.vue'
 
 const props = defineProps<{
@@ -9,11 +10,18 @@ const props = defineProps<{
   isFetching: boolean
   showOnlyPublic: boolean
 }>()
+
+// Keep "staging" catalogues at the bottom, everything else on top. The sort is
+// stable, so the original order is preserved within each group.
+const isStaging = (c: any) => /staging/i.test(c?.getId ?? '') || /staging/i.test(c?.getTitle ?? '')
+const sortedCatalogues = computed(() =>
+  [...(props.catalogues ?? [])].sort((a, b) => Number(isStaging(a)) - Number(isStaging(b))),
+)
 </script>
 
 <template>
   <SearchItems
-    :items="catalogues"
+    :items="sortedCatalogues"
     :get-search-results-pages-count="getSearchResultsPagesCount"
     :is-loading="isLoading"
     :is-fetching="isFetching"
