@@ -17,8 +17,8 @@ export function useSearchParams(locale?: MaybeRefOrGetter) {
     },
   })
 
-  const sort = ref('modified')
-  const sortDirection = ref('desc')
+  const sort = ref('title.en')
+  const sortDirection = ref('asc')
   // const computedSort = computed(() => `${sort.value}+${sortDirection.value}`)
   const computedSort = computed({
     get() {
@@ -41,7 +41,7 @@ export function useSearchParams(locale?: MaybeRefOrGetter) {
       return `${computedSort.value},relevance+desc,${titleSort}`
     return computedSort.value
   })
-  const routerQuerySort = useRouteQuery<string>('sort', 'modified+desc', {
+  const routerQuerySort = useRouteQuery<string>('sort', 'title.en+asc', {
     mode: 'push',
     router: useRouter(),
     route: useRoute(),
