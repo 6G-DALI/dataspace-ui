@@ -22,7 +22,7 @@ const logoUrl = appConfig.logoUrl
         <!-- Left: Logo -->
         <div class="flex items-center flex-shrink-0">
           <RouterLink class="block" to="/">
-            <img :src="logoUrl" :alt="projectTitle || 'Logo'" class="h-8 object-contain">
+            <img :src="logoUrl" :alt="projectTitle || 'Logo'" class="h-12 object-contain">
           </RouterLink>
         </div>
 

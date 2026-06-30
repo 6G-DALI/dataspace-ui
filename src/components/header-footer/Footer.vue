@@ -52,7 +52,7 @@ const loginLinks = computed(() => [
             xl:w-2/12
           "
         >
-        <img :src="appConfig.logoUrl" :alt="appConfig.projectTitle || 'Logo'" class="mb-6 h-8 object-contain">
+        <img :src="appConfig.logoUrl" :alt="appConfig.projectTitle || 'Logo'" class="mb-6 h-12 object-contain">
           <ul class="flex flex-col gap-4">
             <li
               v-for="link in loginLinks"
