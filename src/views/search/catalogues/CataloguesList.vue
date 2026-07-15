@@ -11,11 +11,14 @@ const props = defineProps<{
   showOnlyPublic: boolean
 }>()
 
-// Keep "staging" catalogues at the bottom, everything else on top. The sort is
-// stable, so the original order is preserved within each group.
+// Keep "staging" catalogues at the bottom and "6g-external" directly above
+// them, everything else on top. The sort is stable, so the original order is
+// preserved within each group.
 const isStaging = (c: any) => /staging/i.test(c?.getId ?? '') || /staging/i.test(c?.getTitle ?? '')
+const is6gExternal = (c: any) => (c?.getId ?? '').toLowerCase() === '6g-external'
+const rank = (c: any) => isStaging(c) ? 2 : is6gExternal(c) ? 1 : 0
 const sortedCatalogues = computed(() =>
-  [...(props.catalogues ?? [])].sort((a, b) => Number(isStaging(a)) - Number(isStaging(b))),
+  [...(props.catalogues ?? [])].sort((a, b) => rank(a) - rank(b)),
 )
 </script>
 
