@@ -158,17 +158,9 @@ provide('datasetDetails', {
     </div>
     <DetailsPage
       :headline="pageHeadline"
-      :hide-quality="isService" :title="resultEnhanced?.getTitle || ''"
-      :subtitle="resultEnhanced?.getPublisher?.name || ''" :dataset-id="datasetId" :summary="[
-        {
-          title: t('dataset.provider'),
-          text: resultEnhanced?.getPublisher?.name || '-',
-        },
-        {
-          title: t('dataset.updated'),
-          text: resultEnhanced?.getModified || '-',
-        },
-      ]" :description-markup="resultEnhanced?.getDescriptionMarkup"
+      :title="resultEnhanced?.getTitle || ''"
+      :subtitle="resultEnhanced?.getPublisher?.name || ''" :dataset-id="datasetId"
+      :description-markup="resultEnhanced?.getDescriptionMarkup"
     >
       <template #subtitle="{ subtitle }">
         <RouterLink

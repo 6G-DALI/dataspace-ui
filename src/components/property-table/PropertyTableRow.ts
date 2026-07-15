@@ -16,12 +16,12 @@ const PropertyTable = defineComponent({
 
     function renderLeaf(data: PropertyTableEntryLeaf): VNode {
       if (data.type === 'value')
-        return h('span', data.data)
+        return h('span', { class: 'break-words' }, data.data)
 
       if (data.type === 'href')
-        return h('span', h('a', { class: 'text-primary hover:text-primary-hover hover:underline', href: data.data.href }, data.data.label))
+        return h('span', { class: 'break-words' }, h('a', { class: 'text-primary hover:text-primary-hover hover:underline break-words', href: data.data.href }, data.data.label))
 
-      return h('span', JSON.stringify(data))
+      return h('span', { class: 'break-words' }, JSON.stringify(data))
     }
 
     function renderNodes(nodes: PropertyTableEntry[], depth: number = 0): VNodeArrayChildren {
@@ -31,10 +31,11 @@ const PropertyTable = defineComponent({
           return itemSlot?.({ data, idx, depth })
 
         if (data.type === 'node' && depth <= 0) {
+          const isLink = data.id === 'landingPage' || /link/i.test(String(data.label || ''))
           return !!data.data && data.data.length > 0
-            ? h('tr', { class: 'flex flex-col gap-1 mb-2 mt-2' }, [
-                h('td', { class: 'block font-medium' }, h(Typography, { as: 'span', variant: 'caption' }, () => data.label || data.id)),
-                h('td', { class: 'block' }, renderNodes(data.data || [], depth + 1)),
+            ? h('tr', { class: ['flex min-w-0 flex-col gap-1 mb-2 mt-2', isLink ? 'md:col-span-2' : ''] }, [
+                h('td', { class: 'block min-w-0 font-medium break-words' }, h(Typography, { as: 'span', variant: 'caption' }, () => data.label || data.id)),
+                h('td', { class: 'block min-w-0' }, renderNodes(data.data || [], depth + 1)),
               ])
             : null
           // return h('tr', [
@@ -49,7 +50,7 @@ const PropertyTable = defineComponent({
         }
 
         if (data.type === 'value' || data.type === 'href')
-          return h('td', { class: 'block' }, renderLeaf(data))
+          return h('td', { class: 'block min-w-0' }, renderLeaf(data))
 
         return null
       })

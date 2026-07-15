@@ -1,6 +1,5 @@
 import DatasetDetailsView from '@/views/DatasetDetailsView.vue'
 import DatasetsOverview from '../src/components/details-page/DatasetsOverview.vue'
-import DatasetsQuality from '@/views/search/datasets/DataQuality.vue'
 import NotFound from '@/views/NotFound.vue'
 import Catalogues from '@/views/search/catalogues/Catalogues.vue'
 import Datasets from '@/views/search/datasets/Datasets.vue'
@@ -44,11 +43,6 @@ const router = createRouter({
         path: '',
         name: 'dataset-details',
         component: DatasetsOverview,
-      },
-      {
-        path: 'quality',
-        name: 'dataset-details-quality',
-        component: DatasetsQuality,
       },
   ],
     },

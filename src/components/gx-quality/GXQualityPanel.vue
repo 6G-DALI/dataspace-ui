@@ -3,8 +3,13 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import appConfig from '../../../config/appConfig'
 
+const props = defineProps({
+  datasetId: { type: String, default: '' },
+  distributionId: { type: String, default: '' },
+})
+
 const route  = useRoute()
-const datasetId = route.params.datasetId
+const datasetId = props.datasetId || route.params.datasetId
 
 const measurements = ref([])
 const loading  = ref(true)
@@ -67,11 +72,17 @@ async function fetchMeasurements() {
     if (!r.ok) throw new Error(`HTTP ${r.status}`)
     const data = await r.json()
     const graph = data['@graph'] || []
-    const dsNode = graph.find(n =>
-      [].concat(n['@type'] || []).some(t => t.includes('Dataset'))
-    )
-    const raw = dsNode
-      ? [].concat(dsNode[DQV_HAS] || dsNode['dqv:hasQualityMeasurement'] || [])
+    const isDistribution = n =>
+      [].concat(n['@type'] || []).some(t => t.includes('Distribution'))
+    const matchesDistributionId = n =>
+      [n['@id'], n['dct:identifier'], n['http://purl.org/dc/terms/identifier']]
+        .some(v => v && String(v).toLowerCase().includes(props.distributionId.toLowerCase()))
+
+    const distNode = props.distributionId
+      ? graph.find(n => isDistribution(n) && matchesDistributionId(n))
+      : graph.find(isDistribution)
+    const raw = distNode
+      ? [].concat(distNode[DQV_HAS] || distNode['dqv:hasQualityMeasurement'] || [])
       : []
 
     runTime.value = raw.length
@@ -122,44 +133,35 @@ onMounted(fetchMeasurements)
 </script>
 
 <template>
-  <div class="mt-4">
+  <div v-if="loading || error || measurements.length" class="mt-3 mb-3 border-t border-bg-divider pt-3">
     <!-- Header -->
-    <div class="mb-6">
-      <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
-        Data Quality Measurements
-      </h3>
-      <p v-if="runTime" class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-        Validated with Great Expectations — {{ formatDate(runTime) }}
-      </p>
+    <div class="mb-2 flex flex-wrap items-baseline gap-x-2">
+      <span class="text-xs font-medium text-surface-text">Data Quality</span>
+      <span v-if="runTime" class="text-xs text-surface-light">validated {{ formatDate(runTime) }}</span>
     </div>
 
     <!-- Loading -->
-    <div v-if="loading" class="text-gray-500 italic">Loading…</div>
+    <div v-if="loading" class="text-xs text-surface-light italic">Loading…</div>
 
     <!-- Error -->
-    <div v-else-if="error" class="text-red-600 text-sm">{{ error }}</div>
-
-    <!-- No data -->
-    <div v-else-if="!measurements.length" class="text-gray-500 italic">
-      No quality measurements available for this dataset.
-    </div>
+    <div v-else-if="error" class="text-xs text-red-600">{{ error }}</div>
 
     <!-- Results -->
-    <div v-else class="space-y-6">
-      <div v-for="(group, i) in grouped" :key="i">
+    <div v-else class="flex flex-col gap-3">
+      <div v-for="(group, i) in grouped" :key="i" class="min-w-0">
         <!-- Group label -->
-        <div class="mb-3 border-b border-gray-200 pb-1 text-xs font-semibold uppercase tracking-wider text-gray-400">
+        <div class="mb-1.5 text-[11px] font-medium tracking-wider text-surface-light uppercase">
           {{ group.label }}
         </div>
 
         <!-- Passing items: compact chips -->
-        <div class="mb-3 flex flex-wrap gap-2">
+        <div v-if="group.items.some(m => m.passing)" class="flex flex-wrap gap-1.5">
           <span
             v-for="(m, j) in group.items.filter(m => m.passing)"
             :key="'p' + j"
-            class="inline-flex items-center gap-1 rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-medium text-green-800"
+            class="inline-flex items-center gap-1 rounded-full border border-green-200 bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-800"
           >
-            <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="h-3 w-3 shrink-0" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
             {{ m.column || m.details || m.expectation }}
@@ -170,16 +172,16 @@ onMounted(fetchMeasurements)
         <div
           v-for="(m, j) in group.items.filter(m => !m.passing)"
           :key="'f' + j"
-          class="mb-2 flex items-start gap-3 border-l-4 border-red-400 pl-3 py-1"
+          class="mt-1.5 flex min-w-0 items-start gap-2 rounded-md border-l-2 border-red-400 bg-red-50 py-1 pl-2"
         >
-          <svg class="mt-0.5 h-4 w-4 shrink-0 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+          <svg class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-500" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
           </svg>
-          <div>
-            <div class="text-sm font-medium text-gray-800 dark:text-white">
+          <div class="min-w-0">
+            <div class="text-xs font-medium break-words text-surface-text">
               {{ m.column || m.expectation }}
             </div>
-            <div v-if="m.details" class="mt-0.5 text-xs text-gray-500">{{ m.details }}</div>
+            <div v-if="m.details" class="mt-0.5 text-[11px] break-words text-surface-light">{{ m.details }}</div>
           </div>
         </div>
       </div>

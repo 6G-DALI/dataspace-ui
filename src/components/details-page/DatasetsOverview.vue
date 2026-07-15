@@ -7,7 +7,6 @@ import { marked } from 'marked'
 import { computed, inject, ref, toValue } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import TabGroup from '../base/tab-group/TabGroup.vue'
 import ServiceInfoBanner from '../gx-quality/ServiceInfoBanner.vue'
 import appConfig from '../../../config/appConfig'
 import KTag from '../base/tag/KTag.vue'
@@ -67,71 +66,103 @@ const getFormattedDistributions = computed(() => {
   })
 })
 
-// Distribution truncator ("show more")
-const activeDropdownId = ref<number | null>(null)
+// Master/detail distribution selection
+const selectedDistributionIndex = ref(0)
+const selectedDistribution = computed(() => getFormattedDistributions.value[selectedDistributionIndex.value] || null)
+const isLinkedDataDropdownOpen = ref(false)
 
-function toggleDropdown(id: number) {
-  activeDropdownId.value = activeDropdownId.value === id ? null : id
+function selectDistribution(i: number) {
+  selectedDistributionIndex.value = i
+  isLinkedDataDropdownOpen.value = false
 }
 
-const {
-  data: truncatedFormattedDistributions,
-  toggle: showAllDistributions,
-  isTruncated: isDistributionsTruncated,
-} = useDataTruncator({
-  data: computed(() => (getFormattedDistributions?.value || [])),
-  limit: 7,
-})
+function toggleDropdown() {
+  isLinkedDataDropdownOpen.value = !isLinkedDataDropdownOpen.value
+}
+
+const hasCategories = computed(() => (resultEnhanced?.value?.getCategories?.length || 0) > 0)
+const hasKeywords = computed(() => (resultEnhanced?.value?.getKeywords?.length || 0) > 0)
+
+const providerName = computed(() => resultEnhanced?.value?.getPublisher?.name || '')
+const updatedText = computed(() => resultEnhanced?.value?.getModified || '')
 </script>
 
 <template>
   <div>
     <ServiceInfoBanner />
-    <section>
-      <TabGroup
-        :tabs="[
-          {
-            id: 'dataset',
-            title: t('details.info_tab'),
-            content: truncatedEllipsedDescription || '',
-          },
-        ]" class=""
-      >
-        <template #default="slotProps">
-          <template v-if="slotProps?.id === 'dataset'">
-            <div class="flex flex-col gap-4">
-              <div>
-                <Typography as="h5" variant="header-4" class="mb-2">
-                  <slot name="about-this-dataset">
-                    {{ isService ? 'About this service' : t('details.about_dataset') }}
-                  </slot>
-                </Typography>
-                <Typography as="p" variant="by-copy-small-regular">
-                  <div class="markdown-content" v-html="slotProps?.content" />
-                </Typography>
-              </div>
-              <button
-                v-if="isDescriptionTruncationNeeded" class="mx-auto" @click="toggleDescription"
-              >
-                <div
-                  class="
-                    flex flex-col items-center justify-center text-xs/6
-                    font-bold text-primary
-                  "
-                >
-                  <span>{{ t('details.read_more') }}</span>
-                  <i
-                    v-if="isDescriptionTruncated" class="icon-[ph--caret-down]"
-                  />
-                  <i v-else class="icon-[ph--caret-up]" />
-                </div>
-              </button>
-            </div>
-          </template>
-        </template>
-      </TabGroup>
-    </section>
     <slot name="sections">
+      <div
+        class="relative left-1/2 right-1/2 -mx-[50vw] mb-10 w-screen border-y border-bg-divider bg-surface"
+      >
+        <div class="container mx-auto flex flex-col gap-8 px-4 py-6 lg:flex-row lg:items-start">
+          <!-- Column 1: About + Provider + Updated -->
+          <div class="min-w-0 flex-1">
+            <Typography as="h5" variant="header-4" class="mb-2 text-surface-text">
+              <slot name="about-this-dataset">
+                {{ isService ? 'About this service' : t('details.about_dataset') }}
+              </slot>
+            </Typography>
+            <Typography
+              as="div" variant="by-copy-small-regular" class="markdown-content"
+              v-html="truncatedEllipsedDescription"
+            />
+            <button
+              v-if="isDescriptionTruncationNeeded"
+              class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+              @click="toggleDescription"
+            >
+              <span>{{ t('details.read_more') }}</span>
+              <i v-if="isDescriptionTruncated" class="icon-[ph--caret-down]" />
+              <i v-else class="icon-[ph--caret-up]" />
+            </button>
+
+            <div v-if="providerName || updatedText" class="mt-5 flex flex-wrap gap-8 border-t border-bg-divider pt-4 text-xs">
+              <div v-if="providerName">
+                <div class="text-[11px] font-medium tracking-wider text-surface-light uppercase">
+                  {{ t('dataset.provider') }}
+                </div>
+                <div class="mt-1 text-surface-text">{{ providerName }}</div>
+              </div>
+              <div v-if="updatedText">
+                <div class="text-[11px] font-medium tracking-wider text-surface-light uppercase">
+                  {{ t('dataset.updated') }}
+                </div>
+                <div class="mt-1 text-surface-text">{{ updatedText }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Additional information -->
+          <div
+            v-if="isSuccess"
+            class="min-w-0 flex-1 border-t border-bg-divider pt-4 text-xs text-surface-light lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
+          >
+            <PropertyTable :node="{ type: 'node', id: 'a', label: 'a', data: resultEnhanced?.getPropertyTable2 || undefined }" class="text-sm" />
+          </div>
+
+          <!-- Column 3: Categories + Keywords -->
+          <div
+            v-if="hasCategories || hasKeywords"
+            class="flex min-w-0 flex-col gap-4 border-t border-bg-divider pt-4 text-xs text-surface-light lg:w-56 lg:shrink-0 lg:grow-0 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
+          >
+            <div v-if="hasCategories" class="flex flex-wrap items-center gap-2">
+              <span class="font-medium whitespace-nowrap text-surface-text">{{ t('dataset.categories') }}:</span>
+              <KTag
+                v-for="category in resultEnhanced?.getCategories" :key="category.id" interactive class="text-xs"
+                @click="router.push({ name: 'Datasets', query: { categories: category.id } })"
+              >
+                {{ getLocalizedValue({ obj: category.label, fallbackLocale: 'de' }) }}
+              </KTag>
+            </div>
+            <div v-if="hasKeywords" class="flex flex-wrap items-center gap-2">
+              <span class="font-medium whitespace-nowrap text-surface-text">{{ t('dataset.keywords') }}:</span>
+              <KTag v-for="keyword in resultEnhanced?.getKeywords" :key="keyword.id" class="text-xs">
+                {{ keyword.label }}
+              </KTag>
+            </div>
+          </div>
+        </div>
+      </div>
       <section class="mb-10">
         <div class="flex flex-row items-center gap-2">
           <Typography
@@ -146,135 +177,47 @@ const {
           </KTag>
         </div>
         <div class="bg-bg-divider h-px w-full" />
-        <div name="distribution-cards" class="relative">
-          <template v-for="(distribution, i) in truncatedFormattedDistributions" :key="distribution.id">
-            <div name="distribution-card-wrapper" class="relative">
-              <DistributionCard
-                :title="distribution.title || ''" :description="distribution.descriptionMarkup || ''"
-                :format="distribution.format || 'Unknown'" :download-url="distribution.downloadUrls?.[0]!"
-                :last-updated="distribution.modified" :data="distribution.data" :linked-data="distribution.linkedData"
-                :connector-type-override="distributionConnectorTypes?.[distribution.id]"
-                :distribution-id="distribution.id" :showDropdown="activeDropdownId === i"
-                @toggle="toggleDropdown(i)" download-text="Download" save-text="Linked Data"
-              />
-              <div
-                v-if="i === truncatedFormattedDistributions.length - 1 && isDistributionsTruncated"
-                name="distribution-card-overlay" class="
-                  absolute top-0 left-0 size-full bg-linear-to-b
-                  from-transparent from-0% to-white to-55%
-                  dark:to-neutral-900 dark:to-55%
-                "
-              >
-                <div
-                  class="
-                    absolute bottom-0 flex w-full flex-row items-center
-                    justify-center
-                  "
+        <div class="mt-4 flex flex-col gap-6 lg:flex-row lg:items-start">
+          <!-- Distribution list -->
+          <nav class="lg:w-72 lg:shrink-0" aria-label="Distributions">
+            <ul class="flex flex-col overflow-hidden rounded-xl border border-bg-divider">
+              <li v-for="(distribution, i) in getFormattedDistributions" :key="distribution.id">
+                <button
+                  type="button"
+                  class="flex w-full flex-col items-start gap-0.5 px-4 py-3 text-left transition-colors"
+                  :class="[
+                    i === selectedDistributionIndex ? 'bg-primary/10' : 'hover:bg-bg-divider/40',
+                    i > 0 ? 'border-t border-bg-divider' : '',
+                  ]"
+                  @click="selectDistribution(i)"
                 >
-                  <div>
-                    <!-- button -->
-                    <button
-                      class="
-                        active:bg-primary-pressed
-                        mb-4 inline-flex cursor-pointer items-center
-                        justify-center gap-2 rounded-full border-0 bg-primary
-                        px-4 py-2 text-sm font-medium text-white
-                        transition-colors duration-200
-                        hover:bg-primary-hover
-                      " @click="showAllDistributions"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        viewBox="0 0 256 256"
-                      >
-                        <path
-                          d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"
-                        />
-                      </svg>
-                      <span>Show more ({{ getFormattedDistributions.length }})</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-          <!-- Show Less -->
-          <div
-            v-if="!isDistributionsTruncated && getFormattedDistributions.length > 7"
-            class="mt-4 flex justify-center"
-          >
-            <button
-              class="
-                active:bg-primary-pressed
-                inline-flex cursor-pointer items-center justify-center gap-2
-                rounded-full border-0 bg-primary px-4 py-2 text-sm font-medium
-                text-white transition-colors duration-200
-                hover:bg-primary-hover
-              " @click="showAllDistributions"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M53.92,34.62A8,8,0,1,0,42.08,45.38L61.32,66.55C25,88.84,9.38,123.2,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208a127.11,127.11,0,0,0,52.07-10.83l22,24.21a8,8,0,1,0,11.84-10.76Zm47.33,75.84,41.67,45.85a32,32,0,0,1-41.67-45.85ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.16,133.16,0,0,1,25,128c4.69-8.79,19.66-33.39,47.35-49.38l18,19.75a48,48,0,0,0,63.66,70l14.73,16.2A112,112,0,0,1,128,192Zm6-95.43a8,8,0,0,1,3-15.72,48.16,48.16,0,0,1,38.77,42.64,8,8,0,0,1-7.22,8.71,6.39,6.39,0,0,1-.75,0,8,8,0,0,1-8-7.26A32.09,32.09,0,0,0,134,96.57Zm113.28,34.69c-.42.94-10.55,23.37-33.36,43.8a8,8,0,1,1-10.67-11.92A132.77,132.77,0,0,0,231.05,128a133.15,133.15,0,0,0-23.12-30.77C185.67,75.19,158.78,64,128,64a118.37,118.37,0,0,0-19.36,1.57A8,8,0,1,1,106,49.79,134,134,0,0,1,128,48c34.88,0,66.57,13.26,91.66,38.35,18.83,18.83,27.3,37.62,27.65,38.41A8,8,0,0,1,247.31,131.26Z"
-                />
-              </svg>
-              <span>Show less</span>
-            </button>
+                  <span
+                    class="w-full truncate text-sm font-medium"
+                    :class="i === selectedDistributionIndex ? 'text-primary' : 'text-surface-text'"
+                  >
+                    {{ distribution.title || `${t('dataset.distributions')} ${i + 1}` }}
+                  </span>
+                  <span class="text-xs text-surface-light">{{ distribution.format || 'Unknown' }}</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Selected distribution -->
+          <div class="min-w-0 flex-1">
+            <DistributionCard
+              v-if="selectedDistribution"
+              :key="selectedDistribution.id"
+              :title="selectedDistribution.title || ''" :description="selectedDistribution.descriptionMarkup || ''"
+              :format="selectedDistribution.format || 'Unknown'" :download-url="selectedDistribution.downloadUrls?.[0]!"
+              :last-updated="selectedDistribution.modified" :data="selectedDistribution.data" :linked-data="selectedDistribution.linkedData"
+              :connector-type-override="distributionConnectorTypes?.[selectedDistribution.id]"
+              :distribution-id="selectedDistribution.id" :showDropdown="isLinkedDataDropdownOpen"
+              @toggle="toggleDropdown" download-text="Download" save-text="Linked Data"
+            />
           </div>
         </div>
       </section>
-      <div
-        v-if="(resultEnhanced?.getCategories?.length || 0) > 0" class="
-          space-y-3
-        "
-      >
-        <Typography
-          variant="by-heading-4" class="text-primary-100 font-semibold"
-        >
-          {{ t('dataset.categories') }}
-        </Typography>
-        <div class="mt-5 flex flex-row gap-2">
-          <KTag
-            v-for="category in resultEnhanced?.getCategories" :key="category.id" interactive
-            @click="router.push({ name: 'Datasets', query: { categories: category.id } })"
-          >
-            {{ getLocalizedValue({ obj: category.label, fallbackLocale: 'de' }) }}
-          </KTag>
-        </div>
-      </div>
-      <div
-        v-if="(resultEnhanced?.getKeywords?.length || 0) > 0" class="
-          mt-8 space-y-3
-        "
-      >
-        <Typography
-          variant="by-heading-4" class="text-primary-100 font-semibold"
-        >
-          {{ t('dataset.keywords') }}
-        </Typography>
-        <div class="mt-5 flex flex-row flex-wrap gap-2">
-          <KTag v-for="keyword in resultEnhanced?.getKeywords" :key="keyword.id">
-            {{ keyword.label }}
-          </KTag>
-        </div>
-      </div>
-      <div class="bg-bg-divider h-px w-full" />
-      <div class="mt-12 mb-8 space-y-4">
-        <div class="flex flex-col gap-4 rounded-xl bg-surface p-4">
-          <Typography  as="h5" variant="header-4" class="mb-2">
-                  <slot name="about-this-dataset">
-                  {{ t('dataset.additional_info') }}
-                  </slot>
-                </Typography>
-          <PropertyTable
-            v-if="isSuccess" :node="{
-              type: 'node',
-              id: 'a',
-              label: 'a',
-              data: resultEnhanced?.getPropertyTable2 || undefined,
-            }"
-          />
-        </div>
-      </div>
     </slot>
   </div>
 </template>

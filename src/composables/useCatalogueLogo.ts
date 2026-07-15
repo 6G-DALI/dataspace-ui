@@ -1,11 +1,15 @@
 import type { MaybeRefOrGetter, Ref } from 'vue'
 import { ref, toValue, watch } from 'vue'
 import appConfig from '../../config/appConfig'
-// `?url` is required: vite-plugin-static-copy serves src/assets/images/* as raw
-// files in dev, which would otherwise shadow a bare asset import with the raw
-// SVG (image/svg+xml) and break the module graph. The query bypasses that and
-// makes Vite return the resolved URL as a proper JS module.
-import eurStagingLogo from '../assets/images/eur.svg?url'
+
+// Referenced as a raw static path, not an ES import: vite-plugin-static-copy
+// serves src/assets/images/* as raw files at this exact path in both dev and
+// build (see vite.config.ts), the same way VITE_HOME_QUICK_LINKS_*_ICON and
+// the footer logo are referenced elsewhere. A module import (even with
+// `?url`) races against that middleware, which matches on pathname only and
+// wins regardless of query string, so it always serves the raw SVG in place
+// of Vite's transformed module and breaks the module graph.
+const eurStagingLogo = '/src/assets/images/eur.svg'
 
 const FOAF_LOGO   = 'http://xmlns.com/foaf/0.1/logo'
 const DCT_SPATIAL = 'http://purl.org/dc/terms/spatial'
