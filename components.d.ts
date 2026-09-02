@@ -71,6 +71,7 @@ declare module 'vue' {
     SelectedFacetsOverview: typeof import('./src/components/selected-facets-overview/SelectedFacetsOverview.vue')['default']
     'SelectedFacetsOverview.story': typeof import('./src/components/selected-facets-overview/SelectedFacetsOverview.story.vue')['default']
     ServiceInfoBanner: typeof import('./src/components/gx-quality/ServiceInfoBanner.vue')['default']
+    Sidebar: typeof import('./src/components/header-footer/Sidebar.vue')['default']
     SortSplitButton: typeof import('./src/components/sort-split-button/SortSplitButton.vue')['default']
     'SortSplitButton.story': typeof import('./src/components/sort-split-button/SortSplitButton.story.vue')['default']
     SummaryBox: typeof import('./src/components/base/summary-box/SummaryBox.vue')['default']

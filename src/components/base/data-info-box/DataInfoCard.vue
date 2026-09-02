@@ -41,7 +41,7 @@ const computedWrapperComponent = computed(() => {
     :is="computedWrapperComponent"
     :to="props.to || '/'"
     :class="[
-      'group by relative mx-auto mb-6 box-border w-full rounded-custom border border-b-[3px] border-transparent bg-surface px-6 py-5 text-surface-text',
+      'group by relative mx-auto mb-6 box-border w-full rounded-dali-md border border-b-[3px] border-transparent bg-surface px-6 py-5 text-surface-text',
       props.hoverBorderClass,
     ]"
   >

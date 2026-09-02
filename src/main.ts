@@ -19,6 +19,18 @@ import './assets/tailwind.css'
 import './assets/base.css'
 import '@fontsource-variable/inter'
 import '@fontsource-variable/space-grotesk'
+// Shared 6G-DALI design tokens (colors, brand font stack) and fonts, so the
+// header/footer brand mark matches dataops-ui/portal-ui. Variables-only —
+// selects no elements, so it can't override Tailwind/PrimeVue.
+import '@6g-dali/ui-theme/tokens.css'
+import '@6g-dali/ui-theme/fonts.css'
+import { initTheme } from '@6g-dali/ui-theme/theme.js'
+
+// Applies the stored/OS-preferred dark-or-light theme before the app renders,
+// so both this app's own content palette and @6g-dali/ui-theme's chrome
+// tokens (which share the same `data-theme` attribute) are correct from the
+// first paint instead of flashing dark before DarkModeToggle mounts.
+initTheme()
 
 async function renderApp() {
   // const { worker } = await import('./services/msw')

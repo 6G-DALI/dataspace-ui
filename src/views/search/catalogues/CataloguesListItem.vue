@@ -17,7 +17,7 @@ const { logoUrl, flagCode } = useCatalogueLogo(() => props.item.getId)
   <RouterLink :to="{ path: '/datasets', query: { catalog: item.getId } }" class="block h-full">
     <div
       class="
-        group relative box-border flex h-full w-full flex-col gap-6 rounded-3xl
+        group relative box-border flex h-full w-full flex-col gap-6 rounded-dali-md
         border-b-[3px] border-neutral-20 border-b-transparent bg-surface p-8
         text-surface-text hover:border-b-primary
       "

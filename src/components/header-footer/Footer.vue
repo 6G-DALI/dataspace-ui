@@ -35,7 +35,7 @@ const loginLinks = computed(() => [
 </script>
 
 <template>
-  <footer class="bg-footer-bg px-8 py-16 text-footer-bg-text">
+  <footer class="dali-footer px-8 py-16">
     <div class="container mx-auto max-w-7xl space-y-32">
       <div
         class="
@@ -52,7 +52,8 @@ const loginLinks = computed(() => [
             xl:w-2/12
           "
         >
-        <img :src="appConfig.logoUrl" :alt="appConfig.projectTitle || 'Logo'" class="mb-6 h-12 object-contain">
+        <img :src="appConfig.logoUrl" :alt="appConfig.projectTitle || 'Logo'" class="mb-2 h-12 object-contain">
+          <p class="dali-footer-brand mb-6">6G-<span class="dali-accent">DALI</span></p>
           <ul class="flex flex-col gap-4">
             <li
               v-for="link in loginLinks"
@@ -179,3 +180,29 @@ const loginLinks = computed(() => [
     </div>
   </footer>
 </template>
+
+<style scoped>
+/* Same dark chrome as Sidebar.vue/Header.vue, per §2.4 consistency. */
+.dali-footer {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.dali-footer :deep(h3) {
+  color: var(--text-primary);
+}
+
+/* Shared 6G-DALI brand accent — same color as dataops-ui/portal-ui's .dali-accent. */
+.dali-accent {
+  color: #f2712c;
+}
+
+/* Muted mono caption under the logo, matching ui-theme's .app-footer-build styling. */
+.dali-footer-brand {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--text-muted, inherit);
+  letter-spacing: 0.02em;
+}
+</style>

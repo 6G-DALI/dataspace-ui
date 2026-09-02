@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@6g-dali/ui-theme':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@fontsource-variable/inter':
         specifier: ^5.0.16
         version: 5.1.1
@@ -212,6 +215,9 @@ importers:
         version: 2.2.0(typescript@5.6.3)
 
 packages:
+
+  '@6g-dali/ui-theme@0.3.1':
+    resolution: {integrity: sha512-hooAlBTk5oY6SpT34c5wVa2ynplW1qF9JiR1ACJtwSzAsoB3nt0oGqFYQ/bNs5ejwjXwgiqPvji2If4/braQxQ==}
 
   '@akryum/tinypool@0.3.1':
     resolution: {integrity: sha512-nznEC1ZA/m3hQDEnrGQ4c5gkaa9pcaVnw4LFJyzBAaR7E3nfiAPEHS3otnSafpZouVnoKeITl5D+2LsnwlnK8g==}
@@ -605,6 +611,15 @@ packages:
 
   '@fontsource-variable/space-grotesk@5.1.1':
     resolution: {integrity: sha512-LTz+nIUdm7ZVY9ZlqRiTKqByi+tIcQUKaKONBVSxKRABPRgdnJOwiuqvHa+ac7Xs0ZorDBm7O0fmwHuOGT3HIw==}
+
+  '@fontsource/dm-sans@5.3.0':
+    resolution: {integrity: sha512-lYJtMXXO28q1z+yz+z8XKd0s4hXaa9QdkETzkyD760sidCv5heI86weYA0sx0Nc4pAMAQTUuyf4gO44cYKKS9g==}
+
+  '@fontsource/jetbrains-mono@5.3.0':
+    resolution: {integrity: sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A==}
+
+  '@fontsource/space-mono@5.3.0':
+    resolution: {integrity: sha512-FrpBMOVWn3PRdRHlrZWC55X3kZG/2BTH7SM5ZyS/bky3iKya2BturI5lk+t0RoDQL2JyHzURsVq/EisCsxpI5A==}
 
   '@headlessui/vue@1.7.23':
     resolution: {integrity: sha512-JzdCNqurrtuu0YW6QaDtR2PIYCKPUWq28csDyMvN4zmGccmE7lz40Is6hc3LA4HFeCI7sekZ/PQMTNmn9I/4Wg==}
@@ -4923,6 +4938,12 @@ packages:
 
 snapshots:
 
+  '@6g-dali/ui-theme@0.3.1':
+    dependencies:
+      '@fontsource/dm-sans': 5.3.0
+      '@fontsource/jetbrains-mono': 5.3.0
+      '@fontsource/space-mono': 5.3.0
+
   '@akryum/tinypool@0.3.1': {}
 
   '@alloc/quick-lru@5.2.0': {}
@@ -5311,6 +5332,12 @@ snapshots:
   '@fontsource-variable/inter@5.1.1': {}
 
   '@fontsource-variable/space-grotesk@5.1.1': {}
+
+  '@fontsource/dm-sans@5.3.0': {}
+
+  '@fontsource/jetbrains-mono@5.3.0': {}
+
+  '@fontsource/space-mono@5.3.0': {}
 
   '@headlessui/vue@1.7.23(vue@3.5.13(typescript@5.6.3))':
     dependencies:

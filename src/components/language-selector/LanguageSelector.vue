@@ -74,8 +74,9 @@ onUnmounted(() => {
     <!-- Dropdown Button -->
     <button
       @click="toggleDropdown"
-      class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-surface hover:text-primary-hover rounded-md hover:bg-header-bg dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 dark:focus:bg-header-bg"
-      :class="{ 'bg-surface-100 dark:bg-surface-800': isDropdownOpen }"
+      class="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:text-primary-hover rounded-md transition-colors hover:bg-[var(--bg-elevated)] focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 focus:bg-[var(--bg-elevated)]"
+      style="color: var(--text-primary);"
+      :class="{ 'bg-[var(--bg-elevated)]': isDropdownOpen }"
     >
       <!-- Current Language Flag (hidden at md+ to avoid header overlap at ~770px) -->
       <span class="text-sm md:hidden">
@@ -83,13 +84,13 @@ onUnmounted(() => {
       </span>
 
       <!-- Current Language Code -->
-      <span class="text-sm font-light text-header-bg-text">
+      <span class="text-sm font-light">
         {{ currentLanguage.toUpperCase() }}
       </span>
 
       <!-- Dropdown Arrow -->
       <svg
-        class="w-4 h-4 transition-transform duration-200 text-header-bg-text"
+        class="w-4 h-4 transition-transform duration-200"
         :class="{ 'rotate-180': isDropdownOpen }"
         fill="none"
         stroke="currentColor"

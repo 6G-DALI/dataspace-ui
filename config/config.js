@@ -21,4 +21,9 @@ export default {
   socialFacebook: '$VITE_SOCIAL_FACEBOOK',
   socialGitHub: '$VITE_SOCIAL_GITHUB',
   contactEmail: '$VITE_CONTACT_EMAIL',
+  daliUrl: '$VITE_DALI_URL',
+  portalUrl: '$VITE_PORTAL_URL',
+  dataspaceUrl: '$VITE_DATASPACE_URL',
+  dataopsUrl: '$VITE_DATAOPS_URL',
+  mlopsUrl: '$VITE_MLOPS_URL',
 }

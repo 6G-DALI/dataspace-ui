@@ -88,6 +88,17 @@ const isService = computed(() => resultEnhanced.value?.getCatalogId === services
 
 const DALI_NS = 'https://dali-project.eu/ns#'
 const distributionConnectorTypes = ref<Record<string, string>>({})
+const distributionAssetIds = ref<Record<string, string>>({})
+const variableMeasured = ref<string[]>([])
+
+function firstValue(val: any): string {
+  const v = Array.isArray(val) ? val[0] : val
+  return v?.['@value'] || v?.['@id'] || (v ? String(v) : '')
+}
+
+function allValues(val: any): string[] {
+  return [].concat(val || []).map(firstValue).filter(Boolean)
+}
 
 onMounted(async () => {
   try {
@@ -98,17 +109,31 @@ onMounted(async () => {
     if (!r.ok) return
     const data = await r.json()
     const graph: any[] = data['@graph'] || []
-    const map: Record<string, string> = {}
+    const connectorTypes: Record<string, string> = {}
+    const assetIds: Record<string, string> = {}
+    // The application profile places schema:variableMeasured on the dataset
+    // node, but some records (e.g. harvested/externally-sourced ones) carry
+    // it on a dcat:Distribution node instead — check both and merge.
+    let variables: string[] = []
     for (const node of graph) {
       const types = [].concat(node['@type'] || [])
-      if (!types.some((t: string) => t.includes('Distribution'))) continue
-      const ct = node[`${DALI_NS}connectorType`]
-      if (!ct) continue
-      const val = Array.isArray(ct) ? ct[0] : ct
-      const id = node['@id']?.split('/').pop() || node['@id'] || ''
-      map[id] = (val?.['@value'] || val?.['@id'] || String(val) || '').toLowerCase()
+      const isDistribution = types.some((t: string) => t.includes('Distribution'))
+      if (isDistribution) {
+        const id = node['@id']?.split('/').pop() || node['@id'] || ''
+        const ct = node[`${DALI_NS}connectorType`]
+        if (ct) connectorTypes[id] = firstValue(ct).toLowerCase()
+        const aid = node[`${DALI_NS}assetId`]
+        if (aid) assetIds[id] = firstValue(aid)
+      }
+      if (types.some((t: string) => t.includes('Dataset')) || isDistribution) {
+        const vm = node['schema:variableMeasured'] || node['https://schema.org/variableMeasured']
+        if (vm) variables.push(...allValues(vm))
+      }
     }
-    distributionConnectorTypes.value = map
+    variables = [...new Set(variables)]
+    distributionConnectorTypes.value = connectorTypes
+    distributionAssetIds.value = assetIds
+    variableMeasured.value = variables
   } catch { /* silent */ }
 })
 
@@ -145,6 +170,8 @@ provide('datasetDetails', {
   resultEnhanced: computed(() => resultEnhanced?.value),
   isSuccess: computed(() => isSuccess?.value),
   distributionConnectorTypes,
+  distributionAssetIds,
+  variableMeasured,
 })
 </script>
 

@@ -51,7 +51,7 @@ const { t } = useI18n()
               <div class="z-10 mt-4 flex justify-center gap-4 sm:mt-3">
                 <RouterLink
                   class="
-                w-m mt-4 flex items-center justify-center gap-2 rounded-3xl
+                w-m mt-4 flex items-center justify-center gap-2 rounded-dali-md
                 bg-primary px-5 py-3 text-primary-text transition-colors
                 hover:bg-primary-hover hover:text-white
               "
@@ -65,7 +65,7 @@ const { t } = useI18n()
                   target="_blank"
                   rel="noopener noreferrer"
                   class="
-                w-m mt-4 flex items-center justify-center gap-2 rounded-3xl
+                w-m mt-4 flex items-center justify-center gap-2 rounded-dali-md
                 bg-gray px-5 py-3 text-gray-700
                 hover:bg-primary-hover hover:text-white
               "

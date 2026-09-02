@@ -17,7 +17,7 @@ import { PropertyTable } from '../property-table/PropertyTableRow'
 const { t } = useI18n()
 const router = useRouter()
 
-const { resultEnhanced, isSuccess, distributionConnectorTypes } = inject('datasetDetails') as any
+const { resultEnhanced, isSuccess, distributionConnectorTypes, distributionAssetIds, variableMeasured } = inject('datasetDetails') as any
 const servicesCatalogue = (appConfig as any).servicesCatalogue || '6g-dali-services'
 const isService = computed(() => resultEnhanced?.value?.getCatalogId === servicesCatalogue)
 
@@ -33,6 +33,16 @@ const truncatedEllipsedDescription = computed(() => {
   return truncatedDescription.value
 })
 
+// The SDK's getDistributions() mapper doesn't project a `mediaType` field —
+// dcat:mediaType only shows up as a leaf inside getPropertyTable (id
+// "mediaType", built from the raw media_type field), so it has to be dug out
+// from there instead of read directly off the distribution object.
+function extractPropertyValue(table: PropertyTableEntryNode[] | undefined, id: string): string {
+  const node = table?.find(n => n.id === id) as { data?: { data?: unknown }[] } | undefined
+  const value = node?.data?.[0]?.data
+  return typeof value === 'string' ? value : ''
+}
+
 const getFormattedDistributions = computed(() => {
   if (!isSuccess?.value)
     return []
@@ -44,8 +54,11 @@ const getFormattedDistributions = computed(() => {
       title: dist.title ?? dist.id ?? '',
       description: dist.description ?? '',
       descriptionMarkup: DOMPurify.sanitize(marked(dist.description ?? '', { async: false })),
-      downloadUrls: dist.accessUrls || [],
+      // accessURL is not a download link (e.g. it may point at a connector
+      // endpoint requiring negotiation) — only a genuine downloadURL is used here.
+      downloadUrls: dist.downloadUrls || [],
       format: dist.format ?? '',
+      mediaType: extractPropertyValue(dist.getPropertyTable, 'mediaType'),
       id: dist.id,
       accessUrls: dist.accessUrls,
       modified: dist.modified ?? '',
@@ -197,7 +210,7 @@ const updatedText = computed(() => resultEnhanced?.value?.getModified || '')
                   >
                     {{ distribution.title || `${t('dataset.distributions')} ${i + 1}` }}
                   </span>
-                  <span class="text-xs text-surface-light">{{ distribution.format || 'Unknown' }}</span>
+                  <span class="text-xs text-surface-light">{{ distribution.mediaType || 'Unknown' }}</span>
                 </button>
               </li>
             </ul>
@@ -210,8 +223,12 @@ const updatedText = computed(() => resultEnhanced?.value?.getModified || '')
               :key="selectedDistribution.id"
               :title="selectedDistribution.title || ''" :description="selectedDistribution.descriptionMarkup || ''"
               :format="selectedDistribution.format || 'Unknown'" :download-url="selectedDistribution.downloadUrls?.[0]!"
+              :access-url="selectedDistribution.accessUrls?.[0]"
+              :asset-id="distributionAssetIds?.[selectedDistribution.id]"
+              :connector-type="distributionConnectorTypes?.[selectedDistribution.id]"
+              :variable-measured="variableMeasured"
+              :mediaType="selectedDistribution.mediaType"
               :last-updated="selectedDistribution.modified" :data="selectedDistribution.data" :linked-data="selectedDistribution.linkedData"
-              :connector-type-override="distributionConnectorTypes?.[selectedDistribution.id]"
               :distribution-id="selectedDistribution.id" :showDropdown="isLinkedDataDropdownOpen"
               @toggle="toggleDropdown" download-text="Download" save-text="Linked Data"
             />

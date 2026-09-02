@@ -125,6 +125,12 @@ export default {
       borderRadius: {
         custom: 'var(--border-radius-custom)',
         search: 'var(--border-radius-search)',
+        // @6g-dali/ui-theme's radius scale (--radius-sm/md/lg), for buttons,
+        // cards and panels to match dataops-ui/portal-ui. Genuinely circular
+        // elements (toggles, avatars, badges, pill tags) stay on rounded-full.
+        'dali-sm': 'var(--radius-sm, 6px)',
+        'dali-md': 'var(--radius-md, 10px)',
+        'dali-lg': 'var(--radius-lg, 14px)',
       },
 
       fontSize: {

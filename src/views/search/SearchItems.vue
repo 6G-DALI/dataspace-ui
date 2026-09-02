@@ -177,7 +177,7 @@ function goToPage(page: number) {
     <template v-else>
       <div
         v-for="i in itemsCount.value" :key="i" class="
-          flex size-full animate-pulse flex-col gap-6 rounded-3xl bg-slate-200
+          flex size-full animate-pulse flex-col gap-6 rounded-dali-md bg-slate-200
           text-content
         "
       >

@@ -21,4 +21,9 @@ export default {
   socialFacebook: import.meta.env.VITE_SOCIAL_FACEBOOK || '',
   socialGitHub: import.meta.env.VITE_SOCIAL_GITHUB || '',
   contactEmail: import.meta.env.VITE_CONTACT_EMAIL || '',
+  daliUrl: import.meta.env.VITE_DALI_URL || '',
+  portalUrl: import.meta.env.VITE_PORTAL_URL || '',
+  dataspaceUrl: import.meta.env.VITE_DATASPACE_URL || '',
+  dataopsUrl: import.meta.env.VITE_DATAOPS_URL || '',
+  mlopsUrl: import.meta.env.VITE_MLOPS_URL || '',
 }

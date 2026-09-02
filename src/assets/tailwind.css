@@ -35,6 +35,12 @@
 @layer base {
 
   :root {
+    /* Native widgets (scrollbars, checkboxes, date pickers) otherwise stay
+       light regardless of this app's own dark/light toggle. Not set anywhere
+       else — @6g-dali/ui-theme's theme.css does this too, but vanilla only
+       imports its tokens.css, not theme.css (Bootstrap/AdminLTE-oriented). */
+    color-scheme: light;
+
     /************************/
     /***** Piveau Fonts *****/
     /************************/
@@ -47,40 +53,52 @@
     --border-radius-custom: 25px;
     --border-radius-search: 100px;
 
-    /*****************************/
-    /* Piveau Background Colors */
-    /*****************************/
-    --piveau-primary: #343a41;
-    --piveau-primary-variant: #202272;
-    --piveau-primary-light: #eaebec;
-    --piveau-primary-disabled: #787878;
-    --piveau-secondary: #f9a01b;
-    --piveau-secondary-variant: #e08a00;
-    --piveau-secondary-disabled: #8d8d8d;
-    --piveau-background: #F4F4F4;
-    --piveau-surface: #FFFFFF;
-    --piveau-error: #D15353;
-    --piveau-gray: #dbdbdb;
-    --piveau-black: #000000;
+    /**********************************************************************/
+    /* Colors — sourced from @6g-dali/ui-theme's tokens (tokens.css), so   */
+    /* the content area follows the same "Mission Control" theme as the   */
+    /* shared shell. These are var() references, not literal values, so   */
+    /* they stay correct in both themes automatically: ui-theme's own     */
+    /* [data-theme="light"] override resolves through them without this   */
+    /* file needing its own light/dark split for color any more — see the */
+    /* :root[data-theme="dark"] block below, which now only sets          */
+    /* color-scheme.                                                      */
+    /**********************************************************************/
+    --piveau-primary: var(--accent-cyan);
+    --piveau-primary-variant: var(--accent-cyan-bright);
+    --piveau-primary-light: var(--bg-elevated);
+    --piveau-primary-disabled: var(--text-muted);
+    --piveau-secondary: var(--accent-amber);
+    --piveau-secondary-variant: color-mix(in srgb, var(--accent-amber) 85%, black);
+    --piveau-secondary-disabled: var(--text-muted);
+    --piveau-background: var(--bg-base);
+    --piveau-surface: var(--bg-surface);
+    --piveau-error: var(--accent-red);
+    --piveau-gray: var(--border);
+    --piveau-black: var(--text-primary);
 
     /**********************/
     /* Piveau Text colors */
     /**********************/
-    --piveau-text-on-primary: #ffffff;
-    --piveau-text-on-secondary: #262626;
-    --piveau-text-on-bg: #262626;
-    --piveau-text-on-surface: #262626;
-    --piveau-text-on-surface-light: #4e4e4e; 
-    --piveau-text-on-error: #ffffff;
+    /* Dark ink on the bright accent fills above — white would fail contrast
+       against cyan/amber, same reasoning as ui-theme's own .btn-primary. */
+    --piveau-text-on-primary: var(--text-inverse);
+    --piveau-text-on-secondary: var(--text-inverse);
+    --piveau-text-on-bg: var(--text-primary);
+    --piveau-text-on-surface: var(--text-primary);
+    --piveau-text-on-surface-light: var(--text-secondary);
+    --piveau-text-on-error: var(--text-inverse);
 
     /*************************/
     /* Header and Footer */
     /*************************/
-    --piveau-header-bg: #343a41;
-    --piveau-header-text: #ffffff;
-    --piveau-footer-bg: #343a41;
-    --piveau-footer-text: #ffffff;
-    
+    /* Superseded by direct token usage in Sidebar.vue/Header.vue/Footer.vue;
+       kept in sync here only for anything still reading these (e.g. the
+       unused NavigationBar.vue). */
+    --piveau-header-bg: var(--bg-surface);
+    --piveau-header-text: var(--text-primary);
+    --piveau-footer-bg: var(--bg-surface);
+    --piveau-footer-text: var(--text-primary);
+
     /**************************************************************************************************************************************/
 
     /**************************/
@@ -121,18 +139,13 @@
     --black: var(--piveau-black)
   }
 
-    :root[data-theme="dark"] {
-    /* Only override what needs to change */
-    --piveau-primary-light: #3b3b3b;
-    --piveau-background: #1A1A1A;
-    --piveau-surface: #262626;
-    --piveau-text-on-bg: #f4f4f4;
-    --piveau-text-on-surface: #ececec;
-    --piveau-text-on-surface-light: #E0E0E0;
-    --piveau-header-bg: #212121;
-    --piveau-header-text: #f3f3f3;
-    --piveau-footer-bg: #1c1c1c;
-    --piveau-footer-text: #e9e9e9;
+  :root[data-theme="dark"] {
+    /* Nothing to override here any more: every --piveau-* color above is a
+       var() reference into @6g-dali/ui-theme's tokens, which already flip
+       themselves on this same attribute. Only color-scheme is genuinely
+       attribute-dependent (it isn't a custom property, so it can't be
+       expressed as a var() the same way). */
+    color-scheme: dark;
   }
 
   body {

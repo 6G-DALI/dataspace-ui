@@ -49,7 +49,7 @@ const combinedAttrs = computed(() => {
     <div
       v-bind="combinedAttrs"
       :class="{
-        'rounded-3xl bg-secondary px-4 py-1 text-neutral-100 dark:text-white dark:bg-[var(--piveau-secondary-variant)]': !isInteractive,
+        'rounded-3xl bg-secondary px-4 py-1 text-secondary-text dark:bg-[var(--piveau-secondary-variant)]': !isInteractive,
         'w-[4.5rem] ml-2': !isInteractive && props.fixedWidth
       }"
     >

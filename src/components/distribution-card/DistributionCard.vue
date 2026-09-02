@@ -17,6 +17,10 @@ interface CardProps {
   saveText?: string
   lastUpdated?: string
   downloadUrl: string
+  accessUrl?: string
+  assetId?: string
+  connectorType?: string
+  variableMeasured?: string[]
   linkedData?: Record<string, any>
   distributionId: string
   data: PropertyTableEntryNode
@@ -29,7 +33,6 @@ interface CardProps {
   language?: { label?: string } | null
   checksum?: { checksum_value?: string } | null
   compressFormat?: { label?: string } | null
-  connectorTypeOverride?: string
 }
 const props = withDefaults(defineProps<CardProps>(), {
   downloadText: 'Download',
@@ -52,29 +55,6 @@ function formatDate(d?: string): string {
 }
 
 defineEmits(['toggle'])
-const DSPACE_CONNECTOR = 'dspaceconnector'
-
-function findValue(nodes: any[], id: string): string {
-  for (const node of nodes || []) {
-    if (node.id?.toLowerCase().includes(id.toLowerCase())) {
-      if (node.type === 'value') return String(node.value ?? '')
-      if (node.data) return findValue(Array.isArray(node.data) ? node.data : [node.data], id)
-    }
-    if (node.data) {
-      const found = findValue(Array.isArray(node.data) ? node.data : [node.data], id)
-      if (found) return found
-    }
-  }
-  return ''
-}
-
-const connectorType = computed(() =>
-  findValue(props.data?.data || [], 'connectorType').toLowerCase()
-)
-
-const hideDownload = computed(() =>
-  (props.connectorTypeOverride?.toLowerCase() || connectorType.value) === DSPACE_CONNECTOR
-)
 
 const dataOrder = ['modified', 'license', 'created', 'languages']
 const resolvedData = computed(() => {
@@ -100,18 +80,18 @@ const defaultSaveText = computed(() => props.saveText || 'Linked Data')
           {{ title }}
         </Typography>
         <div class="flex flex-wrap items-center gap-3">
-          <KTag class="text-sm">
-            {{ format }}
+          <KTag class="text-sm" v-if="mediaType">
+            {{ mediaType }}
           </KTag>
 
-          <a v-if="!hideDownload" :href="downloadUrl" target="_blank" nofollow noreferrer download
-            class="text-white bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom text-sm px-4 py-1">
+          <a v-if="downloadUrl" :href="downloadUrl" target="_blank" nofollow noreferrer download
+            class="text-white bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-dali-md border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom text-sm px-4 py-1">
             {{ defaultDownloadText }}
             <i class="icon-[ph--arrow-square-out] ml-2" />
           </a>
 
           <LinkedDataSelector :show-dropdown="showDropdown" :resource-id="distributionId" :indist="true" resource="distributions"
-            button-class="text-white bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-3xl border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom text-sm px-4 py-1"
+            button-class="text-white bg-primary dark:bg-primary-dark hover:bg-primary-hover dark:hover:bg-primary-dark-hover active:bg-primary dark:active:bg-primary-dark-pressed rounded-dali-md border-transparent inline-flex min-w-fit items-center justify-center text-center font-medium align-bottom text-sm px-4 py-1"
             @toggle="$emit('toggle')" />
 
           <Dropdown severity="secondary" :label="defaultSaveText">
@@ -129,19 +109,6 @@ const defaultSaveText = computed(() => props.saveText || 'Linked Data')
         ">
         <div class="flex min-w-0 flex-1 flex-col gap-6">
           <div class="markdown-content mt-4 text-sm leading-6 text-surface-light" v-html="description" />
-        </div>
-
-        <div class="
-            min-w-0 text-surface-text
-            lg:my-0 lg:basis-4/12
-          ">
-          <PropertyTable :node="{
-            id: 'root',
-            label: '',
-            type: 'node',
-            isRoot: true,
-            data: resolvedData || [],
-          }" class="text-sm" />
         </div>
       </div>
 
@@ -175,6 +142,23 @@ const defaultSaveText = computed(() => props.saveText || 'Linked Data')
           <span class="font-medium text-surface-text">Checksum:</span>
           <code class="ml-1 text-[10px]">{{ checksum.checksum_value.slice(0, 16) }}…</code>
         </span>
+        <span v-if="connectorType">
+          <span class="font-medium text-surface-text">Connector type:</span> {{ connectorType }}
+        </span>
+        <span v-if="assetId">
+          <span class="font-medium text-surface-text">Asset ID:</span>
+          <code class="ml-1 text-[10px]">{{ assetId }}</code>
+        </span>
+        <span v-if="accessUrl" class="min-w-0">
+          <span class="font-medium text-surface-text">Access URL:</span>
+          <a :href="accessUrl" target="_blank" rel="noopener"
+             class="ml-1 break-all text-primary hover:underline">{{ accessUrl }}</a>
+        </span>
+      </div>
+
+      <div v-if="variableMeasured?.length" class="mb-3 flex flex-wrap items-center gap-2 text-xs text-surface-light">
+        <span class="font-medium text-surface-text">Variables measured:</span>
+        <KTag v-for="v in variableMeasured" :key="v" class="text-xs">{{ v }}</KTag>
       </div>
 
       <GXQualityPanel :distribution-id="distributionId" />

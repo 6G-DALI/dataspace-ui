@@ -27,6 +27,14 @@ export interface Configuration {
   socialFacebook: string
   socialGitHub: string
   contactEmail: string
+  // Shared 6G-DALI tool suite, linked from the header. Same variable names as
+  // dataops-ui/portal-ui (VITE_DALI_URL etc.) so one deployment config feeds
+  // every front end. Empty = drop that link rather than point at nothing.
+  daliUrl: string
+  portalUrl: string
+  dataspaceUrl: string
+  dataopsUrl: string
+  mlopsUrl: string
 }
 
 export default import.meta.env.MODE === 'production' ? productionConfig : developmentConfig

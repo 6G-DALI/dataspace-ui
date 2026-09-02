@@ -1,31 +1,32 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { getPreferredTheme, toggleTheme } from '@6g-dali/ui-theme/theme.js'
+// The shared shell's toggle styling (icon + track/thumb switch) — the same
+// classes @6g-dali/ui-shell's React ThemeToggle uses, so this control looks
+// identical to dataops-ui/portal-ui's rather than growing its own look.
+import '@6g-dali/ui-theme/shell.css'
 
+// Shared with dataops-ui/portal-ui: the same `data-theme` attribute and
+// localStorage key drive both this app's own light/dark content palette
+// (tailwind.css's `:root[data-theme="dark"]` block) and @6g-dali/ui-theme's
+// chrome tokens (tokens.css's `:root[data-theme="light"]` block) at once.
+// main.ts calls initTheme() before first paint; this only reflects and
+// flips the result afterward.
 const isDark = ref(false)
 
-function toggleDarkMode() {
-  isDark.value = !isDark.value
-  document.documentElement.setAttribute('data-theme', isDark.value ? 'dark' : 'light')
-  localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+function handleToggle() {
+  isDark.value = toggleTheme() === 'dark'
 }
 
 onMounted(() => {
-  const savedTheme = localStorage.getItem('theme')
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-  isDark.value = savedTheme === 'dark' || (!savedTheme && prefersDark)
-
-  if (isDark.value) {
-    document.documentElement.setAttribute('data-theme', 'dark')
-  }
+  isDark.value = getPreferredTheme() === 'dark'
 })
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
-    <!-- Dynamic Sun/Moon Icon -->
-    <svg 
-      class="h-4 w-5"
+  <label class="dali-theme-toggle" :title="isDark ? 'Switch to light theme' : 'Switch to dark theme'">
+    <svg
+      class="dali-theme-toggle-icon"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -46,42 +47,15 @@ onMounted(() => {
       />
     </svg>
 
-    <!-- Toggle Switch -->
-    <label
-      class="
-        relative block h-4 w-7 cursor-pointer rounded-full bg-gray
-        transition-colors
-        [-webkit-tap-highlight-color:_transparent]
-        has-checked:bg-primary
-        dark:bg-surface-800 dark:has-checked:bg-primary-hover
-      "
-    >
+    <span class="dali-theme-toggle-track">
       <input
         type="checkbox"
-        class="peer absolute opacity-0"
+        class="dali-theme-toggle-input"
         :checked="isDark"
-        @change="toggleDarkMode"
+        :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+        @change="handleToggle"
       >
-      <span
-        class="
-          absolute inset-y-0 start-0 m-0.5 size-3 rounded-full bg-white
-          transition-[inset-inline-start]
-          peer-checked:start-3
-          peer-focus-within:ring-2 peer-focus-within:ring-black
-          dark:bg-surface-900
-        "
-      />
-    </label>
-  </div>
+      <span class="dali-theme-toggle-thumb" />
+    </span>
+  </label>
 </template>
-
-<style scoped>
-.has-checked\:bg-primary:has(:checked) {
-  background-color: var(--primary);
-}
-
-.dark .dark\:has-checked\:bg-primary-hover:has(:checked) {
-  background-color: var(--primary-hover);
-}
-
-</style>

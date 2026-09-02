@@ -18,7 +18,7 @@ const props = defineProps({
 })
 
 const button = cva(`
-  inline-flex min-w-fit items-center justify-center rounded-3xl
+  inline-flex min-w-fit items-center justify-center rounded-dali-md
   border-transparent text-center align-bottom font-medium
 `, {
   variants: {

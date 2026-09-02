@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "moduleResolution": "bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@config/*": ["./config/*"]
     },
     "types": ["unplugin-icons/types/vue"],
     "allowJs": true,
