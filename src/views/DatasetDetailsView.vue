@@ -13,7 +13,8 @@ import { useRoute, useRouter } from 'vue-router'
 import KButton from '../components/base/button/KButton.vue'
 import appConfig from '../../config/appConfig'
 
-const servicesCatalogue = (appConfig as any).servicesCatalogue || '6g-dali-services'
+const servicesCatalogue = appConfig.servicesCatalogue || '6g-dali-services'
+const modelsCatalogue = appConfig.modelsCatalogue || '6g-dali-models'
 
 import KCard from '../components/base/card/KCard.vue'
 import KTag from '../components/base/tag/KTag.vue'
@@ -85,6 +86,7 @@ const getFormattedDistributions = computed(() => {
 })
 
 const isService = computed(() => resultEnhanced.value?.getCatalogId === servicesCatalogue)
+const isModel = computed(() => resultEnhanced.value?.getCatalogId === modelsCatalogue)
 
 const DALI_NS = 'https://dali-project.eu/ns#'
 const distributionConnectorTypes = ref<Record<string, string>>({})
@@ -138,7 +140,7 @@ onMounted(async () => {
 })
 
 const pageHeadline = computed(() =>
-  isService.value ? 'Service' : t('dataset.title')
+  isService.value ? 'Service' : isModel.value ? 'ML Model' : t('dataset.title')
 )
 
 const { isError: searchError, error } = query

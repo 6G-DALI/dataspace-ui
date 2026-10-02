@@ -18,8 +18,10 @@ const { t } = useI18n()
 const router = useRouter()
 
 const { resultEnhanced, isSuccess, distributionConnectorTypes, distributionAssetIds, variableMeasured } = inject('datasetDetails') as any
-const servicesCatalogue = (appConfig as any).servicesCatalogue || '6g-dali-services'
+const servicesCatalogue = appConfig.servicesCatalogue || '6g-dali-services'
+const modelsCatalogue = appConfig.modelsCatalogue || '6g-dali-models'
 const isService = computed(() => resultEnhanced?.value?.getCatalogId === servicesCatalogue)
+const isModel = computed(() => resultEnhanced?.value?.getCatalogId === modelsCatalogue)
 
 const { data: truncatedDescription, toggle: toggleDescription, isTruncated: isDescriptionTruncated, isTruncationNeeded: isDescriptionTruncationNeeded } = useDataTruncator({
   data: computed(() => resultEnhanced?.value?.getDescriptionMarkup || ''),
@@ -112,7 +114,7 @@ const updatedText = computed(() => resultEnhanced?.value?.getModified || '')
           <div class="min-w-0 flex-1">
             <Typography as="h5" variant="header-4" class="mb-2 text-surface-text">
               <slot name="about-this-dataset">
-                {{ isService ? 'About this service' : t('details.about_dataset') }}
+                {{ isService ? 'About this service' : isModel ? 'About this model' : t('details.about_dataset') }}
               </slot>
             </Typography>
             <Typography

@@ -35,6 +35,13 @@ export interface Configuration {
   dataspaceUrl: string
   dataopsUrl: string
   mlopsUrl: string
+  // Catalogue ids used purely to distinguish resource types by which
+  // catalogue they live in (a service/model is still a dcat:Dataset
+  // record, there's no other marker) — see SearchItems.vue's
+  // getResourceType and DatasetDetailsView.vue/DatasetsOverview.vue's
+  // isService/isModel.
+  servicesCatalogue: string
+  modelsCatalogue: string
 }
 
 export default import.meta.env.MODE === 'production' ? productionConfig : developmentConfig

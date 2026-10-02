@@ -10,6 +10,8 @@ export default {
   middlewareUrl: '$VITE_API_MIDDLEWARE_URL',
   piveauSparqlUrl: '$VITE_API_SPARQL_URL',
   piveauDataQualityUrl: '$VITE_API_DATA_QUALITY_URL',
+  servicesCatalogue: '$VITE_SERVICES_CATALOGUE',
+  modelsCatalogue: '$VITE_MODELS_CATALOGUE',
   projectTitle: '$VITE_PROJECT_TITLE',
   projectUrl: '$VITE_PROJECT_URL',
   logoUrl: '$VITE_LOGO_URL',

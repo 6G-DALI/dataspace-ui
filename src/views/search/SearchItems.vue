@@ -7,8 +7,8 @@ import { useSearchParams } from './useSearchParams'
 /* ── Resource type resolver — based on content, not catalogue ───────── */
 type ResourceType = 'dataset' | 'service' | 'model'
 
-const servicesCatalogue = (appConfig as any).servicesCatalogue || '6g-dali-services'
-const modelsCatalogue   = (appConfig as any).modelsCatalogue   || '6g-dali-models'
+const servicesCatalogue = appConfig.servicesCatalogue || '6g-dali-services'
+const modelsCatalogue   = appConfig.modelsCatalogue   || '6g-dali-models'
 
 function getResourceType(item: any): ResourceType {
   if (item.getCatalogId === servicesCatalogue) return 'service'

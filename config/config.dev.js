@@ -10,6 +10,7 @@ export default {
   piveauSparqlUrl: 'https://demo.piveau.io/sparql',
   piveauDataQualityUrl: import.meta.env.VITE_API_DATA_QUALITY_URL ?? 'https://demo.piveau.io/api/metrics/cache/',
   servicesCatalogue: import.meta.env.VITE_SERVICES_CATALOGUE || '6g-dali-services',
+  modelsCatalogue: import.meta.env.VITE_MODELS_CATALOGUE || '6g-dali-models',
   projectTitle: import.meta.env.VITE_PROJECT_TITLE || '',
   projectUrl: import.meta.env.VITE_PROJECT_URL || '',
   logoUrl: import.meta.env.VITE_LOGO_URL || '/sparkworks-white.png',
