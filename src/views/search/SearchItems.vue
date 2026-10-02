@@ -11,8 +11,8 @@ const servicesCatalogue = (appConfig as any).servicesCatalogue || '6g-dali-servi
 const modelsCatalogue   = (appConfig as any).modelsCatalogue   || '6g-dali-models'
 
 function getResourceType(item: any): ResourceType {
-  if (item.catalogueId === servicesCatalogue) return 'service'
-  if (item.catalogueId === modelsCatalogue)   return 'model'
+  if (item.getCatalogId === servicesCatalogue) return 'service'
+  if (item.getCatalogId === modelsCatalogue)   return 'model'
   return 'dataset'
 }
 
@@ -161,13 +161,16 @@ function goToPage(page: number) {
           :class="RESOURCE_STYLE[getResourceType(item)].border"
         >
           <template #title-badge>
-            <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--secondary)] px-3 py-0.5 text-xs font-semibold text-white">
+            <span
+              class="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-semibold text-white"
+              :class="RESOURCE_STYLE[getResourceType(item)].pill"
+            >
               <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/>
                 <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/>
                 <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/>
               </svg>
-              Dataset
+              {{ RESOURCE_STYLE[getResourceType(item)].label }}
             </span>
           </template>
         </DataInfoCard>
