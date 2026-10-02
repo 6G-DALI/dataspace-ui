@@ -35,9 +35,9 @@ const RESOURCE_STYLE: Record<ResourceType, { border: string, hover: string, pill
     label:  'Data Processing Service',
   },
   model: {
-    border: 'border-l-4 !border-l-purple-500',
-    hover:  'hover:border-b-purple-500',
-    pill:   'bg-purple-600',
+    border: 'border-l-4 !border-l-amber-500',
+    hover:  'hover:border-b-amber-500',
+    pill:   'bg-amber-600',
     label:  'ML Model',
   },
 }
