@@ -11,8 +11,13 @@ const servicesCatalogue = appConfig.servicesCatalogue || '6g-dali-services'
 const modelsCatalogue   = appConfig.modelsCatalogue   || '6g-dali-models'
 
 function getResourceType(item: any): ResourceType {
-  if (item.getCatalogId === servicesCatalogue) return 'service'
-  if (item.getCatalogId === modelsCatalogue)   return 'model'
+  // Callers disagree on the field name: DatasetDetailsView.vue passes the raw
+  // enhanced search result (getCatalogId), while useDatasetsSearchView.ts
+  // remaps it to catalogueId before handing items to this component — check
+  // both rather than pick one and break the other caller.
+  const catalogId = item.getCatalogId ?? item.catalogueId
+  if (catalogId === servicesCatalogue) return 'service'
+  if (catalogId === modelsCatalogue)   return 'model'
   return 'dataset'
 }
 
