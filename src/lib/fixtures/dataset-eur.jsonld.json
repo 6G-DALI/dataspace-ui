@@ -1,0 +1,572 @@
+{
+    "@graph": [
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_timestamp",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:description": "{\"column\": \"timestamp\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_source",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"column\": \"source\"}",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_metric_id",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"column\": \"metric_id\"}",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_metric_id",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dct:description": "{\"column\": \"metric_id\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_type",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dct:description": "{\"column\": \"type\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_all_quality_checks_to_pass",
+            "dct:description": "{\"source\": \"merged\", \"sources\": [\"great_expectations\", \"great_expectations_after_remediation\", \"pandera\"], \"pipeline_error\": \"ValueError: column 'unit' missing ratio 1.0000 exceeds 0.0000; column 'ue_id' missing ratio 0.4267 exceeds 0.0000\", \"success_percent\": 85.71428571428571, \"duplicate_checks\": 0, \"evaluated_expectations\": 21, \"successful_expectations\": 18, \"unsuccessful_expectations\": 3}",
+            "dqv:value": {
+                "@value": "false",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_all_quality_checks_to_pass"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_type",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"column\": \"type\"}",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_value",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dct:description": "{\"column\": \"value\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_gNB_id",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:description": "{\"column\": \"gNB_id\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_timestamp",
+            "dct:description": "{\"column\": \"timestamp\"}",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_pandera_schema_to_validate",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"mode\": \"time_series\", \"source\": \"pandera\", \"errors\": [\"column 'unit' missing ratio 1.0000 exceeds 0.0000; column 'ue_id' missing ratio 0.4267 exceeds 0.0000\"], \"configured_mode\": \"auto\", \"timestamp_column\": \"timestamp\"}",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "false",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_pandera_schema_to_validate"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/datasets/8bd8e31f-be5d-40f2-bfe9-80c8449e8c4c",
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/TECH"
+            },
+            "@type": [
+                "https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource",
+                "dcat:Dataset"
+            ],
+            "https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#producedBy": {
+                "@id": "https://dali-project.eu/participant/eurecom"
+            },
+            "dcat:keyword": [
+                "Energy",
+                "Digital_Twin",
+                "RAN"
+            ],
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dct:title": {
+                "@language": "en",
+                "@value": "Energy Saving Small Area Two Layers Sectorized AppOFF"
+            },
+            "https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#containsPII": {
+                "@value": "false",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dcat:distribution": {
+                "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981"
+            },
+            "dct:issued": {
+                "@value": "2026-05-28",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dct:modified": {
+                "@value": "2026-05-28",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "https://dali-project.eu/ns#fairCompliant": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:conformsTo": {
+                "@id": "https://www.go-fair.org/fair-principles/"
+            },
+            "prov:wasAttributedTo": {
+                "@id": "https://dali-project.eu/participant/eurecom"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "https://dali-project.eu/ns#testbedContext": {
+                "@id": "_:b0"
+            },
+            "dct:publisher": {
+                "@id": "_:b1"
+            },
+            "dct:identifier": "8bd8e31f-be5d-40f2-bfe9-80c8449e8c4c",
+            "https://dali-project.eu/ns#gdprCompliant": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "https://dali-project.eu/ns#snsProjectName": "6G-DALI",
+            "dct:description": {
+                "@language": "en",
+                "@value": "RAN dataset generated through the EURECOM Digital Twin testbed"
+            },
+            "dct:creator": {
+                "@id": "_:b2"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981",
+            "dct:identifier": "https://dataspace.6gdali.eu/distributions/f4da017a-2b55-4090-a668-0c00341dddb7",
+            "schema:variableMeasured": [
+                "gNB_id",
+                "source",
+                "cell_id",
+                "value",
+                "ue_id",
+                "unit",
+                "metric_id",
+                "type",
+                "timestamp"
+            ],
+            "dqv:hasQualityMeasurement": [
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_metric_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_value"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_timestamp"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_value"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_all_quality_checks_to_pass"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_source"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_cell_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_gNB_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_type"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_source"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_metric_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_timestamp"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_file_to_be_valid_csv"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_unit"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_pandera_schema_to_validate"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_table_row_count_to_be_between"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_gNB_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_cell_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_type"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_unit"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_ue_id"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_ue_id"
+                }
+            ],
+            "https://dali-project.eu/ns#connectorType": "dspaceconnector",
+            "dcat:accessURL": {
+                "@id": "https://edc.dataspace.6gdali.eu"
+            },
+            "dct:format": "CSV",
+            "@type": "dcat:Distribution",
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "dct:title": {
+                "@language": "en",
+                "@value": "5953562c-69e8-47f1-8a09-350641b9855f.csv"
+            },
+            "dcat:mediaType": "text/csv",
+            "schema:measurementTechnique": {
+                "@language": "en",
+                "@value": "EURECOM DataOps Framework with 5 seconds scrape interval"
+            },
+            "https://dali-project.eu/ns#assetId": "5953562c-69e8-47f1-8a09-350641b9855f",
+            "dct:issued": {
+                "@value": "2026-10-05",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "dcatap:availability": {
+                "@id": "dcatap:availability/STABLE"
+            },
+            "dcat:downloadURL": {
+                "@id": "http://sparks-prod07.sparkworks.net:9000/6g-dali-staging-eur/8bd8e31f-be5d-40f2-bfe9-80c8449e8c4c/5953562c-69e8-47f1-8a09-350641b9855f.csv"
+            },
+            "dct:description": {
+                "@language": "en",
+                "@value": "Data distribution for 5953562c-69e8-47f1-8a09-350641b9855f.csv"
+            }
+        },
+        {
+            "@id": "_:b0",
+            "https://dali-project.eu/ns#networkDomain": "RAN",
+            "@type": "https://dali-project.eu/ns#TestbedContext"
+        },
+        {
+            "@id": "_:b1",
+            "@type": "foaf:Organization",
+            "foaf:name": "EURECOM"
+        },
+        {
+            "@id": "_:b2",
+            "foaf:name": "EURECOM 5G Testbed Facility",
+            "@type": "foaf:Person"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_cell_id",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:description": "{\"column\": \"cell_id\"}",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_value",
+            "dct:description": "{\"column\": \"value\"}",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_gNB_id",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "@type": "dqv:QualityMeasurement",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            },
+            "dct:description": "{\"column\": \"gNB_id\"}"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_cell_id",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"column\": \"cell_id\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_table_row_count_to_be_between",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"min_value\": 1, \"observed_value\": 12995}",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_table_row_count_to_be_between"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_file_to_be_valid_csv",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:description": "{\"asset_title\": \"5953562c-69e8-47f1-8a09-350641b9855f.csv\", \"columns\": [\"source\", \"metric_id\", \"timestamp\", \"unit\", \"value\", \"cell_id\", \"gNB_id\", \"type\", \"ue_id\"], \"row_count\": 12995}",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_file_to_be_valid_csv"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_ue_id",
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dct:description": "{\"column\": \"ue_id\", \"element_count\": 12995, \"unexpected_count\": 2200, \"unexpected_percent\": 16.929588303193537}",
+            "dqv:value": {
+                "@value": "false",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_unit",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dct:description": "{\"column\": \"unit\", \"element_count\": 12995, \"unexpected_count\": 12995, \"unexpected_percent\": 100.0}",
+            "dqv:value": {
+                "@value": "false",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "@type": "dqv:QualityMeasurement"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_values_to_not_be_null_source",
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_values_to_not_be_null"
+            },
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:description": "{\"column\": \"source\", \"element_count\": 12995, \"unexpected_count\": 0, \"unexpected_percent\": 0.0}",
+            "@type": "dqv:QualityMeasurement",
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_unit",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            },
+            "dct:description": "{\"column\": \"unit\"}"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/distributions/732da0cc-b0fd-45f2-97e9-dedd438df981/quality/expect_column_to_exist_ue_id",
+            "@type": "dqv:QualityMeasurement",
+            "dqv:value": {
+                "@value": "true",
+                "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+            },
+            "dct:date": {
+                "@value": "2026-10-09T11:51:26.139790Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dqv:isMeasurementOf": {
+                "@id": "https://dali-project.eu/ns#expect_column_to_exist"
+            },
+            "dct:description": "{\"column\": \"ue_id\"}"
+        }
+    ],
+    "@context": {
+        "schema": "https://schema.org/",
+        "dct": "http://purl.org/dc/terms/",
+        "dcatap": "http://data.europa.eu/r5r/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "dqv": "http://www.w3.org/ns/dqv#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

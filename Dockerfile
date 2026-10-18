@@ -1,51 +1,39 @@
-# ── Stage 1: install dependencies ───────────────────────────────────────────
-FROM node:22-alpine AS deps
-WORKDIR /app
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm i -g corepack@latest && corepack prepare pnpm@10 --activate && corepack enable
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install --no-frozen-lockfile
+# Build
+FROM node:24-alpine AS build
 
-# ── Stage 2: build ──────────────────────────────────────────────────────────
-FROM node:22-alpine AS builder
 WORKDIR /app
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm i -g corepack@latest && corepack prepare pnpm@10 --activate && corepack enable
-COPY --from=deps /pnpm /pnpm
-COPY --from=deps /app/node_modules ./node_modules
+
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
-ENV NODE_OPTIONS=--max-old-space-size=8192
-RUN pnpm build
 
-# ── Stage 3: serve ──────────────────────────────────────────────────────────
-FROM nginx:alpine
+# The commit this image was built from, shown in the footer. Passed in: the
+# build context has no .git (see .dockerignore). Unset gives an unmarked build.
+ARG GIT_SHA=""
+ENV GIT_SHA=$GIT_SHA
 
+RUN npm run build
+
+FROM nginx:1.27-alpine
+
+# Templated: the official nginx image runs envsubst over /etc/nginx/templates at
+# start, so the CSP can name this deployment's Keycloak and piveau origins.
+COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
+
+# Only our variables, so nginx's own $uri, $host etc. survive envsubst.
+ENV NGINX_ENVSUBST_FILTER=KEYCLOAK_ORIGIN|PIVEAU_ORIGINS
+# Scheme + host, no path. Overridden at run time; these match src/config.ts.
+ENV KEYCLOAK_ORIGIN=https://auth.6gdali.eu
+# Space-separated: hub-search and hub-repo.
+ENV PIVEAU_ORIGINS="https://search.dataspace.6gdali.eu https://dataspace.6gdali.eu"
+
+# Renders config.js from VITE_* variables at start.
+COPY docker-entrypoint.d/40-catalogue-config.sh /docker-entrypoint.d/40-catalogue-config.sh
+RUN chmod +x /docker-entrypoint.d/40-catalogue-config.sh
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# 8080, as the previous image: the dataspace compose maps 18999:8080.
 EXPOSE 8080
 
-COPY --from=builder /app/dist /usr/share/nginx/html/
-COPY nginx/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
-COPY config/default.env /default.env
-COPY runtimeconfig.sh /
-
-# OpenShift compatibility — allow running as arbitrary user in root group
-RUN mkdir -p /var/cache/nginx/uwsgi_temp \
-             /var/cache/nginx/client_temp \
-             /var/cache/nginx/proxy_temp \
-             /var/cache/nginx/fastcgi_temp \
-             /var/cache/nginx/scgi_temp && \
-    chmod g+rwx /var/cache/nginx \
-                /var/run \
-                /var/log/nginx \
-                /var/cache/nginx/client_temp
-
-RUN apk add --no-cache gettext dos2unix && \
-    dos2unix /runtimeconfig.sh && \
-    dos2unix /default.env && \
-    chmod +x /runtimeconfig.sh && \
-    chmod a+rw /usr/share/nginx/html/ && \
-    chmod a+rw /usr/share/nginx/html/assets && \
-    chmod a+rw /usr/share/nginx/html/assets/*
-
-CMD ["/runtimeconfig.sh"]
+CMD ["nginx", "-g", "daemon off;"]

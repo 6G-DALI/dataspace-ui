@@ -1,8 +1,16 @@
+# Without this, `COPY . .` would overwrite the node_modules that `npm ci` built
+# inside the image with the host's (native binaries of another platform).
 node_modules
-**/node_modules
-.git
-.gitignore
-*.md
 dist
+
+# .env must never be baked in: settings are supplied at run time through config.js.
 .env
-.env.*
+.env.local
+.env.*.local
+
+.git
+.github
+.gitignore
+.dockerignore
+README.md
+.DS_Store

@@ -1,0 +1,181 @@
+{
+    "@graph": [
+        {
+            "@id": "_:b0",
+            "@type": "foaf:Person",
+            "foaf:mbox": {
+                "@id": "mailto:researcher@example.org"
+            },
+            "foaf:name": "A Researcher"
+        },
+        {
+            "@id": "_:b1",
+            "vcard:fn": "KU Leuven WaveCoRE",
+            "@type": "vcard:Organization",
+            "vcard:hasEmail": {
+                "@id": "mailto:wavecore@kuleuven.be"
+            }
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/datasets/m1m2m3m4-0000-0000-0000-000000000001",
+            "https://dali-project.eu/ns#trainingSplit": {
+                "@value": "0.8",
+                "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+            },
+            "dcat:keyword": [
+                {
+                    "@language": "en",
+                    "@value": "CSI"
+                },
+                {
+                    "@language": "en",
+                    "@value": "Massive MIMO"
+                },
+                {
+                    "@language": "en",
+                    "@value": "5G"
+                },
+                {
+                    "@language": "en",
+                    "@value": "CNN"
+                },
+                {
+                    "@language": "en",
+                    "@value": "indoor positioning"
+                },
+                {
+                    "@language": "en",
+                    "@value": "localization"
+                }
+            ],
+            "http://www.w3.org/ns/mldcat#evaluatedOn": {
+                "@id": "https://dataspace.6gdali.eu/set/data/kul-mimo-csi-dataset-test"
+            },
+            "http://www.w3.org/ns/mldcat#trainedOn": {
+                "@id": "https://dataspace.6gdali.eu/set/data/kul-mimo-csi-dataset"
+            },
+            "dct:creator": {
+                "@id": "_:b0"
+            },
+            "dct:identifier": "m1m2m3m4-0000-0000-0000-000000000001",
+            "http://www.w3.org/ns/mldcat#hyperparameters": "{\"layers\": 5, \"filters\": [32,64,128,64,32], \"dropout\": 0.3, \"optimizer\": \"Adam\", \"lr\": 0.001, \"epochs\": 100, \"batch_size\": 128}",
+            "dct:license": {
+                "@id": "https://opensource.org/licenses/MIT"
+            },
+            "dct:title": {
+                "@language": "en",
+                "@value": "5G UE Localization CNN Model"
+            },
+            "@type": [
+                "http://www.w3.org/ns/mldcat#MLModel",
+                "dcat:Dataset"
+            ],
+            "dct:issued": {
+                "@value": "2025-07-01",
+                "@type": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "prov:wasGeneratedBy": {
+                "@id": "_:b2"
+            },
+            "dct:accessRights": {
+                "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+            },
+            "dcat:contactPoint": {
+                "@id": "_:b1"
+            },
+            "http://www.w3.org/ns/mldcat#outputFeatures": {
+                "@language": "en",
+                "@value": "2D position (x, y) in metres within measurement grid"
+            },
+            "https://dali-project.eu/ns#trainingComputeEnv": "Kubernetes cluster",
+            "dct:publisher": {
+                "@id": "_:b3"
+            },
+            "prov:wasDerivedFrom": {
+                "@id": "https://dataspace.6gdali.eu/set/data/kul-mimo-csi-dataset"
+            },
+            "http://www.w3.org/ns/mldcat#mlTask": "Localization",
+            "dcat:landingPage": {
+                "@id": "https://catalogue.dataspace.6gdali.eu/datasets/m1m2m3m4-0000-0000-0000-000000000001"
+            },
+            "dcat:theme": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme/TECH"
+            },
+            "http://www.w3.org/ns/mldcat#mlModelType": "Classification",
+            "http://www.w3.org/ns/mldcat#mlFramework": "TensorFlow",
+            "dqv:hasQualityMeasurement": [
+                {
+                    "@id": "https://dataspace.6gdali.eu/quality/measurement/m1m2m3m4/loc-error"
+                },
+                {
+                    "@id": "https://dataspace.6gdali.eu/quality/measurement/m1m2m3m4/model-size"
+                }
+            ],
+            "adms:version": "1.0.1",
+            "http://www.w3.org/ns/mldcat#inputFeatures": {
+                "@language": "en",
+                "@value": "CSI matrix: 64×100 complex float32 values per sample"
+            },
+            "dct:description": {
+                "@language": "en",
+                "@value": "Convolutional Neural Network for UE indoor localization using CSI fingerprinting. Trained on the KU Leuven MaMIMO CSI dataset. Achieves 18-21mm mean localization error."
+            },
+            "https://dali-project.eu/ns#trainingHardware": "NVIDIA A100 40GB GPU (x4)",
+            "http://www.w3.org/ns/mldcat#mlFrameworkVersion": "2.13.0"
+        },
+        {
+            "@id": "_:b2",
+            "prov:endedAtTime": {
+                "@value": "2025-06-30T14:22:00Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "prov:startedAtTime": {
+                "@value": "2025-06-30T08:00:00Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "@type": "prov:Activity",
+            "rdfs:label": {
+                "@language": "en",
+                "@value": "MLOps training pipeline run 2025-06-30"
+            }
+        },
+        {
+            "@id": "_:b3",
+            "foaf:name": "KU Leuven WaveCoRE",
+            "@type": "foaf:Organization"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/set/record/m1m2m3m4-0000-0000-0000-000000000001",
+            "dct:creator": {
+                "@id": "http://piveau.io"
+            },
+            "spdx:checksum": {
+                "@id": "_:b4"
+            },
+            "dct:modified": {
+                "@value": "2026-10-02T11:46:52Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            }
+        },
+        {
+            "@id": "_:b4",
+            "@type": "spdx:Checksum",
+            "spdx:algorithm": {
+                "@id": "spdx:checksumAlgorithm_md5"
+            },
+            "spdx:checksumValue": "a368378eaa44e3a60d11a9db55533d29"
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "adms": "http://www.w3.org/ns/adms#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "dqv": "http://www.w3.org/ns/dqv#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

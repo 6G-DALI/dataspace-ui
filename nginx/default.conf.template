@@ -1,0 +1,50 @@
+server {
+    # 8080, as the previous image, so the dataspace compose and its healthcheck
+    # need no change. IPv6 declared here: the image's own script only patches
+    # its packaged default.conf.
+    listen 8080;
+    listen [::]:8080;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    # A request that reached a TLS-terminating proxy over plain http: redirect,
+    # because without HTTPS the browser withholds crypto.subtle and sign-in
+    # cannot work. A direct request (no header) is left alone.
+    if ($http_x_forwarded_proto = "http") {
+        return 301 https://$host$request_uri;
+    }
+
+    # Single page app with hash routes. Old deep links of the previous UI
+    # (/datasets/<id>, /catalogues) still land on the app, which then shows its
+    # home page.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Runtime configuration must never be cached.
+    location = /config.js {
+        add_header Cache-Control "no-store, must-revalidate";
+        expires -1;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # connect-src: Keycloak (token endpoint) and piveau (search, repo).
+    # form-action: Keycloak's login form posts back to this origin.
+    # img-src https: catalogue logos (foaf:logo) are hosted anywhere.
+    # No frame-src: sign-in is a top-level redirect, never an iframe.
+    # style-src 'unsafe-inline': index.html's pre-paint background, and the
+    # inline sizes React sets on logos.
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${KEYCLOAK_ORIGIN} ${PIVEAU_ORIGINS}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' ${KEYCLOAK_ORIGIN}" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header X-Frame-Options "DENY" always;
+}

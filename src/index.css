@@ -1,0 +1,237 @@
+/* The catalogue's own styles. Fonts, tokens, theme, utilities and base rules
+ * come from @6g-dali/ui-theme (imported before this file in main.tsx); what is
+ * here is only what the catalogue pages add, built from the shared tokens so it
+ * follows the light and dark themes. */
+
+/* The navbar's "Sign in" / username sits right after the theme toggle. */
+.app-header .account-link {
+  margin-left: var(--space-3);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--size-section-title);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.min-w-0 { min-width: 0; }
+.pre-wrap { white-space: pre-wrap; }
+
+/* ---- Home hero --------------------------------------------------------- */
+
+.hero-card {
+  background: var(--gradient-hero);
+  border: 1px solid var(--border-subtle);
+}
+
+.hero-card .card-body {
+  padding: var(--space-8) var(--space-6);
+}
+
+[data-bs-theme="light"] .hero-card {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--size-page-title);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.hero-lede {
+  color: var(--text-secondary);
+  max-width: 72ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero-search {
+  max-width: 720px;
+}
+
+.hero-note {
+  margin-top: var(--space-4);
+  font-size: var(--size-label);
+  color: var(--text-secondary);
+}
+
+/* ---- Catalogue cards and header ---------------------------------------- */
+
+.catalogue-card {
+  border: 1px solid var(--border-subtle);
+  color: inherit;
+  transition: border-color var(--duration-normal) var(--ease-standard),
+              background var(--duration-normal) var(--ease-standard);
+}
+
+.catalogue-card:hover,
+.catalogue-card:focus-visible {
+  border-color: var(--border-bright);
+  background: var(--bg-elevated);
+}
+
+.catalogue-card:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.catalogue-card .card-footer {
+  background: transparent;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.catalogue-card-title {
+  font-family: var(--font-display);
+  font-size: var(--size-card-title);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.catalogue-card-text {
+  font-size: var(--size-label);
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.catalogue-logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  padding: 4px;
+}
+
+.catalogue-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.catalogue-logo-fallback {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 22px;
+}
+
+.catalogue-header {
+  border: 1px solid var(--border-subtle);
+}
+
+/* ---- Search ------------------------------------------------------------ */
+
+.facet-group .card-header {
+  background: transparent;
+}
+
+.facet-title {
+  font-size: var(--size-label);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.facet-item {
+  font-size: var(--size-label);
+  padding: 2px 0 2px 1.75em;
+}
+
+.filter-chip {
+  font-size: var(--size-caption);
+}
+
+.result-card {
+  border: 1px solid var(--border-subtle);
+}
+
+.result-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.result-text {
+  font-size: var(--size-body);
+  color: var(--text-secondary);
+}
+
+/* ---- Badges ------------------------------------------------------------ */
+
+.kind-badge {
+  border: 1px solid currentColor;
+  background: transparent;
+  font-weight: 600;
+}
+
+.kind-dataset { color: var(--accent-cyan); }
+.kind-model   { color: var(--accent-amber); }
+.kind-service { color: var(--accent-purple); }
+
+.format-badge {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.keyword-badge {
+  background: rgba(var(--accent-cyan-rgb), 0.10);
+  color: var(--text-primary);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.30);
+  font-weight: 500;
+}
+
+.variable-chip {
+  font-size: var(--size-caption);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+/* ---- Record page ------------------------------------------------------- */
+
+.record-description {
+  white-space: pre-line;
+  color: var(--text-primary);
+  max-width: 80ch;
+}
+
+.property-row:last-child {
+  border-bottom: 0 !important;
+}
+
+.property-row {
+  border-color: var(--border-subtle) !important;
+}
+
+.distribution-card .card-header,
+.service-panel .card-header {
+  background: transparent;
+}
+
+.service-panel {
+  border-color: rgba(var(--accent-purple-rgb), 0.35);
+}
+
+.quality-panel {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-3);
+}
+
+.quality-table {
+  font-size: var(--size-label);
+}

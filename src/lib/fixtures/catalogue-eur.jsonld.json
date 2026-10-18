@@ -1,0 +1,59 @@
+{
+    "@graph": [
+        {
+            "@id": "https://6gdali.eu/organization/6g-dali",
+            "dct:type": {
+                "@id": "http://purl.org/adms/publishertype/InternationalOrganisation"
+            },
+            "foaf:name": {
+                "@language": "en",
+                "@value": "6G-DALI"
+            },
+            "@type": "foaf:Organization"
+        },
+        {
+            "@id": "https://dataspace.6gdali.eu/catalogues/6g-dali-staging-eur",
+            "dct:description": {
+                "@language": "en",
+                "@value": "The staging 6G-DALI catalogue for the EUR testbed"
+            },
+            "dct:modified": {
+                "@value": "2025-11-05T00:00:00Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "foaf:homepage": {
+                "@id": "https://6gdali.eu/"
+            },
+            "dct:license": {
+                "@id": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "dct:spatial": {
+                "@id": "http://publications.europa.eu/resource/authority/country/FRA"
+            },
+            "dct:issued": {
+                "@value": "2025-11-05T00:00:00Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "dct:publisher": {
+                "@id": "https://6gdali.eu/organization/6g-dali"
+            },
+            "dct:title": {
+                "@language": "en",
+                "@value": "6G-DALI Staging EUR Catalogue"
+            },
+            "@type": "dcat:Catalog",
+            "dct:language": {
+                "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+            },
+            "dcat:themeTaxonomy": {
+                "@id": "http://publications.europa.eu/resource/authority/data-theme"
+            }
+        }
+    ],
+    "@context": {
+        "dct": "http://purl.org/dc/terms/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "foaf": "http://xmlns.com/foaf/0.1/"
+    }
+}

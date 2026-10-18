@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/" />
-    <title>piveau - Metadata Catalogue</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="6G-DALI Data Space — the metadata catalogue of 6G testbed datasets, ML models and data services" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- Painted before the bundle loads so there is no light flash on first paint. -->
+    <style>
+      html, body { background: #0a0d12; }
+    </style>
+    <!--
+      Runtime configuration (window.__DALI_CONFIG__), loaded before the bundle.
+      Rendered from the environment at container start by
+      docker-entrypoint.d/40-catalogue-config.sh; this copy is the dev default.
+    -->
+    <script src="/config.js"></script>
+    <title>6G-DALI Data Space</title>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <!-- Same AdminLTE body classes as dataops-ui and portal-ui. -->
+  <body class="layout-fixed sidebar-expand-lg">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
