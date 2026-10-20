@@ -4,14 +4,13 @@ import { searchDatasets, type Facet, type SearchDataset } from '../api/piveau'
 import { useSession } from '../auth/useSession'
 import { login } from '../auth/session'
 import { useAsync } from '../hooks'
-import { levelOf, stricter } from '../lib/access'
+import { levelOf } from '../lib/access'
 import { kindOfCatalogue } from '../lib/catalogues'
 import {
   DATASET_FACETS, defaultSort, PAGE_SIZES, SORTS, stateFromQuery, stateToQuery, toggleFacet, type SearchState,
 } from '../lib/search'
 import { formatDate, licenceLabel, pick } from '../lib/text'
 import { href, navigate, type Route } from '../router'
-import { useCatalogueLevel } from './catalogue'
 import { AccessBadge, EmptyPanel, ErrorPanel, KindBadge, Loading, Pagination } from './ui'
 
 /**
@@ -173,7 +172,9 @@ function FacetGroup({ facet, state, onChange }: { facet: Facet; state: SearchSta
 
 export function DatasetResult({ d }: { d: SearchDataset }) {
   const catalogueId = d.catalog?.id ?? ''
-  const level = stricter(levelOf(d.access_right?.resource ?? pick(d.access_right?.label)), useCatalogueLevel(catalogueId))
+  // The dataset's own level: every writer keeps dct:accessRights equal to the level piveau enforces, and an
+  // administrator can publish a dataset of a private catalogue, so the catalogue's level says nothing about it.
+  const level = levelOf(d.access_right?.resource ?? pick(d.access_right?.label)) ?? 'public'
   const kind = kindOfCatalogue(catalogueId)
   const formats = [...new Set((d.distributions ?? []).map(x => pick(x.format?.label) || x.format?.id || '').filter(Boolean))]
   const updated = d.modified ?? d.issued ?? d.catalog_record?.modified

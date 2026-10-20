@@ -2,13 +2,12 @@ import { FiCode, FiEdit3 } from 'react-icons/fi'
 import { getDataset, getRecordExtras, linkedDataUrl } from '../api/piveau'
 import { login } from '../auth/session'
 import { useSession } from '../auth/useSession'
-import { useCatalogueLevel } from '../components/catalogue'
 import Layout, { crumb } from '../components/Layout'
 import { DistributionCard, ServicePanel } from '../components/record'
 import { AccessBadge, CopyableId, ErrorPanel, ExternalLink, KindBadge, Loading, Row, YesNo } from '../components/ui'
 import { config } from '../config'
 import { useAsync } from '../hooks'
-import { ACCESS_HELP, levelOf, stricter } from '../lib/access'
+import { ACCESS_HELP, levelOf } from '../lib/access'
 import { KIND_LABEL, kindOfCatalogue } from '../lib/catalogues'
 import type { RecordExtras } from '../lib/record'
 import { formatDate, licenceLabel, pick, stripMailto } from '../lib/text'
@@ -29,10 +28,9 @@ export default function DatasetPage({ id }: { id: string }) {
   const x = extras.data ?? undefined
   const catalogueId = d?.catalog?.id ?? ''
   const kind = kindOfCatalogue(catalogueId)
-  const level = stricter(
-    levelOf(x?.accessRights ?? d?.access_right?.resource ?? pick(d?.access_right?.label)),
-    useCatalogueLevel(catalogueId || null),
-  )
+  // The dataset's own level (dct:accessRights, kept equal to what piveau enforces): an administrator can publish a
+  // dataset of a private catalogue, so the catalogue's level is not used.
+  const level = levelOf(x?.accessRights ?? d?.access_right?.resource ?? pick(d?.access_right?.label)) ?? 'public'
   const title = d ? pick(d.title) || d.id : id
 
   const crumbs = [

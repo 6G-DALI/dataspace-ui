@@ -38,7 +38,8 @@ piveau decides what each caller may see (access control v2, see
 | `RESTRICTED` | restricted | anyone signed in | *Signed-in users* |
 | `NON_PUBLIC` | internal | members of the catalogue | *Members only* |
 
-A record gets the stricter of its own level and its catalogue's.
+New records are *Members only* in every catalogue until an administrator publishes them in DataOps;
+the badge shows a record's own level (its `dct:accessRights`), not its catalogue's.
 
 The app calls hub-search and hub-repo **directly from the browser**, with the
 user's bearer token when signed in and anonymously otherwise. It holds no
