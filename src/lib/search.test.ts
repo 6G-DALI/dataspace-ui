@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { levelOf, stricter } from './access'
-import { isStaging, sortCatalogues } from './catalogues'
+import { isStaging, listedCatalogues, sortCatalogues } from './catalogues'
 import { datasetSearchQuery, stateFromQuery, stateToQuery, toggleFacet } from './search'
 import { parseHash, href } from '../router'
 
@@ -54,6 +54,13 @@ describe('access levels', () => {
     expect(stricter('public', 'internal')).toBe('internal')
     expect(stricter('restricted', 'public')).toBe('restricted')
     expect(stricter(null, undefined)).toBe('public')
+  })
+})
+
+describe('listed catalogues', () => {
+  it('leaves out the models and services catalogues, which have their own pages', () => {
+    const list = ['6g-dali', '6g-dali-models', '6g-dali-services', '6g-dali-nitos'].map(id => ({ id }))
+    expect(listedCatalogues(list).map(c => c.id)).toEqual(['6g-dali', '6g-dali-nitos'])
   })
 })
 

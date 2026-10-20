@@ -6,19 +6,19 @@ import Layout, { crumb } from '../components/Layout'
 import { AccessBadge, EmptyPanel, ErrorPanel, ExternalLink, KindBadge, Loading } from '../components/ui'
 import { useCatalogueExtras, useCatalogues } from '../hooks'
 import { ACCESS_HELP } from '../lib/access'
-import { isStaging, kindOfCatalogue, sortCatalogues } from '../lib/catalogues'
+import { isStaging, kindOfCatalogue, listedCatalogues, sortCatalogues } from '../lib/catalogues'
 import { pick } from '../lib/text'
 import type { Route, View } from '../router'
 import { login } from '../auth/session'
 import { useSession } from '../auth/useSession'
 
-/** Every catalogue the visitor can see, filterable by name. */
+/** Every catalogue the visitor can see, filterable by name; the models and services catalogues have their own pages. */
 export function CataloguesPage() {
   const catalogues = useCatalogues()
   const [filter, setFilter] = useState('')
   const sorted = useMemo(() => {
     const f = filter.trim().toLowerCase()
-    const list = (catalogues.data ?? []).map(c => ({ ...c, title: pick(c.title) || c.id }))
+    const list = listedCatalogues(catalogues.data ?? []).map(c => ({ ...c, title: pick(c.title) || c.id }))
       .filter(c => !f || c.title.toLowerCase().includes(f) || c.id.includes(f) || pick(c.description).toLowerCase().includes(f))
     return sortCatalogues(list)
   }, [catalogues.data, filter])

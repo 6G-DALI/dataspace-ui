@@ -19,6 +19,14 @@ export function isStaging(catalogueId: string): boolean {
   return /(^|-)staging(-|$)/.test(catalogueId)
 }
 
+/**
+ * The catalogues shown in the catalogue lists (home page, Catalogues page): every one except the models and the
+ * services catalogues, which have their own pages (ML models, Data services). Their own catalogue page still opens.
+ */
+export function listedCatalogues<T extends { id: string }>(list: T[]): T[] {
+  return list.filter(c => kindOfCatalogue(c.id) === 'dataset')
+}
+
 /** The catalogue of datasets that come from outside the project. */
 export const EXTERNAL_CATALOGUE = '6g-external'
 

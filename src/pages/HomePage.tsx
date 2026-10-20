@@ -9,7 +9,7 @@ import Layout, { crumb } from '../components/Layout'
 import { EmptyPanel, ErrorPanel, Loading, MetricCard } from '../components/ui'
 import { config } from '../config'
 import { useAsync, useCatalogues } from '../hooks'
-import { sortCatalogues } from '../lib/catalogues'
+import { listedCatalogues, sortCatalogues } from '../lib/catalogues'
 import { stateFromQuery } from '../lib/search'
 import { pick } from '../lib/text'
 import { href, navigate } from '../router'
@@ -31,7 +31,7 @@ export default function HomePage() {
   const perCatalogue = (id: string) =>
     recent.data ? recent.data.facets.find(f => f.id === 'catalog')?.items.find(i => i.id === id)?.count ?? 0 : undefined
 
-  const sorted = sortCatalogues((catalogues.data ?? []).map(c => ({ ...c, title: pick(c.title) || c.id })))
+  const sorted = sortCatalogues(listedCatalogues(catalogues.data ?? []).map(c => ({ ...c, title: pick(c.title) || c.id })))
 
   return (
     <Layout view="home" breadcrumbs={[crumb('Home')]} pageTitle="6G-DALI Data Space">
@@ -69,7 +69,7 @@ export default function HomePage() {
       {!recent.error && (
         <div className="row g-3 mb-4">
           <MetricCard label="Records" value={recent.data?.count} icon={<FiDatabase />} onSelect={() => navigate(href(['datasets']))} />
-          <MetricCard label="Catalogues" value={catalogues.data?.length} icon={<FiLayers />} onSelect={() => navigate(href(['catalogues']))} />
+          <MetricCard label="Catalogues" value={catalogues.data && sorted.length} icon={<FiLayers />} onSelect={() => navigate(href(['catalogues']))} />
           {config.modelsCatalogue && (
             <MetricCard label="ML models" value={perCatalogue(config.modelsCatalogue)} icon={<FiCpu />} onSelect={() => navigate(href(['models']))} />
           )}
