@@ -28,13 +28,19 @@ interface Sortable {
 }
 
 /**
- * Display order, kept from the previous catalogue UI: published catalogues
- * first, then the staging ones, then the external catalogue; by title within
- * each group.
+ * Display order: the project's own catalogues (6G-DALI, models, services),
+ * then the project testbeds (EUR, KUL, ISI), then the external catalogue, in
+ * this order; every other catalogue (the connected testbeds) after them, by
+ * title.
  */
 export function sortCatalogues<T extends Sortable>(list: T[]): T[] {
-  const group = (c: T) => (c.id === EXTERNAL_CATALOGUE ? 2 : isStaging(c.id) ? 1 : 0)
-  return [...list].sort((a, b) => group(a) - group(b) || a.title.localeCompare(b.title) || a.id.localeCompare(b.id))
+  const pinned = ['6g-dali', config.modelsCatalogue, config.servicesCatalogue,
+    '6g-dali-staging-eur', '6g-dali-staging-kul', '6g-dali-staging-isi', EXTERNAL_CATALOGUE]
+  const rank = (c: T) => {
+    const i = pinned.indexOf(c.id)
+    return i < 0 ? pinned.length : i
+  }
+  return [...list].sort((a, b) => rank(a) - rank(b) || a.title.localeCompare(b.title) || a.id.localeCompare(b.id))
 }
 
 /** Static logos that win over the catalogue's own foaf:logo. */

@@ -58,9 +58,12 @@ describe('access levels', () => {
 })
 
 describe('catalogue order', () => {
-  it('puts published catalogues first, staging next, the external one last', () => {
-    const list = ['6g-external', '6g-dali-staging-eur', '6g-dali-nitos', '6g-dali'].map(id => ({ id, title: id }))
-    expect(sortCatalogues(list).map(c => c.id)).toEqual(['6g-dali', '6g-dali-nitos', '6g-dali-staging-eur', '6g-external'])
+  it('puts the project catalogues first, then EUR, KUL, ISI, external, and the connected testbeds last', () => {
+    const list = ['6g-dali-nitos', '6g-external', '6g-dali-staging-isi', '6g-dali-fivegc', '6g-dali-staging-eur',
+      '6g-dali-services', '6g-dali-staging-kul', '6g-dali-models', '6g-dali'].map(id => ({ id, title: id }))
+    expect(sortCatalogues(list).map(c => c.id)).toEqual(['6g-dali', '6g-dali-models', '6g-dali-services',
+      '6g-dali-staging-eur', '6g-dali-staging-kul', '6g-dali-staging-isi', '6g-external',
+      '6g-dali-fivegc', '6g-dali-nitos'])
     expect(isStaging('6g-dali-staging-kul')).toBe(true)
     expect(isStaging('6g-dali-nitos')).toBe(false)
   })
