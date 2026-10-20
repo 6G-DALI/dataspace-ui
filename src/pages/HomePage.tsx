@@ -14,7 +14,8 @@ import { stateFromQuery } from '../lib/search'
 import { pick } from '../lib/text'
 import { href, navigate } from '../router'
 
-const HOME_CATALOGUES = 6
+// Two full rows of four on wide screens.
+const HOME_CATALOGUES = 8
 const RECENT = 5
 
 /** The public front page: search, the headline counts, the catalogues and what changed lately. */

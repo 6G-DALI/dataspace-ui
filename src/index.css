@@ -84,6 +84,19 @@
   outline-offset: 2px;
 }
 
+/* The logo as the card's header: full width, so wide wordmarks show large. */
+.catalogue-card-logo {
+  padding: var(--space-4) var(--space-4) 0;
+}
+
+.catalogue-card-logo .catalogue-logo {
+  padding: var(--space-3);
+}
+
+.catalogue-card-logo .catalogue-logo-fallback {
+  font-size: 48px;
+}
+
 .catalogue-card .card-footer {
   background: transparent;
   border-top: 1px solid var(--border-subtle);
