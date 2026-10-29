@@ -92,7 +92,10 @@ export default function DatasetPage({ id }: { id: string }) {
             </h2>
             {(d.distributions ?? []).length === 0
               ? <p className="text-secondary">No distributions are listed for this {KIND_LABEL[kind]}.</p>
-              : d.distributions!.map(dist => <DistributionCard key={dist.id} dist={dist} extras={x?.distributions[dist.id]} />)}
+              : d.distributions!.map(dist => (
+                <DistributionCard key={dist.id} dist={dist} extras={x?.distributions[dist.id]}
+                  catalogueId={catalogueId} datasetId={d.id} />
+              ))}
           </div>
 
           <div className="col-xl-4">

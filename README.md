@@ -80,6 +80,7 @@ writes `config.js` at start from these variables; unset ones keep the defaults.
 | `VITE_AUTH_URL` | `authUrl` | `https://auth.6gdali.eu/auth` |
 | `VITE_KEYCLOAK_REALM` | `keycloakRealm` | `6gdali` |
 | `VITE_KEYCLOAK_CLIENT_ID` | `keycloakClientId` | `piveau-hub-ui` |
+| `VITE_DOWNLOAD_API_URL` | `downloadApiUrl` (signs Download links of Data Lake files; empty: the raw link) | `https://dataops.6gdali.eu/api` |
 | `VITE_DALI_URL`, `VITE_PORTAL_URL`, `VITE_DATASPACE_URL`, `VITE_DATAOPS_URL`, `VITE_MLOPS_URL` | navbar tool links | project site only |
 
 Two more variables shape the Content-Security-Policy (nginx template):
@@ -88,6 +89,7 @@ Two more variables shape the Content-Security-Policy (nginx template):
 |---|---|
 | `KEYCLOAK_ORIGIN` | `https://auth.6gdali.eu` |
 | `PIVEAU_ORIGINS` | `https://search.dataspace.6gdali.eu https://dataspace.6gdali.eu` |
+| `DOWNLOAD_API_ORIGIN` | `https://dataops.6gdali.eu` (the origin of `VITE_DOWNLOAD_API_URL`) |
 
 If either is wrong, sign-in or search fails with a CSP violation in the browser
 console and nothing in any server log — check these first.

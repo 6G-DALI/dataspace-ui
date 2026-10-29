@@ -18,6 +18,9 @@ window.__DALI_CONFIG__ = {
   modelsCatalogue: '6g-dali-models',
   servicesCatalogue: '6g-dali-services',
 
+  // DataOps orchestrator: signs download links for Data Lake files. Empty: the raw link.
+  downloadApiUrl: 'https://dataops.6gdali.eu/api',
+
   // Sign-in. Must be piveau's realm, or piveau will not accept the token.
   authUrl: 'https://auth.6gdali.eu/auth',
   keycloakRealm: '6gdali',

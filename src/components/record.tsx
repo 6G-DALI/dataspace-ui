@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FiCheckCircle, FiDownload, FiExternalLink, FiServer, FiXCircle } from 'react-icons/fi'
+import { isDataLakeFile, signedDownloadsEnabled, signedDownloadUrl } from '../api/downloads'
 import type { SearchDistribution } from '../api/piveau'
 import type { DistributionExtras, QualityResult, ServiceInfo } from '../lib/record'
 import { formatBytes, formatDate, licenceLabel, pick } from '../lib/text'
@@ -17,8 +18,39 @@ function connectorLabel(type: string): string {
   return CONNECTORS[type.toLowerCase()] ?? type
 }
 
+/**
+ * The Download button. A file in the Data Lake is fetched through a signed link, asked for on click (it expires in
+ * minutes); any other download URL is opened as it is.
+ */
+function DownloadButton({ url, catalogueId, datasetId, onError }: {
+  url: string; catalogueId: string; datasetId: string; onError: (message: string | null) => void
+}) {
+  const [busy, setBusy] = useState(false)
+  const signed = signedDownloadsEnabled() && !!datasetId && isDataLakeFile(url, catalogueId)
+  const label = <><FiDownload className="me-1" aria-hidden="true" />{busy ? 'Preparing…' : 'Download'}</>
+  if (!signed) {
+    return <a className="btn btn-sm btn-outline-primary" href={url} target="_blank" rel="noopener noreferrer">{label}</a>
+  }
+  const download = async () => {
+    setBusy(true)
+    onError(null)
+    try {
+      // The link answers with Content-Disposition: attachment, so the page stays where it is.
+      window.location.assign(await signedDownloadUrl(catalogueId, datasetId, url))
+    } catch (e) {
+      onError((e as Error).message)
+    } finally {
+      setBusy(false)
+    }
+  }
+  return <button type="button" className="btn btn-sm btn-outline-primary" onClick={download} disabled={busy}>{label}</button>
+}
+
 /** One distribution: its file or endpoint, the connector asset behind it, and its quality results. */
-export function DistributionCard({ dist, extras }: { dist: SearchDistribution; extras?: DistributionExtras }) {
+export function DistributionCard({ dist, extras, catalogueId = '', datasetId = '' }: {
+  dist: SearchDistribution; extras?: DistributionExtras; catalogueId?: string; datasetId?: string
+}) {
+  const [downloadError, setDownloadError] = useState<string | null>(null)
   const format = pick(dist.format?.label) || dist.format?.id || ''
   const download = dist.download_url?.[0]
   const access = dist.access_url?.[0]
@@ -30,9 +62,7 @@ export function DistributionCard({ dist, extras }: { dist: SearchDistribution; e
         <span className="fw-medium text-break">{pick(dist.title) || dist.id}</span>
         <span className="ms-auto d-flex gap-2">
           {download && (
-            <a className="btn btn-sm btn-outline-primary" href={download} target="_blank" rel="noopener noreferrer">
-              <FiDownload className="me-1" aria-hidden="true" />Download
-            </a>
+            <DownloadButton url={download} catalogueId={catalogueId} datasetId={datasetId} onError={setDownloadError} />
           )}
           {access && access !== download && (
             <a className="btn btn-sm btn-outline-secondary" href={access} target="_blank" rel="noopener noreferrer">
@@ -40,6 +70,7 @@ export function DistributionCard({ dist, extras }: { dist: SearchDistribution; e
             </a>
           )}
         </span>
+        {downloadError && <div className="w-100 small text-danger" role="alert">{downloadError}</div>}
       </div>
       <div className="card-body">
         {description && <p className="text-secondary small">{description}</p>}

@@ -22,11 +22,13 @@ FROM nginx:1.27-alpine
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 
 # Only our variables, so nginx's own $uri, $host etc. survive envsubst.
-ENV NGINX_ENVSUBST_FILTER=KEYCLOAK_ORIGIN|PIVEAU_ORIGINS
+ENV NGINX_ENVSUBST_FILTER=KEYCLOAK_ORIGIN|PIVEAU_ORIGINS|DOWNLOAD_API_ORIGIN
 # Scheme + host, no path. Overridden at run time; these match src/config.ts.
 ENV KEYCLOAK_ORIGIN=https://auth.6gdali.eu
 # Space-separated: hub-search and hub-repo.
 ENV PIVEAU_ORIGINS="https://search.dataspace.6gdali.eu https://dataspace.6gdali.eu"
+# The DataOps orchestrator, which signs download links (downloadApiUrl).
+ENV DOWNLOAD_API_ORIGIN=https://dataops.6gdali.eu
 
 # Renders config.js from VITE_* variables at start.
 COPY docker-entrypoint.d/40-catalogue-config.sh /docker-entrypoint.d/40-catalogue-config.sh

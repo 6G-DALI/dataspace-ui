@@ -17,6 +17,8 @@ export interface CatalogueConfig extends DaliBaseConfig {
   modelsCatalogue: string
   /** Catalogue whose records are data services (dcat:DataService). */
   servicesCatalogue: string
+  /** DataOps orchestrator API: signs the download links of Data Lake files. Empty: the raw link is used. */
+  downloadApiUrl: string
 }
 
 export const config = resolveConfig<CatalogueConfig>({
@@ -37,6 +39,7 @@ export const config = resolveConfig<CatalogueConfig>({
     repoApiUrl: 'https://dataspace.6gdali.eu',
     modelsCatalogue: '6g-dali-models',
     servicesCatalogue: '6g-dali-services',
+    downloadApiUrl: 'https://dataops.6gdali.eu/api',
   },
   envKeys: {
     ...DALI_ENV_KEYS,
@@ -45,6 +48,7 @@ export const config = resolveConfig<CatalogueConfig>({
     repoApiUrl: 'VITE_REPO_API_URL',
     modelsCatalogue: 'VITE_MODELS_CATALOGUE',
     servicesCatalogue: 'VITE_SERVICES_CATALOGUE',
+    downloadApiUrl: 'VITE_DOWNLOAD_API_URL',
   },
   // Passed in: Vite substitutes import.meta.env in this file, not in the package.
   env: import.meta.env,

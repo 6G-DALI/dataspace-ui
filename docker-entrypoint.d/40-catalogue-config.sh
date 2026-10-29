@@ -40,6 +40,7 @@ for pair in \
   'repoApiUrl:VITE_REPO_API_URL' \
   'modelsCatalogue:VITE_MODELS_CATALOGUE' \
   'servicesCatalogue:VITE_SERVICES_CATALOGUE' \
+  'downloadApiUrl:VITE_DOWNLOAD_API_URL' \
   'authUrl:VITE_AUTH_URL' \
   'keycloakRealm:VITE_KEYCLOAK_REALM' \
   'keycloakClientId:VITE_KEYCLOAK_CLIENT_ID'
