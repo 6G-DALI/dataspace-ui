@@ -80,6 +80,8 @@ writes `config.js` at start from these variables; unset ones keep the defaults.
 | `VITE_AUTH_URL` | `authUrl` | `https://auth.6gdali.eu/auth` |
 | `VITE_KEYCLOAK_REALM` | `keycloakRealm` | `6gdali` |
 | `VITE_KEYCLOAK_CLIENT_ID` | `keycloakClientId` | `piveau-hub-ui` |
+| `VITE_GA_MEASUREMENT_ID` | `gaMeasurementId` (Google Analytics, e.g. `G-77QK1XE88P`, loaded only after the visitor accepts it in the cookie banner; empty: no analytics and no banner) | empty |
+| `VITE_COOKIES_POLICY_URL`, `VITE_PRIVACY_POLICY_URL` | linked from the cookie banner | `https://6gdali.eu/cookies-policy/`, `https://6gdali.eu/privacy-policy/` |
 | `VITE_DOWNLOAD_API_URL` | `downloadApiUrl` (signs Download links of Data Lake files; empty: the raw link) | `https://dataops.6gdali.eu/api` |
 | `VITE_DALI_URL`, `VITE_PORTAL_URL`, `VITE_DATASPACE_URL`, `VITE_DATAOPS_URL`, `VITE_MLOPS_URL` | navbar tool links | project site only |
 
@@ -90,6 +92,8 @@ Two more variables shape the Content-Security-Policy (nginx template):
 | `KEYCLOAK_ORIGIN` | `https://auth.6gdali.eu` |
 | `PIVEAU_ORIGINS` | `https://search.dataspace.6gdali.eu https://dataspace.6gdali.eu` |
 | `DOWNLOAD_API_ORIGIN` | `https://dataops.6gdali.eu` (the origin of `VITE_DOWNLOAD_API_URL`) |
+| `ANALYTICS_SCRIPT_ORIGINS` | `https://www.googletagmanager.com` (gtag.js) |
+| `ANALYTICS_CONNECT_ORIGINS` | `https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com` |
 
 If either is wrong, sign-in or search fails with a CSP violation in the browser
 console and nothing in any server log — check these first.

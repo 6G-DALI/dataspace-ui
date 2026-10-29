@@ -41,6 +41,9 @@ for pair in \
   'modelsCatalogue:VITE_MODELS_CATALOGUE' \
   'servicesCatalogue:VITE_SERVICES_CATALOGUE' \
   'downloadApiUrl:VITE_DOWNLOAD_API_URL' \
+  'gaMeasurementId:VITE_GA_MEASUREMENT_ID' \
+  'cookiesPolicyUrl:VITE_COOKIES_POLICY_URL' \
+  'privacyPolicyUrl:VITE_PRIVACY_POLICY_URL' \
   'authUrl:VITE_AUTH_URL' \
   'keycloakRealm:VITE_KEYCLOAK_REALM' \
   'keycloakClientId:VITE_KEYCLOAK_CLIENT_ID'

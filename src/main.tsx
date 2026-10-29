@@ -10,10 +10,15 @@ import '@6g-dali/ui-theme'
 import { initTheme } from '@6g-dali/ui-theme/theme.js'
 import App from './App'
 import { initSession } from './auth/session'
+import { config } from './config'
+import { startAnalytics } from './lib/analytics'
+import { getConsent } from './lib/consent'
 import './index.css'
 
 // The stored or OS-preferred theme, before anything renders.
 initTheme()
+// Analytics only for a visitor who accepted it earlier; the others are asked by ConsentBanner.
+if (getConsent() === 'granted') startAnalytics(config.gaMeasurementId)
 
 // The pages are public, so they render whatever Keycloak says — and also when
 // it cannot be reached at all. Waiting for initSession first means a signed-in

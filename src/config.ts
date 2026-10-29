@@ -19,6 +19,11 @@ export interface CatalogueConfig extends DaliBaseConfig {
   servicesCatalogue: string
   /** DataOps orchestrator API: signs the download links of Data Lake files. Empty: the raw link is used. */
   downloadApiUrl: string
+  /** Google Analytics measurement id (G-…). Empty: no analytics, and no cookie banner. */
+  gaMeasurementId: string
+  /** Linked from the cookie banner. Empty: no link. */
+  cookiesPolicyUrl: string
+  privacyPolicyUrl: string
 }
 
 export const config = resolveConfig<CatalogueConfig>({
@@ -40,6 +45,10 @@ export const config = resolveConfig<CatalogueConfig>({
     modelsCatalogue: '6g-dali-models',
     servicesCatalogue: '6g-dali-services',
     downloadApiUrl: 'https://dataops.6gdali.eu/api',
+    // Set per deployment (VITE_GA_MEASUREMENT_ID), so development and test instances do not report.
+    gaMeasurementId: '',
+    cookiesPolicyUrl: 'https://6gdali.eu/cookies-policy/',
+    privacyPolicyUrl: 'https://6gdali.eu/privacy-policy/',
   },
   envKeys: {
     ...DALI_ENV_KEYS,
@@ -49,6 +58,9 @@ export const config = resolveConfig<CatalogueConfig>({
     modelsCatalogue: 'VITE_MODELS_CATALOGUE',
     servicesCatalogue: 'VITE_SERVICES_CATALOGUE',
     downloadApiUrl: 'VITE_DOWNLOAD_API_URL',
+    gaMeasurementId: 'VITE_GA_MEASUREMENT_ID',
+    cookiesPolicyUrl: 'VITE_COOKIES_POLICY_URL',
+    privacyPolicyUrl: 'VITE_PRIVACY_POLICY_URL',
   },
   // Passed in: Vite substitutes import.meta.env in this file, not in the package.
   env: import.meta.env,

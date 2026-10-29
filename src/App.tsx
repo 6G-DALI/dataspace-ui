@@ -1,3 +1,4 @@
+import ConsentBanner from './components/ConsentBanner'
 import DatasetSearch from './components/DatasetSearch'
 import Layout, { crumb } from './components/Layout'
 import { EmptyPanel } from './components/ui'
@@ -50,6 +51,7 @@ export default function App() {
         main?.focus()
       }}>Skip to content</a>
       {page}
+      <ConsentBanner />
     </>
   )
 }

@@ -37,14 +37,15 @@ server {
         add_header Cache-Control "public, immutable";
     }
 
-    # connect-src: Keycloak (token endpoint), piveau (search, repo) and the
-    # DataOps orchestrator (signed download links).
+    # connect-src: Keycloak (token endpoint), piveau (search, repo), the
+    # DataOps orchestrator (signed download links) and Google Analytics.
+    # script-src: Google's gtag.js, loaded by the app when analytics is on.
     # form-action: Keycloak's login form posts back to this origin.
     # img-src https: catalogue logos (foaf:logo) are hosted anywhere.
     # No frame-src: sign-in is a top-level redirect, never an iframe.
     # style-src 'unsafe-inline': index.html's pre-paint background, and the
     # inline sizes React sets on logos.
-    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${KEYCLOAK_ORIGIN} ${PIVEAU_ORIGINS} ${DOWNLOAD_API_ORIGIN}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' ${KEYCLOAK_ORIGIN}" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' ${ANALYTICS_SCRIPT_ORIGINS}; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${KEYCLOAK_ORIGIN} ${PIVEAU_ORIGINS} ${DOWNLOAD_API_ORIGIN} ${ANALYTICS_CONNECT_ORIGINS}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' ${KEYCLOAK_ORIGIN}" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header X-Frame-Options "DENY" always;

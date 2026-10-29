@@ -4,6 +4,7 @@ import { AppShell, daliTools, type AccountAction, type Crumb, type SidebarEntry 
 import { login, logout } from '../auth/session'
 import { useSession } from '../auth/useSession'
 import { accountConsoleUrl, config } from '../config'
+import { CookieSettingsLink } from './ConsentBanner'
 import { navigate, href, type View } from '../router'
 
 /**
@@ -78,7 +79,7 @@ export default function Layout({ view, breadcrumbs, pageTitle, children }: Layou
       username={username}
       account={account}
       onLogout={session.authenticated ? logout : undefined}
-      footer={<strong>Data Space &mdash; the 6G-DALI metadata catalogue.</strong>}
+      footer={<><strong>Data Space &mdash; the 6G-DALI metadata catalogue.</strong><CookieSettingsLink /></>}
       build={__BUILD_SHA__}
     >
       {children}
